@@ -1,0 +1,812 @@
+{
+  "picks": [
+    {
+      "pick_number": 1,
+      "round": 1,
+      "pick_in_round": 1,
+      "current_team": "lv",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 2,
+      "round": 1,
+      "pick_in_round": 2,
+      "current_team": "nyj",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 3,
+      "round": 1,
+      "pick_in_round": 3,
+      "current_team": "ari",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 4,
+      "round": 1,
+      "pick_in_round": 4,
+      "current_team": "ten",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 5,
+      "round": 1,
+      "pick_in_round": 5,
+      "current_team": "nyg",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 6,
+      "round": 1,
+      "pick_in_round": 6,
+      "current_team": "cle",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 7,
+      "round": 1,
+      "pick_in_round": 7,
+      "current_team": "wsh",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 8,
+      "round": 1,
+      "pick_in_round": 8,
+      "current_team": "no",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 9,
+      "round": 1,
+      "pick_in_round": 9,
+      "current_team": "kc",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 10,
+      "round": 1,
+      "pick_in_round": 10,
+      "current_team": "cin",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 11,
+      "round": 1,
+      "pick_in_round": 11,
+      "current_team": "mia",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 12,
+      "round": 1,
+      "pick_in_round": 12,
+      "current_team": "dal",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 13,
+      "round": 1,
+      "pick_in_round": 13,
+      "current_team": "lar",
+      "traded_from": ["atl"],
+      "trade_notes": "Acquired from Atlanta Falcons as part of Micah Parsons trade package",
+      "player_id": null
+    },
+    {
+      "pick_number": 14,
+      "round": 1,
+      "pick_in_round": 14,
+      "current_team": "bal",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 15,
+      "round": 1,
+      "pick_in_round": 15,
+      "current_team": "tb",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 16,
+      "round": 1,
+      "pick_in_round": 16,
+      "current_team": "nyj",
+      "traded_from": ["ind"],
+      "trade_notes": "Acquired from Indianapolis Colts as part of Sauce Gardner trade package",
+      "player_id": null
+    },
+    {
+      "pick_number": 17,
+      "round": 1,
+      "pick_in_round": 17,
+      "current_team": "det",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 18,
+      "round": 1,
+      "pick_in_round": 18,
+      "current_team": "min",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 19,
+      "round": 1,
+      "pick_in_round": 19,
+      "current_team": "car",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 20,
+      "round": 1,
+      "pick_in_round": 20,
+      "current_team": "dal",
+      "traded_from": ["gb"],
+      "trade_notes": "Acquired from Green Bay Packers as part of Micah Parsons trade package",
+      "player_id": null
+    },
+    {
+      "pick_number": 21,
+      "round": 1,
+      "pick_in_round": 21,
+      "current_team": "pit",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 22,
+      "round": 1,
+      "pick_in_round": 22,
+      "current_team": "lac",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 23,
+      "round": 1,
+      "pick_in_round": 23,
+      "current_team": "phi",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 24,
+      "round": 1,
+      "pick_in_round": 24,
+      "current_team": "cle",
+      "traded_from": ["jax"],
+      "trade_notes": "Acquired from Jacksonville Jaguars",
+      "player_id": null
+    },
+    {
+      "pick_number": 25,
+      "round": 1,
+      "pick_in_round": 25,
+      "current_team": "chi",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 26,
+      "round": 1,
+      "pick_in_round": 26,
+      "current_team": "buf",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 27,
+      "round": 1,
+      "pick_in_round": 27,
+      "current_team": "sf",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 28,
+      "round": 1,
+      "pick_in_round": 28,
+      "current_team": "hou",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 29,
+      "round": 1,
+      "pick_in_round": 29,
+      "current_team": "lar",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 30,
+      "round": 1,
+      "pick_in_round": 30,
+      "current_team": "den",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 31,
+      "round": 1,
+      "pick_in_round": 31,
+      "current_team": "ne",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 32,
+      "round": 1,
+      "pick_in_round": 32,
+      "current_team": "sea",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 33,
+      "round": 2,
+      "pick_in_round": 1,
+      "current_team": "nyj",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 34,
+      "round": 2,
+      "pick_in_round": 2,
+      "current_team": "ari",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 35,
+      "round": 2,
+      "pick_in_round": 3,
+      "current_team": "ten",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 36,
+      "round": 2,
+      "pick_in_round": 4,
+      "current_team": "lv",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 37,
+      "round": 2,
+      "pick_in_round": 5,
+      "current_team": "nyg",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 38,
+      "round": 2,
+      "pick_in_round": 6,
+      "current_team": "hou",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 39,
+      "round": 2,
+      "pick_in_round": 7,
+      "current_team": "cle",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 40,
+      "round": 2,
+      "pick_in_round": 8,
+      "current_team": "kc",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 41,
+      "round": 2,
+      "pick_in_round": 9,
+      "current_team": "cin",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 42,
+      "round": 2,
+      "pick_in_round": 10,
+      "current_team": "no",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 43,
+      "round": 2,
+      "pick_in_round": 11,
+      "current_team": "mia",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 44,
+      "round": 2,
+      "pick_in_round": 12,
+      "current_team": "nyj",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 45,
+      "round": 2,
+      "pick_in_round": 13,
+      "current_team": "bal",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 46,
+      "round": 2,
+      "pick_in_round": 14,
+      "current_team": "tb",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 47,
+      "round": 2,
+      "pick_in_round": 15,
+      "current_team": "ind",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 48,
+      "round": 2,
+      "pick_in_round": 16,
+      "current_team": "atl",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 49,
+      "round": 2,
+      "pick_in_round": 17,
+      "current_team": "min",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 50,
+      "round": 2,
+      "pick_in_round": 18,
+      "current_team": "det",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 51,
+      "round": 2,
+      "pick_in_round": 19,
+      "current_team": "car",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 52,
+      "round": 2,
+      "pick_in_round": 20,
+      "current_team": "gb",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 53,
+      "round": 2,
+      "pick_in_round": 21,
+      "current_team": "pit",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 54,
+      "round": 2,
+      "pick_in_round": 22,
+      "current_team": "phi",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 55,
+      "round": 2,
+      "pick_in_round": 23,
+      "current_team": "lac",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 56,
+      "round": 2,
+      "pick_in_round": 24,
+      "current_team": "jax",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 57,
+      "round": 2,
+      "pick_in_round": 25,
+      "current_team": "chi",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 58,
+      "round": 2,
+      "pick_in_round": 26,
+      "current_team": "sf",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 59,
+      "round": 2,
+      "pick_in_round": 27,
+      "current_team": "hou",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 60,
+      "round": 2,
+      "pick_in_round": 28,
+      "current_team": "buf",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 61,
+      "round": 2,
+      "pick_in_round": 29,
+      "current_team": "lar",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 62,
+      "round": 2,
+      "pick_in_round": 30,
+      "current_team": "den",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 63,
+      "round": 2,
+      "pick_in_round": 31,
+      "current_team": "ne",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 64,
+      "round": 2,
+      "pick_in_round": 32,
+      "current_team": "sea",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 65,
+      "round": 3,
+      "pick_in_round": 1,
+      "current_team": "ari",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 66,
+      "round": 3,
+      "pick_in_round": 2,
+      "current_team": "ten",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 67,
+      "round": 3,
+      "pick_in_round": 3,
+      "current_team": "lv",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 68,
+      "round": 3,
+      "pick_in_round": 4,
+      "current_team": "phi",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 69,
+      "round": 3,
+      "pick_in_round": 5,
+      "current_team": "hou",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 70,
+      "round": 3,
+      "pick_in_round": 6,
+      "current_team": "cle",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 71,
+      "round": 3,
+      "pick_in_round": 7,
+      "current_team": "wsh",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 72,
+      "round": 3,
+      "pick_in_round": 8,
+      "current_team": "cin",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 73,
+      "round": 3,
+      "pick_in_round": 9,
+      "current_team": "no",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 74,
+      "round": 3,
+      "pick_in_round": 10,
+      "current_team": "kc",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 75,
+      "round": 3,
+      "pick_in_round": 11,
+      "current_team": "mia",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 76,
+      "round": 3,
+      "pick_in_round": 12,
+      "current_team": "pit",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 77,
+      "round": 3,
+      "pick_in_round": 13,
+      "current_team": "tb",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 78,
+      "round": 3,
+      "pick_in_round": 14,
+      "current_team": "ind",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 79,
+      "round": 3,
+      "pick_in_round": 15,
+      "current_team": "atl",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 80,
+      "round": 3,
+      "pick_in_round": 16,
+      "current_team": "bal",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 81,
+      "round": 3,
+      "pick_in_round": 17,
+      "current_team": "jax",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 82,
+      "round": 3,
+      "pick_in_round": 18,
+      "current_team": "min",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 83,
+      "round": 3,
+      "pick_in_round": 19,
+      "current_team": "car",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 84,
+      "round": 3,
+      "pick_in_round": 20,
+      "current_team": "gb",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 85,
+      "round": 3,
+      "pick_in_round": 21,
+      "current_team": "pit",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 86,
+      "round": 3,
+      "pick_in_round": 22,
+      "current_team": "lac",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 87,
+      "round": 3,
+      "pick_in_round": 23,
+      "current_team": "mia",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 88,
+      "round": 3,
+      "pick_in_round": 24,
+      "current_team": "jax",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 89,
+      "round": 3,
+      "pick_in_round": 25,
+      "current_team": "chi",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 90,
+      "round": 3,
+      "pick_in_round": 26,
+      "current_team": "mia",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 91,
+      "round": 3,
+      "pick_in_round": 27,
+      "current_team": "buf",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 92,
+      "round": 3,
+      "pick_in_round": 28,
+      "current_team": "sf",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 93,
+      "round": 3,
+      "pick_in_round": 29,
+      "current_team": "lar",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 94,
+      "round": 3,
+      "pick_in_round": 30,
+      "current_team": "den",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 95,
+      "round": 3,
+      "pick_in_round": 31,
+      "current_team": "ne",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 96,
+      "round": 3,
+      "pick_in_round": 32,
+      "current_team": "sea",
+      "traded_from": [],
+      "player_id": null
+    },
+    {
+      "pick_number": 97,
+      "round": 3,
+      "pick_in_round": 33,
+      "current_team": "min",
+      "traded_from": [],
+      "is_compensatory": true,
+      "player_id": null
+    },
+    {
+      "pick_number": 98,
+      "round": 3,
+      "pick_in_round": 34,
+      "current_team": "phi",
+      "traded_from": [],
+      "is_compensatory": true,
+      "player_id": null
+    },
+    {
+      "pick_number": 99,
+      "round": 3,
+      "pick_in_round": 35,
+      "current_team": "pit",
+      "traded_from": [],
+      "is_compensatory": true,
+      "player_id": null
+    },
+    {
+      "pick_number": 100,
+      "round": 3,
+      "pick_in_round": 36,
+      "current_team": "jax",
+      "traded_from": [],
+      "is_compensatory": true,
+      "player_id": null
+    }
+  ]
+}
