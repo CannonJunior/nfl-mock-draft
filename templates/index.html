@@ -230,8 +230,8 @@
 
               {# Scouting grade #}
               <td class="grade-cell">
-                {% if player %}
-                  {% set g = player.grade if player.grade is not none else 0 %}
+                {% if player and player.grade is not none %}
+                  {% set g = player.grade %}
                   {% set is_derived = player.grade_breakdown and player.grade_breakdown.grade_source != "ESPN Scouting Grade" %}
                   {% if g >= 8.5 %}
                     <span class="grade-value grade-a" title="{{ player.grade_breakdown.grade_source if player.grade_breakdown else 'Grade' }}">{{ "%.1f"|format(g) }}</span>
