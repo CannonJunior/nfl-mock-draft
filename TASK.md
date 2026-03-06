@@ -28,6 +28,16 @@
 - [x] Install dependencies with uv sync
 - [x] Verified 92/92 tests pass
 
+## Discovered During Work (2026-03-04 analytics build)
+- Synthetic player pool (103 confirmed 2026 prospects) added as fallback when DB is empty
+- `POST /api/predictions/run?scrape=false` runs simulation only on existing DB data
+- 154 tests passing after analytics engine added
+- [DONE] Fixed scoring model: position weights tightened to 0.92–1.02 range so high-grade players at any position rank correctly
+- [DONE] Created app/scrapers/college_stats.py — scrapes NFL.com prospect pages for season stats
+- [DONE] Created app/scrapers/news.py — scrapes Google News RSS for 5 articles per player
+- [DONE] Wired college_stats and news into runner.py pipeline (sources: "college_stats", "news")
+- [DONE] simulator.py now populates bio (height/weight/arm/hand + combine), stat_views, and media_links from DB
+
 ## Discovered During Work
 - Pick 13 (Round 1): Rams acquired from Falcons (Micah Parsons trade)
 - Pick 16 (Round 1): Jets acquired from Colts (Sauce Gardner trade)
@@ -38,10 +48,46 @@
 - `app/models/` directory conflict: models.py renamed to models_core.py; models/__init__.py re-exports all classes
 - Extra directories exist: app/api/, app/pipeline/, app/scrapers/ — contain scaffolding for future scraping pipeline
 
+## Discovered During Work (2026-03-04 scraper fixes)
+- [DONE] Fixed scoring model (all position weights = 1.0, need_boost max 3%) so grade dominates over position/need
+- [DONE] Fixed all broken scraper URLs and HTML parsers for 2026 season:
+  - tankathon.py: /nfl/full_draft + /nfl/mock_draft, CSS-class parsers (mock-row, full-draft-round-nfl)
+  - espn.py: Kiper big board article, h2 regex parser for "N.Name, POS, College*" format
+  - nfl_mock.py: Zierlein/Jeremiah 2.0 article URLs, nfl-o-ranked-item component parser
+  - espn_mock.py: Kiper/Reid/Yates mock URLs, h2-team parser for "N.Team\n<p>Player, POS, College</p>" format
+  - sharp.py: /rankings/nfl URL; nfl_com.py: /combine/ URL (JS-rendered, returns 0 gracefully)
+- [DONE] Fixed player pool — supplements ESPN's 25 with mock-only players for 100+ prospect coverage
+- [DONE] End-to-end simulation now assigns 100/100 picks with real scraped data
+- nfl_com combine and nfl_prospects are JS-rendered — return 0 gracefully, not fixable with httpx
+
+## Discovered During Work (2026-03-05 combine scraper)
+- [DONE] Created app/scrapers/draft_countdown.py — scrapes draftcountdown.com (wpDataTable, 300+ prospects, server-rendered) with bigboardlab.com fallback (COMBINE_DATA JS array, 450+ prospects)
+- [DONE] Added "draft_countdown" to ALL_SOURCES in runner.py
+- [DONE] 35 new unit tests added; 189/189 total passing
+- draftcountdown.com encoding: HGT=FIID (feet+inches+tenth), HAND/ARM=WW..N8 (whole+eighths), BJ=FII (feet+last2=inches)
+- nfl_com combine scraper (existing) returns 0 records gracefully — JS-rendered; draft_countdown is now the primary combine source
+
+## Discovered During Work (2026-03-05 grade + combine fixes)
+- [DONE] Grade display revamped: never N/A; ESPN grade if available, else base_score/10 (min 3.5)
+- [DONE] `_compute_display_grade()` and `_build_grade_breakdown()` added to simulator.py
+- [DONE] `grade_breakdown` field added to Player model; written to players.json per player
+- [DONE] Grade Analysis section added to expanded pick panel (formula, all signal components, base score)
+- [DONE] Combine stat_view added to Statistics tab when combine data is present in DB
+- [DONE] `grade-derived-label` "model" badge shown under grade circle when grade is model-derived
+- [DONE] CSS added: .grade-analysis-box, .grade-source-pill, .grade-components-grid, .grade-derived-label
+- Combine data will display once `draft_countdown` scraper runs (via POST /api/predictions/run)
+
+## Discovered During Work (2026-03-06 college logos)
+- [DONE] Created data/config/college_logo_map.json — maps ~90 lowercased college names to ESPN CDN numeric IDs
+- [DONE] Downloaded 129 unique college logo PNGs to static/img/colleges/ (local, no CDN hits at runtime)
+- [DONE] Added `_resolve_college_logo_url()` to simulator.py — resolves college name → /static/img/colleges/{id}.png
+- [DONE] UAB ID corrected to 5 (was incorrectly 2439 which is UNLV); UNLV retains 2439; Old Dominion removed (ESPN 404)
+- [DONE] 2 new tests in test_simulator.py; 191/191 total passing
+
 ## Upcoming Tasks
 - [x] Add web data ingestion pipeline (T-001 — completed 2026-03-04)
-- [ ] Add player analytics pipeline to populate data/players.json
-- [ ] Source ESPN numeric IDs for college team logos
+- [x] Add player analytics pipeline to populate data/players.json (completed 2026-03-04)
+- [x] Source ESPN numeric IDs for college team logos (completed 2026-03-06)
 - [ ] Update compensatory picks once NFL announces official 2026 comp picks (est. March 7, 2026)
 - [ ] Add search/filter functionality to the UI (by team, position, round)
 - [ ] Add a "my mock draft" mode where users can make their own picks

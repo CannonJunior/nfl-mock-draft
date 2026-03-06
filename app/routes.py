@@ -12,13 +12,17 @@ Provides:
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
+from pathlib import Path
+
 from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from pathlib import Path
 
 from app import data_loader
 from app.models_core import EnrichedPick, Team
+
+_DATA_DIR = Path(__file__).parent.parent / "data"
 
 # Resolve templates directory relative to this file
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
@@ -51,12 +55,26 @@ async def index(request: Request) -> HTMLResponse:
         if ep.pick.round in rounds:
             rounds[ep.pick.round].append(ep)
 
+    # Determine how many picks have a player assigned
+    assigned = sum(1 for ep in all_picks if ep.player is not None)
+
+    # Last prediction run time from picks.json modification timestamp
+    picks_path = _DATA_DIR / "picks.json"
+    last_updated: str | None = None
+    if picks_path.exists() and assigned > 0:
+        mtime = picks_path.stat().st_mtime
+        last_updated = datetime.fromtimestamp(mtime, tz=timezone.utc).strftime(
+            "%b %d, %Y %H:%M UTC"
+        )
+
     return templates.TemplateResponse(
         request,
         "index.html",
         {
             "rounds": rounds,
             "total_picks": len(all_picks),
+            "assigned_picks": assigned,
+            "last_updated": last_updated,
         },
     )
 

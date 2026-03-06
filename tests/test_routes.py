@@ -113,11 +113,17 @@ class TestGetSinglePick:
         response = client.get("/api/picks/999")
         assert response.status_code == 404
 
-    def test_player_null_for_unassigned(self):
-        """GET /api/picks/1 returns null player when no player is assigned."""
+    def test_pick_1_has_valid_player_or_null(self):
+        """GET /api/picks/1 returns a pick with either a player object or null."""
         response = client.get("/api/picks/1")
+        assert response.status_code == 200
         data = response.json()
-        assert data["player"] is None
+        # player is None before predictions run; a dict with required keys after
+        player = data["player"]
+        if player is not None:
+            assert "name" in player
+            assert "position" in player
+            assert "college" in player
 
 
 # -----------------------------------------------------------------------

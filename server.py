@@ -16,6 +16,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.routes import router
 from app.api.scrape import scrape_router
+from app.api.predictions import predictions_router
 
 # Load .env file if present
 load_dotenv()
@@ -40,6 +41,7 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 # Register all page and API routes
 app.include_router(router)
 app.include_router(scrape_router)
+app.include_router(predictions_router)
 
 
 if __name__ == "__main__":

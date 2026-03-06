@@ -1,0 +1,31 @@
+{
+  "position_tiers": {
+    "QB":   {"tier": 1, "weight": 1.0},
+    "OT":   {"tier": 1, "weight": 1.0},
+    "EDGE": {"tier": 1, "weight": 1.0},
+    "DE":   {"tier": 1, "weight": 1.0},
+    "WR":   {"tier": 2, "weight": 1.0},
+    "CB":   {"tier": 2, "weight": 1.0},
+    "DT":   {"tier": 2, "weight": 1.0},
+    "TE":   {"tier": 2, "weight": 1.0},
+    "LB":   {"tier": 3, "weight": 1.0},
+    "IOL":  {"tier": 3, "weight": 1.0},
+    "OG":   {"tier": 3, "weight": 1.0},
+    "C":    {"tier": 3, "weight": 1.0},
+    "S":    {"tier": 3, "weight": 1.0},
+    "RB":   {"tier": 4, "weight": 1.0},
+    "FB":   {"tier": 4, "weight": 1.0}
+  },
+  "need_boost": {
+    "1": 0.00,
+    "2": 0.00,
+    "3": 0.01,
+    "4": 0.02,
+    "5": 0.03
+  },
+  "supply_pressure": {
+    "talent_cliff_threshold": 8.0,
+    "early_drain_threshold": 0.60,
+    "max_boost": 1.04
+  }
+}

@@ -161,6 +161,55 @@ function formatHeight(totalInches) {
 }
 
 // ============================================================
+// Predictions
+// ============================================================
+
+/**
+ * Call the predictions API (scrape=false for speed), then reload the page.
+ * Shows a loading spinner on the button and disables it during the run.
+ */
+async function runPredictions() {
+  const btn = document.getElementById("predictions-btn");
+  const icon = document.getElementById("predictions-btn-icon");
+  const label = document.getElementById("predictions-btn-label");
+  const ts = document.getElementById("predictions-timestamp");
+
+  if (!btn) return;
+
+  // Loading state
+  btn.disabled = true;
+  btn.classList.add("loading");
+  if (icon) icon.textContent = "⏳";
+  if (label) label.textContent = "Running…";
+
+  try {
+    const res = await fetch("/api/predictions/run?scrape=false", { method: "POST" });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: "Unknown error" }));
+      throw new Error(err.detail || `HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    if (icon) icon.textContent = "✓";
+    if (label) label.textContent = `Done — ${data.picks_assigned} picks`;
+    // Reload after a brief pause so the user sees the success state
+    setTimeout(() => window.location.reload(), 800);
+  } catch (err) {
+    btn.disabled = false;
+    btn.classList.remove("loading");
+    btn.classList.add("error");
+    if (icon) icon.textContent = "✗";
+    if (label) label.textContent = "Error — retry";
+    console.error("Predictions run failed:", err);
+    // Reset error state after 3 seconds
+    setTimeout(() => {
+      btn.classList.remove("error");
+      if (icon) icon.textContent = "⟳";
+      if (label) label.textContent = "Refresh Predictions";
+    }, 3000);
+  }
+}
+
+// ============================================================
 // DOM Initialisation
 // ============================================================
 

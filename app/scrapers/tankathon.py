@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import logging
 import re
-from typing import Optional
 
 from bs4 import BeautifulSoup, Tag
 
@@ -27,15 +26,6 @@ logger = logging.getLogger(__name__)
 
 _SOURCE = "tankathon"
 _BASE = "https://www.tankathon.com"
-
-# Tankathon uses numeric need levels inside colored cells; we normalise to 1-5
-_NEED_LABEL_MAP: dict[str, int] = {
-    "critical": 5,
-    "high": 4,
-    "medium": 3,
-    "low": 2,
-    "minimal": 1,
-}
 
 
 class TankathonScraper(BaseScraper):
@@ -54,7 +44,7 @@ class TankathonScraper(BaseScraper):
             tuple[list[ScrapedDraftPick], ScrapeResult]: Parsed picks and
                 a summary result object.
         """
-        url = f"{_BASE}/"
+        url = f"{_BASE}/nfl/full_draft"
         picks: list[ScrapedDraftPick] = []
         try:
             soup = await self.fetch_html(url)
@@ -71,26 +61,18 @@ class TankathonScraper(BaseScraper):
 
     async def fetch_team_needs(self) -> tuple[list[ScrapedTeamNeed], ScrapeResult]:
         """
-        Scrape team positional needs from tankathon.com/team-needs.
+        Return empty team needs — Tankathon has no standalone team-needs page.
+
+        Reason: Tankathon encodes needs inside their mock algorithm but does
+        not expose a separate team-needs URL. Return success with 0 records so
+        the pipeline continues without error.
 
         Returns:
-            tuple[list[ScrapedTeamNeed], ScrapeResult]: Parsed needs and
-                a summary result object.
+            tuple[list[ScrapedTeamNeed], ScrapeResult]: Empty list and a
+                successful result object.
         """
-        url = f"{_BASE}/team-needs"
-        needs: list[ScrapedTeamNeed] = []
-        try:
-            soup = await self.fetch_html(url)
-            needs = _parse_team_needs(soup, url)
-            logger.info("[tankathon] Team needs: %d records", len(needs))
-            return needs, ScrapeResult(
-                source=_SOURCE, success=True, records_fetched=len(needs)
-            )
-        except ScraperError as exc:
-            logger.error("[tankathon] Team needs failed: %s", exc)
-            return needs, ScrapeResult(
-                source=_SOURCE, success=False, error=str(exc)
-            )
+        logger.info("[tankathon] Team needs page does not exist — skipping")
+        return [], ScrapeResult(source=_SOURCE, success=True, records_fetched=0)
 
     async def fetch_mock_draft(self) -> tuple[list[ScrapedMockEntry], ScrapeResult]:
         """
@@ -100,7 +82,7 @@ class TankathonScraper(BaseScraper):
             tuple[list[ScrapedMockEntry], ScrapeResult]: Parsed mock entries
                 and a summary result object.
         """
-        url = f"{_BASE}/mock-draft"
+        url = f"{_BASE}/nfl/mock_draft"
         entries: list[ScrapedMockEntry] = []
         try:
             soup = await self.fetch_html(url)
@@ -123,7 +105,12 @@ class TankathonScraper(BaseScraper):
 
 def _parse_draft_order(soup: BeautifulSoup, url: str) -> list[ScrapedDraftPick]:
     """
-    Extract draft pick rows from the Tankathon homepage table.
+    Extract draft pick rows from the Tankathon full-draft page.
+
+    The full_draft page uses round sections (div.full-draft-round-nfl) each
+    containing a table.full-draft with rows of:
+        <td class="pick-number">N</td>
+        <td><div class="team-link"><a href="/nfl/slug">…<div class="desktop">Team</div></a></div></td>
 
     Args:
         soup (BeautifulSoup): Parsed HTML document.
@@ -133,137 +120,64 @@ def _parse_draft_order(soup: BeautifulSoup, url: str) -> list[ScrapedDraftPick]:
         list[ScrapedDraftPick]: Parsed pick objects.
     """
     picks: list[ScrapedDraftPick] = []
-    # Tankathon renders picks inside a table with class "draft-table" or similar
-    rows = soup.select("table.draft-table tr, #draft-board tr, .pick-row")
-    if not rows:
-        # Fall back to any table row containing a pick number cell
-        rows = soup.find_all("tr")
 
-    overall = 0
-    current_round = 1
-    pick_in_round = 0
+    for round_div in soup.select("div.full-draft-round-nfl"):
+        # Derive round number from the round title (e.g. "1st Round", "2nd Round")
+        current_round = 1
+        title_div = round_div.find("div", class_="round-title")
+        if title_div:
+            round_match = re.search(r"(\d+)", title_div.get_text())
+            if round_match:
+                current_round = int(round_match.group(1))
 
-    for row in rows:
-        cells = row.find_all(["td", "th"])
-        if not cells:
-            continue
-        text_vals = [c.get_text(strip=True) for c in cells]
+        pick_in_round = 0
+        for row in round_div.select("tr"):
+            pick_td = row.find("td", class_="pick-number")
+            if not pick_td:
+                continue
+            pick_text = pick_td.get_text(strip=True)
+            if not pick_text.isdigit():
+                continue
 
-        # Detect round header rows like "Round 1", "Round 2"
-        full_text = " ".join(text_vals)
-        round_match = re.search(r"Round\s+(\d)", full_text, re.IGNORECASE)
-        if round_match and len(text_vals) <= 2:
-            current_round = int(round_match.group(1))
-            pick_in_round = 0
-            continue
+            pick_num = int(pick_text)
+            pick_in_round += 1
 
-        # Skip header/label rows
-        if not text_vals[0].isdigit():
-            continue
+            # Team name from the first link's desktop label
+            team = ""
+            team_link = row.find("a")
+            if isinstance(team_link, Tag):
+                desktop = team_link.find("div", class_="desktop")
+                if desktop:
+                    team = desktop.get_text(strip=True)
 
-        overall += 1
-        pick_in_round += 1
-        pick_num = int(text_vals[0]) if text_vals[0].isdigit() else overall
-        team = text_vals[1] if len(text_vals) > 1 else "UNK"
-        traded_from: Optional[str] = None
-
-        # Reason: traded picks appear as "NYJ (via NE)" or similar
-        via_match = re.search(r"\(via\s+(.+?)\)", team)
-        if via_match:
-            traded_from = via_match.group(1).strip()
-            team = re.sub(r"\s*\(via.+?\)", "", team).strip()
-
-        picks.append(
-            ScrapedDraftPick(
-                pick_number=pick_num,
-                round=current_round,
-                pick_in_round=pick_in_round,
-                team=team,
-                traded_from=traded_from,
-                source=_SOURCE,
-                source_url=url,
+            picks.append(
+                ScrapedDraftPick(
+                    pick_number=pick_num,
+                    round=current_round,
+                    pick_in_round=pick_in_round,
+                    team=team,
+                    traded_from=None,
+                    source=_SOURCE,
+                    source_url=url,
+                )
             )
-        )
 
     return picks
-
-
-def _parse_team_needs(soup: BeautifulSoup, url: str) -> list[ScrapedTeamNeed]:
-    """
-    Extract team positional need ratings from the Tankathon team-needs page.
-
-    Args:
-        soup (BeautifulSoup): Parsed HTML document.
-        url (str): Source URL for attribution.
-
-    Returns:
-        list[ScrapedTeamNeed]: Parsed need records.
-    """
-    needs: list[ScrapedTeamNeed] = []
-    # Tankathon renders needs as a grid: rows = teams, columns = positions
-    # Header row contains position names
-    table = soup.find("table")
-    if not table or not isinstance(table, Tag):
-        logger.warning("[tankathon] Could not find needs table")
-        return needs
-
-    header_cells = table.find_all("th")
-    positions = [th.get_text(strip=True) for th in header_cells[1:]]
-
-    for row in table.find_all("tr")[1:]:
-        cells = row.find_all("td")
-        if not cells:
-            continue
-        team_name = cells[0].get_text(strip=True)
-        for i, cell in enumerate(cells[1:]):
-            if i >= len(positions):
-                break
-            # Reason: need level is encoded as a CSS class like "need-5" or data attr
-            level = _extract_need_level(cell)
-            if level is not None:
-                needs.append(
-                    ScrapedTeamNeed(
-                        team=team_name,
-                        position=positions[i],
-                        need_level=level,
-                        source=_SOURCE,
-                        source_url=url,
-                    )
-                )
-
-    return needs
-
-
-def _extract_need_level(cell: Tag) -> Optional[int]:
-    """
-    Determine the integer need level from a Tankathon needs table cell.
-
-    Args:
-        cell (Tag): A BeautifulSoup <td> element.
-
-    Returns:
-        Optional[int]: Need level 1-5, or None if it cannot be determined.
-    """
-    # Try data attributes first
-    for attr in ("data-need", "data-level", "data-value"):
-        val = cell.get(attr)
-        if val and str(val).isdigit():
-            return max(1, min(5, int(val)))
-
-    # Try CSS class names like "need-4" or "level-3"
-    classes = " ".join(cell.get("class", []))
-    class_match = re.search(r"(?:need|level)-(\d)", classes)
-    if class_match:
-        return max(1, min(5, int(class_match.group(1))))
-
-    # Try text label
-    label = cell.get_text(strip=True).lower()
-    return _NEED_LABEL_MAP.get(label)
 
 
 def _parse_mock_draft(soup: BeautifulSoup, url: str) -> list[ScrapedMockEntry]:
     """
     Extract projected picks from the Tankathon mock draft page.
+
+    Each pick is in a div.mock-row containing:
+        <div class="mock-row-pick-number">1</div>
+        <div class="mock-row-logo"><a href="/nfl/slug"><img alt="LV" …/></a></div>
+        <div class="mock-row-player">
+            <a href="/nfl/players/…">
+                <div class="mock-row-name">Player Name</div>
+                <div class="mock-row-school-position">QB | Indiana </div>
+            </a>
+        </div>
 
     Args:
         soup (BeautifulSoup): Parsed HTML document.
@@ -273,26 +187,46 @@ def _parse_mock_draft(soup: BeautifulSoup, url: str) -> list[ScrapedMockEntry]:
         list[ScrapedMockEntry]: Parsed mock draft entries.
     """
     entries: list[ScrapedMockEntry] = []
-    rows = soup.select("table tr, .mock-pick, .pick-row")
 
-    for row in rows:
-        cells = row.find_all(["td", "th"])
-        if len(cells) < 3:
+    for row in soup.select("div.mock-row"):
+        # Pick number
+        pick_div = row.find("div", class_="mock-row-pick-number")
+        if not pick_div:
             continue
-        text_vals = [c.get_text(strip=True) for c in cells]
+        pick_text = pick_div.get_text(strip=True)
+        if not pick_text.isdigit():
+            continue
+        pick_num = int(pick_text)
 
-        if not text_vals[0].isdigit():
+        # Team abbreviation from the logo img alt attribute (e.g. alt="LV")
+        team = ""
+        logo_div = row.find("div", class_="mock-row-logo")
+        if isinstance(logo_div, Tag):
+            img = logo_div.find("img")
+            if img:
+                team = img.get("alt", "")  # type: ignore[arg-type]
+
+        # Player name
+        name_div = row.find("div", class_="mock-row-name")
+        player_name = name_div.get_text(strip=True) if isinstance(name_div, Tag) else ""
+        if not player_name:
             continue
 
-        pick_number = int(text_vals[0])
-        team = text_vals[1] if len(text_vals) > 1 else "UNK"
-        player_name = text_vals[2] if len(text_vals) > 2 else "TBD"
-        position = text_vals[3] if len(text_vals) > 3 else ""
-        college = text_vals[4] if len(text_vals) > 4 else ""
+        # Position and college from "QB | Indiana" text
+        position = ""
+        college = ""
+        pos_div = row.find("div", class_="mock-row-school-position")
+        if isinstance(pos_div, Tag):
+            pos_text = pos_div.get_text(strip=True)
+            parts = [p.strip() for p in pos_text.split("|")]
+            if parts:
+                position = parts[0]
+            if len(parts) >= 2:
+                college = parts[1]
 
         entries.append(
             ScrapedMockEntry(
-                pick_number=pick_number,
+                pick_number=pick_num,
                 team=team,
                 player_name=player_name,
                 position=position,

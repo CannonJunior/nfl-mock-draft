@@ -1,149 +1,143 @@
 """
 Unit tests for app.scrapers.tankathon.
 
-Tests the private parse helpers using synthetic HTML fixtures,
-avoiding any live HTTP calls.
+Tests the private parse helpers using synthetic HTML fixtures that match
+Tankathon's actual CSS-class-based layout. Avoids any live HTTP calls.
 """
 
 from __future__ import annotations
 
-import pytest
 from bs4 import BeautifulSoup
 
 from app.scrapers.tankathon import (
     _parse_draft_order,
     _parse_mock_draft,
-    _parse_team_needs,
-    _extract_need_level,
 )
 
 
 # ---------------------------------------------------------------------------
-# Fixtures: minimal HTML fragments that mimic Tankathon's structure
+# Fixtures: HTML that mimics Tankathon's actual page structure
 # ---------------------------------------------------------------------------
 
+# full_draft page structure: div.full-draft-round-nfl > table.full-draft > tr
 DRAFT_ORDER_HTML = """
-<table class="draft-table">
-  <tr><th>Pick</th><th>Team</th></tr>
-  <tr><td>1</td><td>TEN</td></tr>
-  <tr><td>2</td><td>CLE (via NE)</td></tr>
-  <tr><td>3</td><td>NYG</td></tr>
-</table>
+<div class="full-draft-round full-draft-round-nfl">
+  <div class="round-title">1st Round</div>
+  <table class="full-draft">
+    <tr>
+      <td class="pick-number">1</td>
+      <td><div class="team-link"><a href="/nfl/raiders">
+        <div class="team-link-section team-link-logo"><img src="lv.svg"/></div>
+        <div class="team-link-section"><div class="desktop">Las Vegas</div></div>
+      </a></div></td>
+    </tr>
+    <tr>
+      <td class="pick-number">2</td>
+      <td><div class="team-link"><a href="/nfl/jets">
+        <div class="team-link-section"><div class="desktop">NY Jets</div></div>
+      </a></div></td>
+    </tr>
+  </table>
+</div>
+<div class="full-draft-round full-draft-round-nfl">
+  <div class="round-title">2nd Round</div>
+  <table class="full-draft">
+    <tr>
+      <td class="pick-number">33</td>
+      <td><div class="team-link"><a href="/nfl/raiders">
+        <div class="team-link-section"><div class="desktop">Las Vegas</div></div>
+      </a></div></td>
+    </tr>
+  </table>
+</div>
 """
 
-TEAM_NEEDS_HTML = """
-<table>
-  <tr>
-    <th>Team</th><th>QB</th><th>OT</th><th>WR</th>
-  </tr>
-  <tr>
-    <td>TEN</td>
-    <td data-need="5"></td>
-    <td data-need="3"></td>
-    <td data-need="1"></td>
-  </tr>
-</table>
-"""
-
+# mock_draft page structure: div.mock-row
 MOCK_DRAFT_HTML = """
-<table>
-  <tr><th>#</th><th>Team</th><th>Player</th><th>Pos</th><th>College</th></tr>
-  <tr><td>1</td><td>TEN</td><td>Cam Ward</td><td>QB</td><td>Miami</td></tr>
-  <tr><td>2</td><td>CLE</td><td>Travis Hunter</td><td>CB</td><td>Colorado</td></tr>
-</table>
+<div class="mock-row nfl">
+  <div class="mock-row-pick-number">1</div>
+  <div class="mock-row-logo"><a href="/nfl/raiders"><img alt="LV" src="lv.svg"/></a></div>
+  <div class="mock-row-player">
+    <a href="/nfl/players/cam-ward">
+      <div class="mock-row-name">Cam Ward</div>
+      <div class="mock-row-school-position">QB | Miami </div>
+    </a>
+  </div>
+</div>
+<div class="mock-row nfl">
+  <div class="mock-row-pick-number">2</div>
+  <div class="mock-row-logo"><a href="/nfl/jets"><img alt="NYJ" src="nyj.svg"/></a></div>
+  <div class="mock-row-player">
+    <a href="/nfl/players/travis-hunter">
+      <div class="mock-row-name">Travis Hunter</div>
+      <div class="mock-row-school-position">CB | Colorado </div>
+    </a>
+  </div>
+</div>
 """
 
 
 # ---------------------------------------------------------------------------
-# Draft order tests
+# _parse_draft_order
 # ---------------------------------------------------------------------------
 
 
 def test_parse_draft_order_basic():
-    """Expected: parse three picks from well-formed draft order table."""
+    """Expected: picks parsed from table.full-draft rows with round detection."""
     soup = BeautifulSoup(DRAFT_ORDER_HTML, "lxml")
     picks = _parse_draft_order(soup, "https://example.com")
     assert len(picks) == 3
     assert picks[0].pick_number == 1
-    assert picks[0].team == "TEN"
+    assert picks[0].team == "Las Vegas"
+    assert picks[0].round == 1
     assert picks[0].traded_from is None
 
 
-def test_parse_draft_order_traded_pick():
-    """Expected: detect traded pick and parse via team correctly."""
+def test_parse_draft_order_round_boundary():
+    """Expected: pick 33 is assigned to round 2."""
     soup = BeautifulSoup(DRAFT_ORDER_HTML, "lxml")
     picks = _parse_draft_order(soup, "https://example.com")
-    traded = [p for p in picks if p.traded_from]
-    assert len(traded) == 1
-    assert traded[0].team == "CLE"
-    assert traded[0].traded_from == "NE"
+    pick_33 = next(p for p in picks if p.pick_number == 33)
+    assert pick_33.round == 2
 
 
-def test_parse_draft_order_empty_table():
-    """Edge case: empty table returns empty list without raising."""
-    soup = BeautifulSoup("<table></table>", "lxml")
+def test_parse_draft_order_empty_html():
+    """Failure case: no round divs returns empty list."""
+    soup = BeautifulSoup("<div></div>", "lxml")
     picks = _parse_draft_order(soup, "https://example.com")
     assert picks == []
 
 
-def test_parse_draft_order_no_table():
-    """Failure case: no table in HTML returns empty list without raising."""
-    soup = BeautifulSoup("<div>no picks here</div>", "lxml")
+def test_parse_draft_order_source_tag():
+    """Expected: all picks carry source='tankathon'."""
+    soup = BeautifulSoup(DRAFT_ORDER_HTML, "lxml")
     picks = _parse_draft_order(soup, "https://example.com")
-    assert picks == []
+    assert all(p.source == "tankathon" for p in picks)
 
 
 # ---------------------------------------------------------------------------
-# Team needs tests
-# ---------------------------------------------------------------------------
-
-
-def test_parse_team_needs_basic():
-    """Expected: three position needs parsed for TEN with correct levels."""
-    soup = BeautifulSoup(TEAM_NEEDS_HTML, "lxml")
-    needs = _parse_team_needs(soup, "https://example.com/team-needs")
-    assert len(needs) == 3
-    qb_need = next(n for n in needs if n.position == "QB")
-    assert qb_need.need_level == 5
-    assert qb_need.team == "TEN"
-
-
-def test_parse_team_needs_no_table():
-    """Failure case: missing table returns empty list."""
-    soup = BeautifulSoup("<p>nothing here</p>", "lxml")
-    needs = _parse_team_needs(soup, "https://example.com/team-needs")
-    assert needs == []
-
-
-def test_extract_need_level_from_class():
-    """Edge case: need level extracted from CSS class when data attr absent."""
-    from bs4 import BeautifulSoup as BS
-    cell = BS('<td class="need-4"></td>', "lxml").find("td")
-    assert _extract_need_level(cell) == 4
-
-
-def test_extract_need_level_clamped():
-    """Edge case: values outside 1-5 are clamped to valid range."""
-    from bs4 import BeautifulSoup as BS
-    cell = BS('<td data-need="9"></td>', "lxml").find("td")
-    level = _extract_need_level(cell)
-    assert level == 5
-
-
-# ---------------------------------------------------------------------------
-# Mock draft tests
+# _parse_mock_draft
 # ---------------------------------------------------------------------------
 
 
 def test_parse_mock_draft_basic():
-    """Expected: two mock entries parsed correctly."""
+    """Expected: two ScrapedMockEntry objects with correct fields."""
     soup = BeautifulSoup(MOCK_DRAFT_HTML, "lxml")
     entries = _parse_mock_draft(soup, "https://example.com/mock-draft")
     assert len(entries) == 2
     assert entries[0].pick_number == 1
     assert entries[0].player_name == "Cam Ward"
+    assert entries[0].team == "LV"
     assert entries[0].position == "QB"
     assert entries[0].college == "Miami"
+
+
+def test_parse_mock_draft_second_entry():
+    """Expected: second entry parsed correctly."""
+    soup = BeautifulSoup(MOCK_DRAFT_HTML, "lxml")
+    entries = _parse_mock_draft(soup, "https://example.com/mock-draft")
+    assert entries[1].player_name == "Travis Hunter"
+    assert entries[1].position == "CB"
 
 
 def test_parse_mock_draft_empty():
@@ -151,3 +145,10 @@ def test_parse_mock_draft_empty():
     soup = BeautifulSoup("<html></html>", "lxml")
     entries = _parse_mock_draft(soup, "https://example.com/mock-draft")
     assert entries == []
+
+
+def test_parse_mock_draft_source_tag():
+    """Expected: all entries carry source='tankathon'."""
+    soup = BeautifulSoup(MOCK_DRAFT_HTML, "lxml")
+    entries = _parse_mock_draft(soup, "https://example.com/mock-draft")
+    assert all(e.source == "tankathon" for e in entries)

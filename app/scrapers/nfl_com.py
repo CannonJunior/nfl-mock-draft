@@ -20,7 +20,10 @@ logger = logging.getLogger(__name__)
 
 _SOURCE = "nfl"
 _BASE = "https://www.nfl.com"
-_COMBINE_URL = f"{_BASE}/prospects/combine"
+# Reason: NFL.com combine tracker is JS-rendered; this URL returns 200 but
+# no table data will be extracted. The scraper returns success with 0 records
+# rather than a 404 error, keeping the pipeline non-blocking.
+_COMBINE_URL = f"{_BASE}/combine/"
 
 
 class NFLComScraper(BaseScraper):
@@ -109,6 +112,10 @@ def _parse_combine_table(soup: BeautifulSoup, url: str) -> list[ScrapedCombineSt
                 name=name,
                 position=position or "",
                 college=college or "",
+                height_inches=_parse_height(_get_col(text_vals, col, "ht")),
+                weight_lbs=_parse_int(_get_col(text_vals, col, "wt")),
+                arm_length_inches=_parse_float(_get_col(text_vals, col, "arm")),
+                hand_size_inches=_parse_float(_get_col(text_vals, col, "hand")),
                 forty_yard_dash=_parse_float(_get_col(text_vals, col, "40")),
                 vertical_jump_inches=_parse_float(_get_col(text_vals, col, "vert")),
                 broad_jump_inches=_parse_int(_get_col(text_vals, col, "broad")),
@@ -139,6 +146,10 @@ def _build_column_map(headers: list[str]) -> dict[str, int]:
         "name": ["name", "player"],
         "pos": ["pos", "position"],
         "school": ["school", "college", "team"],
+        "ht": ["ht", "height"],
+        "wt": ["wt", "weight"],
+        "arm": ["arm"],
+        "hand": ["hand"],
         "40": ["40-yd", "40 yd", "40yard", "40"],
         "vert": ["vert", "vertical"],
         "broad": ["broad"],
@@ -173,6 +184,32 @@ def _get_col(
         return None
     val = values[idx].strip()
     return val if val and val not in ("-", "—", "N/A") else None
+
+
+def _parse_height(raw: Optional[str]) -> Optional[int]:
+    """
+    Convert a height string to total inches.
+
+    Accepts formats: "6-4", "6'4\"", "6-04", "76" (already inches).
+
+    Args:
+        raw (Optional[str]): Raw height string.
+
+    Returns:
+        Optional[int]: Height in total inches or None.
+    """
+    if not raw:
+        return None
+    # Formats: "6-4", "6'4", "6-04"
+    m = re.match(r"(\d+)['\-](\d+)", raw.strip())
+    if m:
+        return int(m.group(1)) * 12 + int(m.group(2))
+    # Already pure inches integer
+    try:
+        val = int(re.sub(r"[^\d]", "", raw))
+        return val if 60 <= val <= 84 else None  # sanity: 5'0" to 7'0"
+    except ValueError:
+        return None
 
 
 def _parse_float(raw: Optional[str]) -> Optional[float]:

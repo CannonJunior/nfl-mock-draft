@@ -302,13 +302,9 @@ img {
 }
 
 .team-logo-traded {
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   object-fit: contain;
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  padding: 1px;
-  border: 1px solid var(--border);
   opacity: 0.65;
   filter: grayscale(30%);
 }
@@ -453,6 +449,90 @@ img {
 .grade-c { background: #2d2a1e; color: var(--gold); border: 2px solid var(--gold); }
 .grade-d { background: #3a1a1a; color: var(--red); border: 2px solid var(--red); }
 .grade-none { background: var(--bg-secondary); color: var(--text-muted); border: 2px solid var(--border); font-size: 0.7rem; }
+
+/* Grade cell layout: badge + derived label stacked */
+.grade-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.grade-derived-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* ---------- Grade Analysis Box (in expanded detail panel) ---------- */
+.grade-analysis-box {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.grade-analysis-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.grade-analysis-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.grade-source-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: rgba(31,111,235,0.18);
+  color: var(--accent-hover);
+  border: 1px solid rgba(31,111,235,0.35);
+}
+.grade-analysis-formula {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+.grade-components-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 12px;
+}
+.grade-component-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+}
+.grade-comp-label {
+  color: var(--text-secondary);
+}
+.grade-comp-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.grade-base-score-row {
+  grid-column: 1 / -1;
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border);
+  font-weight: 700;
+}
+.grade-base-score-row .grade-comp-label {
+  color: var(--text-primary);
+}
+.grade-base-score-row .grade-comp-value {
+  color: var(--accent-hover);
+}
 
 /* ---------- Expand Icon ---------- */
 .expand-icon {
@@ -764,6 +844,62 @@ img {
   .draft-table thead th:nth-child(n+5) { display: none; }
   .draft-table td:nth-child(n+5) { display: none; }
   .team-cell { min-width: 160px; }
+}
+
+/* ---------- Predictions Button ---------- */
+.predictions-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.predictions-timestamp {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.predictions-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.predictions-btn:hover:not(:disabled) {
+  background: var(--gold);
+  color: #000;
+}
+
+.predictions-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.predictions-btn.loading {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.predictions-btn.error {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.predictions-btn-icon {
+  font-size: 0.9rem;
+  line-height: 1;
 }
 
 /* ---------- Scrollbar ---------- */

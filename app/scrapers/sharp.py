@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 _SOURCE = "sharp"
 _BASE = "https://www.sharpfootballanalysis.com"
-_RANKINGS_URL = f"{_BASE}/ranking"
+_RANKINGS_URL = f"{_BASE}/rankings/nfl"
 
 
 class TeamAnalytics(BaseModel):

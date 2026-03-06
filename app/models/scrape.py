@@ -46,6 +46,10 @@ class ScrapedCombineStat(BaseModel):
         name (str): Player name (used to match to ScrapedProspect).
         position (str): Position code.
         college (str): College name.
+        height_inches (Optional[int]): Height in total inches (e.g. 76 for 6'4").
+        weight_lbs (Optional[int]): Weight in pounds.
+        arm_length_inches (Optional[float]): Arm length in inches.
+        hand_size_inches (Optional[float]): Hand size in inches.
         forty_yard_dash (Optional[float]): 40-yard dash time in seconds.
         vertical_jump_inches (Optional[float]): Vertical jump in inches.
         broad_jump_inches (Optional[int]): Broad jump in inches.
@@ -60,12 +64,44 @@ class ScrapedCombineStat(BaseModel):
     name: str
     position: str
     college: str
+    height_inches: Optional[int] = None
+    weight_lbs: Optional[int] = None
+    arm_length_inches: Optional[float] = None
+    hand_size_inches: Optional[float] = None
     forty_yard_dash: Optional[float] = None
     vertical_jump_inches: Optional[float] = None
     broad_jump_inches: Optional[int] = None
     bench_press_reps: Optional[int] = None
     three_cone: Optional[float] = None
     twenty_yard_shuttle: Optional[float] = None
+    source: str
+    source_url: str
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class ScrapedCollegeStat(BaseModel):
+    """
+    College season statistics for a single prospect.
+
+    Stats are stored as a JSON blob (stats_json) keyed by stat name so the
+    schema works across all positions (QB passing, WR receiving, EDGE defense, etc.).
+
+    Attributes:
+        name (str): Player full name.
+        position (str): Position code.
+        college (str): College name.
+        season (str): Season year (e.g. "2025") or "Career".
+        stats_json (str): JSON-encoded dict of stat_name → value pairs.
+        source (str): Scraper source identifier.
+        source_url (str): URL that was scraped.
+        fetched_at (datetime): Timestamp of the fetch.
+    """
+
+    name: str
+    position: str
+    college: str
+    season: str
+    stats_json: str  # JSON-encoded {stat_name: value}
     source: str
     source_url: str
     fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -139,6 +175,56 @@ class ScrapedMockEntry(BaseModel):
     player_name: str
     position: str
     college: str
+    source: str
+    source_url: str
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class ScrapedBuzzRecord(BaseModel):
+    """
+    Social/analyst buzz data for a single prospect.
+
+    Attributes:
+        name (str): Player full name.
+        grade (Optional[float]): Analyst grade on 0-10 scale.
+        rank (Optional[int]): Community consensus rank.
+        mentions (Optional[int]): Social media mention / post count.
+        source (str): Scraper source identifier ("thedraftnetwork", "reddit").
+        source_url (str): URL that was scraped.
+        fetched_at (datetime): Timestamp of the fetch.
+    """
+
+    name: str
+    grade: Optional[float] = None
+    rank: Optional[int] = None
+    mentions: Optional[int] = None
+    source: str
+    source_url: str
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class ScrapedMediaArticle(BaseModel):
+    """
+    A news article or media link about a specific draft prospect.
+
+    Attributes:
+        player_name (str): Player the article is about.
+        title (str): Article headline.
+        url (str): Full article URL.
+        source_name (str): Publication name (e.g. "ESPN", "NFL.com").
+        source_type (str): Category — "news", "mock_draft", or "video".
+        published_at (Optional[str]): ISO date string when published.
+        source (str): Scraper source identifier (e.g. "google_news").
+        source_url (str): URL that was scraped to find this article.
+        fetched_at (datetime): Timestamp of the fetch.
+    """
+
+    player_name: str
+    title: str
+    url: str
+    source_name: str
+    source_type: str = "news"
+    published_at: Optional[str] = None
     source: str
     source_url: str
     fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

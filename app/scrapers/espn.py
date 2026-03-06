@@ -21,7 +21,19 @@ logger = logging.getLogger(__name__)
 
 _SOURCE = "espn"
 _BASE = "https://www.espn.com"
+
+# Kiper big board article for 2026; tracker URL kept as fallback
+_BIG_BOARD_URL = (
+    f"{_BASE}/nfl/draft2026/story/_/id/46573669/"
+    "2026-nfl-draft-rankings-mel-kiper-big-board-top-prospects-players-positions"
+)
 _TRACKER_URL = f"{_BASE}/nfl/draft/tracker"
+
+# Matches "<h2>1.Name, POS, College*</h2>" or "<h2>1. Name, POS, College</h2>"
+# Space after dot is optional; trailing asterisk (underclassman marker) is stripped.
+_H2_RANK_RE = re.compile(
+    r"^(\d+)\.\s*(.+?),\s+([A-Z]{1,5}),\s+(.+?)[\*\s]*$"
+)
 
 
 class ESPNScraper(BaseScraper):
@@ -38,11 +50,11 @@ class ESPNScraper(BaseScraper):
         """
         Scrape ESPN's draft big board for the top prospects.
 
-        ESPN paginates the draft tracker; this method fetches up to
-        max_pages pages and deduplicates by player name.
+        Tries the Kiper big board article first (2026 format), then falls back
+        to paginated tracker URLs.
 
         Args:
-            max_pages (int): Maximum number of paginated pages to fetch.
+            max_pages (int): Maximum number of tracker pages to try if article fails.
 
         Returns:
             tuple[list[ScrapedProspect], ScrapeResult]: Parsed prospects and
@@ -50,6 +62,20 @@ class ESPNScraper(BaseScraper):
         """
         all_prospects: list[ScrapedProspect] = []
         try:
+            # Strategy 1: Kiper big board article — preferred for 2026
+            try:
+                soup = await self.fetch_html(_BIG_BOARD_URL)
+                all_prospects = _parse_big_board_article(soup, _BIG_BOARD_URL)
+                if all_prospects:
+                    logger.info("[espn] Big board article: %d prospects", len(all_prospects))
+                    return all_prospects, ScrapeResult(
+                        source=_SOURCE, success=True, records_fetched=len(all_prospects)
+                    )
+                logger.warning("[espn] Big board article returned 0 prospects, trying tracker")
+            except ScraperError as exc:
+                logger.warning("[espn] Big board article failed: %s — trying tracker", exc)
+
+            # Strategy 2: paginated tracker (fallback)
             for page in range(1, max_pages + 1):
                 url = f"{_TRACKER_URL}/_/class/2026/page/{page}"
                 try:
@@ -58,18 +84,18 @@ class ESPNScraper(BaseScraper):
                     if not page_prospects:
                         # Reason: stop early if a page returns no data
                         logger.info(
-                            "[espn] No prospects on page %d, stopping pagination", page
+                            "[espn] No prospects on tracker page %d, stopping", page
                         )
                         break
                     all_prospects.extend(page_prospects)
                     logger.info(
-                        "[espn] Page %d: %d prospects (total %d)",
+                        "[espn] Tracker page %d: %d prospects (total %d)",
                         page,
                         len(page_prospects),
                         len(all_prospects),
                     )
                 except ScraperError as page_exc:
-                    logger.warning("[espn] Page %d failed: %s", page, page_exc)
+                    logger.warning("[espn] Tracker page %d failed: %s", page, page_exc)
                     break
 
             return all_prospects, ScrapeResult(
@@ -181,3 +207,63 @@ def _parse_grade(raw: str) -> Optional[float]:
         return float(raw)
     except (ValueError, TypeError):
         return None
+
+
+def _parse_big_board_article(soup: BeautifulSoup, url: str) -> list[ScrapedProspect]:
+    """
+    Parse ESPN Kiper big board article for 2026 prospects.
+
+    The article uses <h2> elements in the format:
+        <h2>1. Fernando Mendoza, QB, Indiana</h2>
+    Each entry may be followed by paragraph text containing a grade like "8.5".
+
+    Args:
+        soup (BeautifulSoup): Parsed HTML document.
+        url (str): Source URL for attribution.
+
+    Returns:
+        list[ScrapedProspect]: Parsed prospects in rank order.
+    """
+    prospects: list[ScrapedProspect] = []
+
+    for h2 in soup.find_all("h2"):
+        text = h2.get_text(strip=True)
+        m = _H2_RANK_RE.match(text)
+        if not m:
+            continue
+
+        rank = int(m.group(1))
+        name = m.group(2).strip()
+        position = m.group(3).strip().upper()
+        college = m.group(4).strip()
+
+        # Look for a grade (e.g. "8.5") in the first paragraph after this heading
+        grade: Optional[float] = None
+        node = h2.next_sibling
+        while node is not None:
+            if hasattr(node, "name"):
+                if node.name == "h2":
+                    break  # Next prospect block
+                if node.name == "p":
+                    p_text = node.get_text(strip=True)
+                    grade_match = re.search(r"\b(\d+\.\d)\b", p_text)
+                    if grade_match:
+                        candidate = float(grade_match.group(1))
+                        if 1.0 <= candidate <= 10.0:
+                            grade = candidate
+                            break
+            node = node.next_sibling
+
+        prospects.append(
+            ScrapedProspect(
+                name=name,
+                position=position,
+                college=college,
+                rank=rank,
+                grade=grade,
+                source=_SOURCE,
+                source_url=url,
+            )
+        )
+
+    return prospects

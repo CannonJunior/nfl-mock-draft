@@ -19,14 +19,21 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
+import re
 import sys
 from typing import Optional
 
 from app.models.scrape import ScrapeResult
 from app.pipeline import storage
+from app.scrapers.college_stats import CollegeStatsScraper
+from app.scrapers.draft_countdown import DraftCountdownScraper
 from app.scrapers.espn import ESPNScraper
+from app.scrapers.espn_mock import ESPNMockScraper
+from app.scrapers.news import NewsScraper
 from app.scrapers.nfl_com import NFLComScraper
+from app.scrapers.nfl_mock import NFLMockScraper
 from app.scrapers.sharp import SharpScraper
+from app.scrapers.social import SocialScraper
 from app.scrapers.tankathon import TankathonScraper
 
 logging.basicConfig(
@@ -37,7 +44,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # All valid source identifiers
-ALL_SOURCES = ["tankathon", "espn", "nfl", "sharp"]
+ALL_SOURCES = [
+    "tankathon", "espn", "nfl", "sharp",
+    "nfl_mock", "espn_mock", "social",
+    "college_stats", "news", "draft_countdown",
+]
 
 
 async def run_pipeline(
@@ -141,6 +152,74 @@ async def _run_source(source: str) -> list[ScrapeResult]:
             from app.pipeline.storage import _export_json
             _export_json("team_analytics", [a.model_dump(mode="json") for a in analytics])
         results.append(r)
+
+    elif source == "nfl_mock":
+        scraper = NFLMockScraper()
+        mock, r = await scraper.fetch_mock_draft()
+        if mock:
+            storage.upsert_mock_entries(mock)
+        results.append(r)
+
+    elif source == "espn_mock":
+        scraper = ESPNMockScraper()
+        mock, r = await scraper.fetch_mock_draft()
+        if mock:
+            storage.upsert_mock_entries(mock)
+        results.append(r)
+
+    elif source == "social":
+        scraper = SocialScraper()
+
+        tdn_records, r1 = await scraper.fetch_tdn_board()
+        if tdn_records:
+            storage.upsert_buzz_records(tdn_records)
+        results.append(r1)
+
+        reddit_records, r2 = await scraper.fetch_reddit_buzz()
+        if reddit_records:
+            storage.upsert_buzz_records(reddit_records)
+        results.append(r2)
+
+    elif source == "college_stats":
+        players = storage.get_prospects()
+        if not players:
+            logger.warning("[college_stats] No prospects in DB — run espn source first")
+            results.append(ScrapeResult(
+                source="nfl_prospects", success=False,
+                error="No prospects in DB to scrape stats for",
+            ))
+        else:
+            # Derive player_id (URL slug) from name
+            for p in players:
+                slug = re.sub(r"[^\w\s-]", "", p["name"].lower())
+                p["player_id"] = re.sub(r"[\s_]+", "-", slug).strip("-")
+            scraper = CollegeStatsScraper()
+            stats, r = await scraper.fetch_stats_for_pool(players)
+            if stats:
+                storage.upsert_college_stats(stats)
+            results.append(r)
+
+    elif source == "draft_countdown":
+        scraper = DraftCountdownScraper()
+        combine_stats, r = await scraper.fetch_combine_stats()
+        if combine_stats:
+            storage.upsert_combine_stats(combine_stats)
+        results.append(r)
+
+    elif source == "news":
+        players = storage.get_prospects()
+        if not players:
+            logger.warning("[news] No prospects in DB — run espn source first")
+            results.append(ScrapeResult(
+                source="google_news", success=False,
+                error="No prospects in DB to fetch news for",
+            ))
+        else:
+            scraper = NewsScraper()
+            articles, r = await scraper.fetch_articles_for_pool(players)
+            if articles:
+                storage.upsert_media_articles(articles)
+            results.append(r)
 
     return results
 

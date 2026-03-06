@@ -149,6 +149,7 @@ class Player(BaseModel):
     media_links: list[MediaLink] = Field(default_factory=list)
     grade: Optional[float] = None
     notes: Optional[str] = None
+    grade_breakdown: Optional[dict] = None
 
 
 class Pick(BaseModel):

@@ -115,12 +115,14 @@ class TestLoadPicks:
 class TestLoadPlayers:
     """Tests for data_loader.load_players()."""
 
-    def test_empty_players_returns_empty_dict(self):
-        """load_players returns empty dict when players.json has no entries."""
+    def test_load_players_returns_dict_of_players(self):
+        """load_players returns a dict keyed by player_id with Player values."""
+        from app.models_core import Player
         players = data_loader.load_players()
-        # data/players.json is initially empty
+        # players.json may be empty (pre-prediction) or populated (post-run)
         assert isinstance(players, dict)
-        assert len(players) == 0
+        for v in players.values():
+            assert isinstance(v, Player)
 
     def test_missing_file_raises(self, tmp_path, monkeypatch):
         """load_players raises FileNotFoundError when players.json is absent."""
