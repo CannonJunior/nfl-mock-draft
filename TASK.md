@@ -84,6 +84,19 @@
 - [DONE] UAB ID corrected to 5 (was incorrectly 2439 which is UNLV); UNLV retains 2439; Old Dominion removed (ESPN 404)
 - [DONE] 2 new tests in test_simulator.py; 191/191 total passing
 
+## Discovered During Work (2026-03-06 Twitter/Social Buzz + NEW badges)
+- [DONE] Created data/config/twitter_accounts.json — top 5 general experts + 3 per NFL team (32 teams)
+- [DONE] Created app/scrapers/twitter_nitter.py — nitter-based Twitter scraper with 5 fallback instances; graceful on all-fail
+- [DONE] Added "twitter" to ALL_SOURCES in runner.py; dispatches TwitterNitterScraper
+- [DONE] Added `sources` query param to POST /api/predictions/run — limits scraping scope (e.g. ?sources=news,twitter)
+- [DONE] Refresh Predictions button now calls ?scrape=true&sources=news,twitter; sets localStorage.nflMockLastRefresh
+- [DONE] simulator.py splits articles into media_links (news/video) and tweets (twitter); both include fetched_at
+- [DONE] Player model gains `tweets: Optional[list]` field; players.json updated
+- [DONE] NEW badge on pick rows (disappears when row expanded); NEW badge on individual media/tweet items
+- [DONE] Tweets section added to expanded pick card (Social Buzz, full-width below detail grid)
+- [DONE] localStorage tracks lastRefresh + seenPicks for persistent badge state across reloads
+- [DONE] 17 new tests in test_twitter_nitter.py; 208/208 total passing
+
 ## Upcoming Tasks
 - [x] Add web data ingestion pipeline (T-001 — completed 2026-03-04)
 - [x] Add player analytics pipeline to populate data/players.json (completed 2026-03-04)

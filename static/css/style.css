@@ -922,3 +922,107 @@ img {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* ============================================================
+   NEW Badge System
+   ============================================================ */
+
+/* Pill badge — hidden by default, shown via JS .visible class */
+.new-badge {
+  display: none;
+  background: var(--accent);
+  color: #000;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  vertical-align: middle;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.new-badge.visible {
+  display: inline-block;
+}
+
+/* Pick-row level badge (in the expand toggle cell) */
+#new-badge-\00031,
+[id^="new-badge-"] {
+  margin-right: 6px;
+}
+
+/* Highlight border on newly-added media/tweet items */
+.media-link.is-new {
+  border-left: 3px solid var(--accent);
+  padding-left: 9px; /* compensate for 3px border */
+}
+
+.tweet-card.is-new {
+  border-left: 3px solid var(--accent);
+}
+
+/* ============================================================
+   Tweet Cards (Social Buzz section)
+   ============================================================ */
+
+.tweets-section {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.tweets-section .detail-section-title {
+  margin-bottom: 10px;
+}
+
+.tweets-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tweet-card {
+  display: block;
+  position: relative;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tweet-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+}
+
+.tweet-account {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.tweet-text {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.tweet-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Inline NEW badge inside tweet cards and media links */
+.tweet-card .new-item-badge,
+.media-link .new-item-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  margin: 0;
+}

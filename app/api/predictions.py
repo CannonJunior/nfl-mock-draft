@@ -68,14 +68,21 @@ class StatusResponse(BaseModel):
 async def run_predictions(
     scrape: bool = Query(
         default=True,
-        description="If true, run all scrapers before simulating. Set false to use existing DB data.",
-    )
+        description="If true, run scrapers before simulating. Set false to use existing DB data.",
+    ),
+    sources: Optional[str] = Query(
+        default=None,
+        description=(
+            "Comma-separated list of scraper sources to run (e.g. 'news,twitter'). "
+            "Ignored when scrape=false. Defaults to all sources."
+        ),
+    ),
 ) -> RunResponse:
     """
     Run the full prediction pipeline: scrape → simulate → write results.
 
     Steps:
-    1. (Optional) Run all scrapers to refresh DB with latest data.
+    1. (Optional) Run scrapers to refresh DB with latest data.
     2. Build player pool from DB (or synthetic fallback).
     3. Load team needs from DB.
     4. Run sequential simulation across all 100 picks.
@@ -84,6 +91,8 @@ async def run_predictions(
 
     Args:
         scrape (bool): Whether to run scrapers before simulating. Default True.
+        sources (Optional[str]): Comma-separated source names to limit scraping scope.
+            When None, all sources are run. Example: "news,twitter".
 
     Returns:
         RunResponse: Summary of the operation including counts and timing.
@@ -105,7 +114,8 @@ async def run_predictions(
         try:
             from app.pipeline.runner import run_pipeline
 
-            results = await run_pipeline()
+            source_list = [s.strip() for s in sources.split(",")] if sources else None
+            results = await run_pipeline(sources=source_list)
             for r in results:
                 if r.success:
                     sources_scraped.append(r.source)

@@ -7,6 +7,7 @@
  *  - Stats tab switching per pick
  *  - Injury history toggle
  *  - Image fallback for broken logos
+ *  - "NEW" badge system for recently added media/tweets
  */
 
 "use strict";
@@ -35,6 +36,80 @@ function activateRound(round) {
 }
 
 // ============================================================
+// "NEW" Badge System
+// ============================================================
+
+/**
+ * Mark media items and pick rows as "new" if they were fetched after the
+ * last time the user clicked "Refresh Predictions".
+ *
+ * Uses localStorage keys:
+ *   nflMockLastRefresh  — ISO timestamp of last refresh button click
+ *   nflMockSeenPicks    — JSON array of pick numbers already expanded since refresh
+ */
+function markNewItems() {
+  const lastRefresh = localStorage.getItem("nflMockLastRefresh");
+  if (!lastRefresh) return; // First visit — nothing to badge
+
+  const seenPicks = new Set(
+    JSON.parse(localStorage.getItem("nflMockSeenPicks") || "[]")
+  );
+
+  // For each element with a data-fetched-at attribute (media links + tweet cards)
+  document.querySelectorAll("[data-fetched-at]").forEach((el) => {
+    const fetchedAt = el.dataset.fetchedAt;
+    if (!fetchedAt || fetchedAt <= lastRefresh) return;
+
+    // Mark the item itself as new
+    el.classList.add("is-new");
+    // Show the inline NEW badge inside the item
+    const itemBadge = el.querySelector(".new-item-badge");
+    if (itemBadge) itemBadge.classList.add("visible");
+
+    // Find the parent detail-row to identify the pick number
+    const detailRow = el.closest("tr.detail-row");
+    if (!detailRow) return;
+    const pickNum = detailRow.id.replace("detail-", "");
+    if (seenPicks.has(pickNum)) return; // User already expanded this pick
+
+    // Show the pick-row level NEW badge
+    const rowBadge = document.getElementById(`new-badge-${pickNum}`);
+    if (rowBadge) rowBadge.classList.add("visible");
+  });
+}
+
+/**
+ * Clear NEW badges for a specific pick after the user expands its row.
+ * Persists the pick as "seen" in localStorage.
+ *
+ * @param {string|number} pickNum - The pick number.
+ */
+function clearPickNewBadge(pickNum) {
+  const pn = String(pickNum);
+
+  // Remove the pick-row badge
+  const rowBadge = document.getElementById(`new-badge-${pn}`);
+  if (rowBadge) rowBadge.classList.remove("visible");
+
+  // Remove is-new from all media/tweet items inside this detail row
+  const detailRow = document.getElementById(`detail-${pn}`);
+  if (detailRow) {
+    detailRow.querySelectorAll("[data-fetched-at]").forEach((el) => {
+      el.classList.remove("is-new");
+      const itemBadge = el.querySelector(".new-item-badge");
+      if (itemBadge) itemBadge.classList.remove("visible");
+    });
+  }
+
+  // Persist to localStorage so badge stays cleared across reloads
+  const seen = new Set(
+    JSON.parse(localStorage.getItem("nflMockSeenPicks") || "[]")
+  );
+  seen.add(pn);
+  localStorage.setItem("nflMockSeenPicks", JSON.stringify([...seen]));
+}
+
+// ============================================================
 // Pick Row Expand / Collapse
 // ============================================================
 
@@ -49,27 +124,23 @@ function togglePickDetail(row) {
 
   const isExpanded = row.classList.contains("expanded");
 
-  // Collapse all currently open rows first (accordion-style optional;
-  // currently we allow multiple open — remove the block below to enforce accordion)
-  // document.querySelectorAll(".pick-row.expanded").forEach(r => {
-  //   if (r !== row) collapsePickRow(r);
-  // });
-
   if (isExpanded) {
     collapsePickRow(row, detailRow);
   } else {
-    expandPickRow(row, detailRow);
+    expandPickRow(row, detailRow, pickNum);
   }
 }
 
 /**
- * Expand a pick row to show its detail panel.
+ * Expand a pick row to show its detail panel and clear its NEW badge.
  * @param {HTMLElement} row - The pick-row element.
  * @param {HTMLElement} detailRow - The corresponding detail-row element.
+ * @param {string} pickNum - The pick number.
  */
-function expandPickRow(row, detailRow) {
+function expandPickRow(row, detailRow, pickNum) {
   row.classList.add("expanded");
   detailRow.classList.add("visible");
+  if (pickNum) clearPickNewBadge(pickNum);
 }
 
 /**
@@ -165,25 +236,33 @@ function formatHeight(totalInches) {
 // ============================================================
 
 /**
- * Call the predictions API (scrape=false for speed), then reload the page.
+ * Call the predictions API (scrape news + twitter, then re-simulate),
+ * record a refresh timestamp in localStorage, and reload the page.
  * Shows a loading spinner on the button and disables it during the run.
  */
 async function runPredictions() {
   const btn = document.getElementById("predictions-btn");
   const icon = document.getElementById("predictions-btn-icon");
   const label = document.getElementById("predictions-btn-label");
-  const ts = document.getElementById("predictions-timestamp");
 
   if (!btn) return;
+
+  // Record the refresh timestamp BEFORE the request so newly-fetched items
+  // whose fetched_at >= this timestamp are flagged as "new" after reload.
+  const refreshTs = new Date().toISOString();
 
   // Loading state
   btn.disabled = true;
   btn.classList.add("loading");
   if (icon) icon.textContent = "⏳";
-  if (label) label.textContent = "Running…";
+  if (label) label.textContent = "Fetching media…";
 
   try {
-    const res = await fetch("/api/predictions/run?scrape=false", { method: "POST" });
+    // Scrape news + twitter only (fast targeted refresh), then re-simulate
+    const res = await fetch(
+      "/api/predictions/run?scrape=true&sources=news,twitter",
+      { method: "POST" }
+    );
     if (!res.ok) {
       const err = await res.json().catch(() => ({ detail: "Unknown error" }));
       throw new Error(err.detail || `HTTP ${res.status}`);
@@ -191,6 +270,11 @@ async function runPredictions() {
     const data = await res.json();
     if (icon) icon.textContent = "✓";
     if (label) label.textContent = `Done — ${data.picks_assigned} picks`;
+
+    // Persist the refresh timestamp and clear seen-picks so all new items badge
+    localStorage.setItem("nflMockLastRefresh", refreshTs);
+    localStorage.removeItem("nflMockSeenPicks");
+
     // Reload after a brief pause so the user sees the success state
     setTimeout(() => window.location.reload(), 800);
   } catch (err) {
@@ -253,4 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inches = parseInt(el.dataset.inches);
     if (!isNaN(inches)) el.textContent = formatHeight(inches);
   });
+
+  // Mark new media/tweet items based on last refresh timestamp
+  markNewItems();
 });

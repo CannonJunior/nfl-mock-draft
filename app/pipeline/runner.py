@@ -35,6 +35,7 @@ from app.scrapers.nfl_mock import NFLMockScraper
 from app.scrapers.sharp import SharpScraper
 from app.scrapers.social import SocialScraper
 from app.scrapers.tankathon import TankathonScraper
+from app.scrapers.twitter_nitter import TwitterNitterScraper
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,7 +48,7 @@ logger = logging.getLogger(__name__)
 ALL_SOURCES = [
     "tankathon", "espn", "nfl", "sharp",
     "nfl_mock", "espn_mock", "social",
-    "college_stats", "news", "draft_countdown",
+    "college_stats", "news", "draft_countdown", "twitter",
 ]
 
 
@@ -220,6 +221,15 @@ async def _run_source(source: str) -> list[ScrapeResult]:
             if articles:
                 storage.upsert_media_articles(articles)
             results.append(r)
+
+    elif source == "twitter":
+        players = storage.get_prospects()
+        player_names = [p["name"] for p in players] if players else []
+        scraper = TwitterNitterScraper()
+        articles, r = await scraper.fetch_tweets_for_picks([], player_names)
+        if articles:
+            storage.upsert_media_articles(articles)
+        results.append(r)
 
     return results
 

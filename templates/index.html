@@ -250,8 +250,9 @@
                 {% endif %}
               </td>
 
-              {# Expand toggle #}
+              {# Expand toggle + NEW badge #}
               <td class="center">
+                <span class="new-badge" id="new-badge-{{ pick.pick_number }}">NEW</span>
                 <span class="expand-icon">▶</span>
               </td>
 
@@ -469,8 +470,10 @@
                             target="_blank"
                             rel="noopener noreferrer"
                             class="media-link"
+                            data-fetched-at="{{ link.fetched_at or '' }}"
                             onclick="event.stopPropagation()"
                           >
+                            <span class="new-item-badge new-badge">NEW</span>
                             <span class="media-icon">
                               {{ type_icons.get(link.source_type, '🔗') }}
                             </span>
@@ -492,6 +495,33 @@
                     </div>
 
                   </div>{# end detail-grid #}
+
+                  {# --- Tweets / Social Buzz section (full width below the 3-col grid) --- #}
+                  {% if player and player.tweets %}
+                  <div class="tweets-section">
+                    <div class="detail-section-title">Social Buzz</div>
+                    <div class="tweets-grid">
+                      {% for tweet in player.tweets %}
+                      <a
+                        href="{{ tweet.url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="tweet-card"
+                        data-fetched-at="{{ tweet.fetched_at or '' }}"
+                        onclick="event.stopPropagation()"
+                      >
+                        <span class="new-item-badge new-badge">NEW</span>
+                        <div class="tweet-account">{{ tweet.source_name }}</div>
+                        <div class="tweet-text">{{ tweet.title }}</div>
+                        {% if tweet.published_at %}
+                        <div class="tweet-meta">{{ tweet.published_at }}</div>
+                        {% endif %}
+                      </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% endif %}
+
                 </div>{# end detail-panel #}
               </td>
             </tr>{# end detail-row #}

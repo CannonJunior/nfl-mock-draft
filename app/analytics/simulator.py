@@ -242,20 +242,21 @@ def _load_media_articles_map() -> dict[str, list[dict]]:
     try:
         conn = sqlite3.connect(str(_DB_PATH))
         rows = conn.execute(
-            "SELECT player_name, title, url, source_name, source_type, published_at "
+            "SELECT player_name, title, url, source_name, source_type, published_at, fetched_at "
             "FROM media_articles ORDER BY published_at DESC"
         ).fetchall()
         conn.close()
     except sqlite3.Error as exc:
         logger.warning("media_articles load failed: %s", exc)
         return result
-    for player_name, title, url, source_name, source_type, published_at in rows:
+    for player_name, title, url, source_name, source_type, published_at, fetched_at in rows:
         result.setdefault(player_name.lower(), []).append({
             "title": title,
             "url": url,
             "source_name": source_name,
             "source_type": source_type or "news",
             "published_at": published_at,
+            "fetched_at": fetched_at,  # ISO string; used by frontend for "new" badge
         })
     return result
 
@@ -452,17 +453,23 @@ def _candidate_to_player_dict(
                 "stats": stats,
             })
 
-    # Build media_links from scraped news articles
+    # Split articles into news/media links and tweets
     media_links: list[dict] = []
+    tweets: list[dict] = []
     for art in (articles or []):
-        media_links.append({
+        entry = {
             "source_type": art.get("source_type", "news"),
             "title": art.get("title", ""),
             "url": art.get("url", ""),
             "source_name": art.get("source_name", ""),
             "published_at": art.get("published_at"),
+            "fetched_at": art.get("fetched_at"),  # used by frontend "new" badge
             "thumbnail_url": None,
-        })
+        }
+        if art.get("source_type") == "twitter":
+            tweets.append(entry)
+        else:
+            media_links.append(entry)
 
     # --- Combine stat view (always add when combine data exists) ---
     if combine:
@@ -539,6 +546,7 @@ def _candidate_to_player_dict(
         "injury_history": [],
         "stat_views": stat_views,
         "media_links": media_links,
+        "tweets": tweets,
         "grade": grade,
         "grade_breakdown": grade_bd,
         "notes": (

@@ -147,6 +147,7 @@ class Player(BaseModel):
     injury_history: list[InjuryRecord] = Field(default_factory=list)
     stat_views: list[StatView] = Field(default_factory=list)
     media_links: list[MediaLink] = Field(default_factory=list)
+    tweets: Optional[list] = None
     grade: Optional[float] = None
     notes: Optional[str] = None
     grade_breakdown: Optional[dict] = None

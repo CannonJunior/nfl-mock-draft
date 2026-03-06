@@ -1,0 +1,172 @@
+{
+  "_comment": "Curated Twitter/X accounts for NFL draft coverage. Top 5 general experts + 3 per team.",
+  "general_experts": [
+    {"handle": "AdamSchefter", "name": "Adam Schefter", "org": "ESPN"},
+    {"handle": "RapSheet", "name": "Ian Rapoport", "org": "NFL Network"},
+    {"handle": "MelKiperESPN", "name": "Mel Kiper Jr.", "org": "ESPN"},
+    {"handle": "MoveTheSticks", "name": "Daniel Jeremiah", "org": "NFL Network"},
+    {"handle": "nfldraftscout", "name": "Matt Miller", "org": "ESPN"}
+  ],
+  "team_experts": {
+    "ari": [
+      {"handle": "joshweinfuss", "name": "Josh Weinfuss", "org": "ESPN"},
+      {"handle": "DougHaller", "name": "Doug Haller", "org": "The Athletic"},
+      {"handle": "theo_mackie", "name": "Theo Mackie", "org": "Arizona Republic"}
+    ],
+    "atl": [
+      {"handle": "DOrlandoLED", "name": "D. Orlando Ledbetter", "org": "Atlanta Journal-Constitution"},
+      {"handle": "marcraimondi", "name": "Marc Raimondi", "org": "ESPN"},
+      {"handle": "ToriMcElhaney", "name": "Tori McElhaney", "org": "The Athletic"}
+    ],
+    "bal": [
+      {"handle": "jeff_zrebiec", "name": "Jeff Zrebiec", "org": "The Athletic"},
+      {"handle": "jamisonhensley", "name": "Jamison Hensley", "org": "ESPN"},
+      {"handle": "AaronWilson_NFL", "name": "Aaron Wilson", "org": "KPRC 2"}
+    ],
+    "buf": [
+      {"handle": "JoeB_WGR", "name": "Joe Buscaglia", "org": "The Athletic"},
+      {"handle": "MattParrino", "name": "Matt Parrino", "org": "Syracuse.com"},
+      {"handle": "AGetzenberg", "name": "Alaina Getzenberg", "org": "ESPN"}
+    ],
+    "car": [
+      {"handle": "josephperson", "name": "Joseph Person", "org": "The Athletic"},
+      {"handle": "DarinGantt", "name": "Darin Gantt", "org": "Panthers.com"},
+      {"handle": "Sheena_Marie3", "name": "Sheena Quick", "org": "FOX Sports"}
+    ],
+    "chi": [
+      {"handle": "kfishbain", "name": "Kevin Fishbain", "org": "The Athletic"},
+      {"handle": "adamjahns", "name": "Adam Jahns", "org": "The Athletic"},
+      {"handle": "DanWiederer", "name": "Dan Wiederer", "org": "Chicago Tribune"}
+    ],
+    "cin": [
+      {"handle": "GeoffHobsonCin", "name": "Geoff Hobson", "org": "Bengals.com"},
+      {"handle": "Ben_Baby", "name": "Ben Baby", "org": "ESPN"},
+      {"handle": "JayMorrisonATH", "name": "Jay Morrison", "org": "The Athletic"}
+    ],
+    "cle": [
+      {"handle": "MaryKayCabot", "name": "Mary Kay Cabot", "org": "Cleveland.com"},
+      {"handle": "zkjackson", "name": "Zac Jackson", "org": "The Athletic"},
+      {"handle": "TomKronholz", "name": "Tom Kronholz", "org": "Cleveland.com"}
+    ],
+    "dal": [
+      {"handle": "jonmachota", "name": "Jon Machota", "org": "The Athletic"},
+      {"handle": "toddarcher", "name": "Todd Archer", "org": "ESPN"},
+      {"handle": "clarencehilljr", "name": "Clarence Hill Jr.", "org": "Fort Worth Star-Telegram"}
+    ],
+    "den": [
+      {"handle": "mikeklis", "name": "Mike Klis", "org": "9NEWS Denver"},
+      {"handle": "AlesiaHammond", "name": "Alescia Hammond", "org": "Denver Post"},
+      {"handle": "RyanOHalloran", "name": "Ryan O'Halloran", "org": "Denver Post"}
+    ],
+    "det": [
+      {"handle": "davebirkett", "name": "Dave Birkett", "org": "Detroit Free Press"},
+      {"handle": "ttwentyman", "name": "Tim Twentyman", "org": "Lions.com"},
+      {"handle": "Carlos_Monarrez", "name": "Carlos Monarrez", "org": "Detroit Free Press"}
+    ],
+    "gb": [
+      {"handle": "mattschneidman", "name": "Matt Schneidman", "org": "The Athletic"},
+      {"handle": "RobDemovsky", "name": "Rob Demovsky", "org": "ESPN"},
+      {"handle": "RyanWood_PG", "name": "Ryan Wood", "org": "Green Bay Press-Gazette"}
+    ],
+    "hou": [
+      {"handle": "AaronWilson_NFL", "name": "Aaron Wilson", "org": "KPRC 2"},
+      {"handle": "MarkBerman_Fox26", "name": "Mark Berman", "org": "FOX 26"},
+      {"handle": "johnmcclain", "name": "John McClain", "org": "Houston Chronicle"}
+    ],
+    "ind": [
+      {"handle": "zkeefer", "name": "Zak Keefer", "org": "The Athletic"},
+      {"handle": "KBowen1070", "name": "Kevin Bowen", "org": "1070 The Fan"},
+      {"handle": "JoelAErickson", "name": "Joel A. Erickson", "org": "Indianapolis Star"}
+    ],
+    "jax": [
+      {"handle": "ESPNdirocco", "name": "Michael DiRocco", "org": "ESPN"},
+      {"handle": "_John_Shipley", "name": "John Shipley", "org": "Sports Illustrated"},
+      {"handle": "Demetrius82", "name": "Demetrius Harvey", "org": "Florida Times-Union"}
+    ],
+    "kc": [
+      {"handle": "adamteicher", "name": "Adam Teicher", "org": "ESPN"},
+      {"handle": "arrowheadpride", "name": "Arrowhead Pride", "org": "SB Nation"},
+      {"handle": "Charles_Goldman", "name": "Charles Goldman", "org": "A to Z Sports"}
+    ],
+    "lac": [
+      {"handle": "krisrhim1", "name": "Kris Rhim", "org": "ESPN"},
+      {"handle": "danielrpopper", "name": "Daniel Popper", "org": "The Athletic"},
+      {"handle": "LATimesklein", "name": "Gary Klein", "org": "Los Angeles Times"}
+    ],
+    "lar": [
+      {"handle": "JourdanRodrigue", "name": "Jourdan Rodrigue", "org": "The Athletic"},
+      {"handle": "StuJRams", "name": "Stu Jackson", "org": "Rams.com"},
+      {"handle": "AdamGrosbard", "name": "Adam Grosbard", "org": "OC Register"}
+    ],
+    "lv": [
+      {"handle": "VicTafur", "name": "Vic Tafur", "org": "The Athletic"},
+      {"handle": "MarcSessler", "name": "Marc Sessler", "org": "NFL.com"},
+      {"handle": "StaceyDales", "name": "Stacey Dales", "org": "NFL Network"}
+    ],
+    "mia": [
+      {"handle": "OmarKelly", "name": "Omar Kelly", "org": "Sun Sentinel"},
+      {"handle": "ArmandoSalguero", "name": "Armando Salguero", "org": "Pro Football Talk"},
+      {"handle": "ChrisFotiatis", "name": "Chris Fotiatis", "org": "WSVN FOX 7"}
+    ],
+    "min": [
+      {"handle": "ArifHasanNFL", "name": "Arif Hasan", "org": "The Athletic"},
+      {"handle": "Kevin_Seifert", "name": "Kevin Seifert", "org": "ESPN"},
+      {"handle": "ChadGraff", "name": "Chad Graff", "org": "The Athletic"}
+    ],
+    "ne": [
+      {"handle": "MikeReiss", "name": "Mike Reiss", "org": "ESPN"},
+      {"handle": "ChrisPrice_WEEI", "name": "Chris Price", "org": "WEEI"},
+      {"handle": "BenVolin", "name": "Ben Volin", "org": "Boston Globe"}
+    ],
+    "no": [
+      {"handle": "Kat_Terrell", "name": "Katherine Terrell", "org": "ESPN"},
+      {"handle": "JimHenderson504", "name": "Jim Henderson", "org": "WWL Radio"},
+      {"handle": "amie_just", "name": "Amie Just", "org": "Nola.com"}
+    ],
+    "nyg": [
+      {"handle": "JordanRaanan", "name": "Jordan Raanan", "org": "ESPN"},
+      {"handle": "DanDolphin", "name": "Dan Duggan", "org": "The Athletic"},
+      {"handle": "RalphVacchiano", "name": "Ralph Vacchiano", "org": "FOX Sports"}
+    ],
+    "nyj": [
+      {"handle": "BrianCoz", "name": "Brian Costello", "org": "New York Post"},
+      {"handle": "ConnorHughes_", "name": "Connor Hughes", "org": "The Athletic"},
+      {"handle": "RichCimini", "name": "Rich Cimini", "org": "ESPN"}
+    ],
+    "phi": [
+      {"handle": "RoobNBCS", "name": "Reuben Frank", "org": "NBC Sports Philadelphia"},
+      {"handle": "DZangaroNBCS", "name": "Dave Zangaro", "org": "NBC Sports Philadelphia"},
+      {"handle": "Tim_McManus", "name": "Tim McManus", "org": "ESPN"}
+    ],
+    "pit": [
+      {"handle": "gerrydulac", "name": "Gerry Dulac", "org": "Pittsburgh Post-Gazette"},
+      {"handle": "Teresa_Varley", "name": "Teresa Varley", "org": "Steelers.com"},
+      {"handle": "Mark_Kaboly", "name": "Mark Kaboly", "org": "The Athletic"}
+    ],
+    "sea": [
+      {"handle": "bcondotta", "name": "Bob Condotta", "org": "Seattle Times"},
+      {"handle": "gbellseattle", "name": "Gregg Bell", "org": "Tacoma News Tribune"},
+      {"handle": "Brady_Henderson", "name": "Brady Henderson", "org": "ESPN"}
+    ],
+    "sf": [
+      {"handle": "mattbarrows", "name": "Matt Barrows", "org": "The Athletic"},
+      {"handle": "VicTafur", "name": "Vic Tafur", "org": "The Athletic"},
+      {"handle": "PaigeRoundy", "name": "Paige Roundy", "org": "NBC Sports Bay Area"}
+    ],
+    "tb": [
+      {"handle": "NFLSTROUD", "name": "Rick Stroud", "org": "Tampa Bay Times"},
+      {"handle": "gregauman", "name": "Greg Auman", "org": "The Athletic"},
+      {"handle": "JoeBucsFan", "name": "Joe Bucs Fan", "org": "JoeBucsFan.com"}
+    ],
+    "ten": [
+      {"handle": "TDavenport_NFL", "name": "Turron Davenport", "org": "ESPN"},
+      {"handle": "jwyattsports", "name": "Jim Wyatt", "org": "Titans.com"},
+      {"handle": "terrymc13", "name": "Terry McCormick", "org": "TitanInsider.com"}
+    ],
+    "was": [
+      {"handle": "tashanreed", "name": "Tashan Reed", "org": "Washington Post"},
+      {"handle": "JPFinlayNBCS", "name": "JP Finlay", "org": "NBC Sports Washington"},
+      {"handle": "NBCSEdge", "name": "Pete Hailey", "org": "NBC Sports Washington"}
+    ]
+  }
+}

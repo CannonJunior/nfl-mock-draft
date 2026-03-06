@@ -42,6 +42,7 @@
           "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQZkowdzVleGptRGZNRENQRU1saXAwcnl0WlQ5QVg3cVRZUjYzcGYtZ2hQalhLeExOczlKNTFPdkNvU2VzcUpZcHptdE5lbkRsTG9CSGVxTXJuNVpJS0R6V0xyLVl5bmZ1dDN3alY4REFEYzVMTDRuM1FpVjlGb3JDWVpYdmliRDdjcldnT3I5eC10TjRBZXFjVnFQc2xlQjMtZnFaRmRHakUzcnNYWmJmNmxINjhILXZFNVp1QU9ZcTROa2M?oc=5",
           "source_name": "Bleacher Report",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:29.481560+00:00",
           "thumbnail_url": null
         },
         {
@@ -50,6 +51,7 @@
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQaUQwY1gwc0RsTWY1Tm5WZTFlRll4cHJfVG1Cd2pmWUt5WUhiWDlUdjNJMVBxUEx0cHphc05GaVBSbC1pdjRQSXJQQ3VOWWV4UFdvRHl0TWRFUmVTdk83OFkwcHlhNVhKN0FIRjBreEtObmlQZW9ZMnlfcmN1MFB5Tnh3QUdkUEtUOUQyaEdtTEV6YlBGTDhMMExWOURkVVZZTGc?oc=5",
           "source_name": "Raiders.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:29.481616+00:00",
           "thumbnail_url": null
         },
         {
@@ -58,6 +60,7 @@
           "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAwU3BjdzRtcHdhMnhmUEJla3FsTDdac0M4aVhtYzdLX1NYSzVOdW0yRkVpX0xkYXl6bVNrZ1M1NUFFUkppTVhHX2xWSHd3YkF4S1h5RU5wNlJrSW80cVhGcERqOGpFd3VfWFNMVmZnazZlLS13RzZNeQ?oc=5",
           "source_name": "AOL.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:29.481593+00:00",
           "thumbnail_url": null
         },
         {
@@ -66,9 +69,11 @@
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE13NHJ5d2VQWTliaFpPQVl2UkJ6ZmlkVjFJRzlxc3BXNEdGUWQzbmNiNFFpbFU1d2xVS0pRbXhGWURVNnk1RmVnaU5pVGlKazFNWjhvUkx3?oc=5",
           "source_name": "Fox News",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:29.481643+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 9.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -125,6 +130,7 @@
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPSy1LZGJyU2JQRTkwdGd1WFNNOGF5V3BLV3RtU1NmTUY0bDVRUE1RSEFTdjBwV0NpcnlRekFiY29abVdaOWJUUEs1OERZU2xxTEVjOW9UMUktN3FTRWdyNUl6YzRxYmN6TkMyYWxuQjN5VWlZd0llMnlxVmJFTFFvX0hjaldCdmtmVkNJbzZPOWJTcUpCMUhj?oc=5",
           "source_name": "Jets X-Factor",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:24.678592+00:00",
           "thumbnail_url": null
         },
         {
@@ -133,6 +139,7 @@
           "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE41SF9fTE5DUHRtdWRqWlZQS0pMcFV5ay1XNFA5UFJkM0pMWGZpMmVhTEdzQjdic0wyV0hUQ2RGbFp5VDZ6aWtPd0dCaFBBZ1ptLW45Ynl3dExtb2dTTWtrcVo0M05SUENwdmF0MUwwYzdxdHl4X1hmX25R?oc=5",
           "source_name": "Tampa Bay Buccaneers",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:51:57.438803+00:00",
           "thumbnail_url": null
         },
         {
@@ -141,6 +148,7 @@
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOc2VXRTVmbWp5SE9EajVYUjQ5bF9aajJBcDZkYzRmdkdSWno3aF9VcmRBeFhHd2xjT0VnVVotOEMwQXh4dUFJcU1GZTJDbU9mZ0FfYVhtVDlRQ1BEenZDeGc2dkNnMzRDWUVvY2NsVVNTNERKZm1HT1JrTHZWV3ZjN1U5aHRYWFQ1V3NpbndsQWUxV21reVlYaWo5UUNjQ0k?oc=5",
           "source_name": "CBS Sports",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:24.678625+00:00",
           "thumbnail_url": null
         },
         {
@@ -149,6 +157,7 @@
           "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNMWYyY1EzODNPZ1BCWkx5eFViSlJRZWhxbWxhQnd5bWp6N1pLMHpqLUU4YWFrY3BXaEpZb1UyZHduWkNlb2xxYUhyU3FENXJhV191dXdfWGEwYTVCc0dWb2dfSTFTNWZrbFVqbmtsWkhvRVk5YVQ3M2VzdGJvM1ZtMU9hR1VSOEFmV1R3UmY3ZHZmUkJCd29KcXhNSGZiTmJHZ2N5am9GM0l6RUJ00gG0AUFVX3lxTE1fOHgwY05EaklpMks1Ym9rZ3dIUzMzRlEyUnBFMlg3RnRqdl9OTHpBYWt0RG9KTVlxVnJjM3pDTzk3dFZHYVpVY3BZV0dzdWd5MFZhdXFKX0tkNVBWRDFHV1NjYzFTVWZacFFMRDBvTThFZnVzVVNtdjh5c0IxT0RTdHFodHhBUjhpcWR1SWJxeGQzZ2dqWXpXWmlsNmpTTnV4V1h3TGNDNmQ0NWtQa2M1Y0w4Zw?oc=5",
           "source_name": "NBC Sports Bay Area & California",
           "published_at": "2026-02-28",
+          "fetched_at": "2026-03-05T03:54:24.678519+00:00",
           "thumbnail_url": null
         },
         {
@@ -157,6 +166,7 @@
           "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOdFhYZUZvaTZ0ZkJDOUF5bDk4bkdMNkRRT0Rjejg0QklQQXNNY213U2ZWOTdaM19YNVYwMnowMzZxSG5adzVkOHQ5MGxOYnB4RU01SjB4ME5fejZLeGxzM3A5MGl1c2lGSDlQV3l2Z20yMzhLX1Y0anZWdEhZN2tXS2M0VlVSMVJ4T0V4WEdCU09XeWc?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-02-26",
+          "fetched_at": "2026-03-05T03:54:24.678562+00:00",
           "thumbnail_url": null
         },
         {
@@ -165,9 +175,11 @@
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNWXFaY1NHRHNWY2Z2VFJxYzZZS1dEdlZOb3JTRkNoM3Z6NlNOSXE1TkhraV9kMVA2RV8tOGRmem0tYkpyaU5vQ1lKV2NXLUNyQnQ4Q0xMcTVlTUd2dVNFdWdLX01FNzRwM2RwcG9aUGRjOUdmZVQ3d2R6b0pKR1ZLQ3pCWjJuMXh4UDJfbkxHYnBoanhzUEVUdmMtQ21qbkpnNzhHRnY4bGlqM01UdHZDcWY1U1RMZDVzcC1RTndCZFRsd0dFYk42V3pn?oc=5",
           "source_name": "ESPN",
           "published_at": "2026-02-23",
+          "fetched_at": "2026-03-05T03:37:35.571560+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 9.5,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -227,6 +239,7 @@
           "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQUXhROWVEQ3dmTDZBQzAtbGRTV1Z0VlE1Mm16Uy1WLVFybGg5ZUl0UVZZUzJzeEdJeVd6MEhPRWdKQklITkJSR2Qtclo1Q2JwVENBZlpZRHdvSGc5YmJSa0RmNU95MUJjMWZ0eGpWUjhtQWo3XzgxektoR1owUFlSb0kzMkJqc1RUVXZfSHZTWmNhNWctNmdzNDhBOGx2YmZJTTdwRktyZHE?oc=5",
           "source_name": "The Jet Press",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:25.288814+00:00",
           "thumbnail_url": null
         },
         {
@@ -235,6 +248,7 @@
           "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPclJRSXFsQUVnb1pCMjlUci1xLXBqUEI3QkNXODRxSmNLSFNHeGk4U3hhZ0JOdkdCTXZtQXFKYUlvNnZCc3ZtOFpYWENEbUppZHlvZGtxNW1YNmhndXlERUI1ZGJUZms1SWtQc1BzZEgtUHVEVDFOTmIxN2NQeVRsbFRkNnItMWJpV2czaVNSc1dDYlYxLXlGVmhiYkV1SktyTDhIblJOc2dXdjVEWVhUYkd4QlVZWmczM2pHc1RIMENkXzFPNjVB?oc=5",
           "source_name": "Rams Wire",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:25.288904+00:00",
           "thumbnail_url": null
         },
         {
@@ -243,9 +257,11 @@
           "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxORnl6TUNGaG9EMXk1QkE3YmJCTHdyNFhRUExKZWNJSnZTeXc1OHBzaDZWWENEVjZTbFQ3ZVZjVnY4U18tNE9aMlFfUEx0RFhqSmtIVGFYMW5jb2M0c2ZFem5MRWt5dmMxWjdBQVpJRnltY2JIVGEyVG5pMGRnQ3BQZVRZVE9RSkE2VXFuRHZsQTJBR2xZQUZranBnVnRrcEI5aGZrQnk1RURkcnRCZlhFLThTd2VyNnhGOXd1X1ZlMkg2akZDRElFTzA1SF8tVEo0N3oxMkpB?oc=5",
           "source_name": "NBC Sports",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:25.288931+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.5,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -303,6 +319,7 @@
           "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOVXRPdG1KazVOM2VudUk0RnNjeGFJOW5KeHBsd181eDFJUDFETTl3MkxkeGRnMkdWcmtGckJNT0g2cEhfMTRyR0pQU2FLdHBJZ1NGTXRDZERkUEVvRHU0ZXFCb2o2d2ZKREdEUm52Ri15MC1mcVlqWFY1ekttcVhQMXVSZ09tNGJheDJhY0lzczZOQ1lreVF0MFZiRzd2TnJudnhMLUJwS3BTYVI2UnM4?oc=5",
           "source_name": "Seattle Seahawks",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:32.466499+00:00",
           "thumbnail_url": null
         },
         {
@@ -311,6 +328,7 @@
           "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNT2RLNWg5a0VqUjNMNUFlSjdEVlJodk56NEpLejdSaG5FQkxVZDc1MHhyOWJoV003Y2FiX2hScGxoYW50UExua1EzQUZ5V01fYTdCazJzbFJ5azJ6ZlJlTnRyWjZsZWZNbWFuWU8tcW9GaDgwdmo5OVBDdWdLXzlWNXozcFpRTkQxY1hFQ1kzc01TbG0tQUFMZWVxYUlBaXpTLTZfYmoxVnZ1SERwTHlGZ1hWWlpuWGNxWVJXZVpCZng0YVc4ZS1kbXZaWk5MZGZ6S3I5eUR4S3dOWnBiSFg1OXg4VGhBWFFXTU9B?oc=5",
           "source_name": "Pittsburgh Post-Gazette",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:32.466549+00:00",
           "thumbnail_url": null
         },
         {
@@ -319,6 +337,7 @@
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQSVVqOWprOUR5STJkS1lJNE1TZU5paWFfNkRHUS1xaEJfWXNlZW9tT1lVQzl4WEhubDJfS2RfMHJqT0JNa2JsM0lUVEVnalFlanh6UzF5RGlxRDFBbl9mdE9DYUVpelJNc3BrUi16Qlg1ZjBnNDJrZERua19Wcko0R0JpclJ0OGRTUGcyRUFTbjNMREFMNWNBeWREcFBseWREOWF0YXcyRVg2YzhYN1JkS19wbDk0N1dvcXlUajF6eWV6czVjY0xPbXNn?oc=5",
           "source_name": "Falcons Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:32.466575+00:00",
           "thumbnail_url": null
         },
         {
@@ -327,6 +346,7 @@
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQM1k3MEhYd3FLbTdaYm1ud0VWVE41WnljWTZXYWVkTk5ETFJzcEtlWVJURjhzcUtfNy1tSE82Y0VwOEYzaUthQndOWHF0d0Fzb3RNOGVLRElVaFNZU1Rvak5PZ0V1TmhqWkhmWWZXN0xycjQxWWxBZEVrQUZuVm1iMGhCLWlsSEhNRTc0a25BU3l5ZDd1VEtwR0V0X3ZSN1k?oc=5",
           "source_name": "Detroit Lions",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:32.466628+00:00",
           "thumbnail_url": null
         },
         {
@@ -335,9 +355,11 @@
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOdlh1OGE0ZWdFcVZUWjZNdXJiQkJKWTR5M24zbkZFaXRXNU9jelNjRWNjSmZTZUExcnA0RkY2ZTg3aW91MXhGUDhCLVJvUkliZFl1T05DZjY4UV85VFpyNVhtVE9BLURqQ2g4U0RJYXpGSUREWXFrRU8zaW90d3NuWEhoa0w?oc=5",
           "source_name": "NFL.com",
           "published_at": "2026-02-26",
+          "fetched_at": "2026-03-05T03:54:32.466603+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 9.5,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -400,6 +422,7 @@
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQVFBGd2JxWnpPSmV0alVtVVQxOUU3V0M4NGdEM3RZZDJXU1JXLXQ2MjJ6RVZPTE9ST0FEZm91SWJqWVU2ZHA0ZTZfR2w3VjNCUWhuTWJRUUdXdnBET1BhSjVIQTJXNkI4VWIzbTJBbWVRbVB5c3ZrTWpBT0FBMHplc1JMQi11ZExlcjN6ZEotbGl2b1QyVmhqck1sSVRMNUo2UFVlWG54ZjlFMEVuVVl5LW9R0gGyAUFVX3lxTFBRWUpXYU13d01qNjRBUzhsQUtBMkZXLTZSSWgxZlRBUERYdFY4TUN3cFFyS3pFT1NtS2dhcjNDVmxmRzNYVXI5RFRiLUp4THYzQm1kTEtSZEtGY3h5OF9Ua3luUmRzSTRkSDdHUDMxelc1LUQ0c0N6cDE5YWZvMnY3VWd6ZzNLaW1ZWENnYjZuWWZzdzQ0SmprWU9TM3dHcHdBTDl6d3JsMTF0UDc5MlVWZHc?oc=5",
           "source_name": "FOX Sports",
           "published_at": "2026-03-05",
+          "fetched_at": "2026-03-05T03:54:28.359495+00:00",
           "thumbnail_url": null
         },
         {
@@ -408,6 +431,7 @@
           "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5xZGR0dzR4Yy1pS1BfSmJ5MWl6bXdrdGtMNzg0YjM1NGdjaUx4dlIxUXFTWDYzVWdqaHJiNzBXWC1HTFIxTW1EeGlCeERTVDBfbkRZZWxZSjUzTnZZb2V6V0RUdmhQVndXYVlJOEZEcmNBUURX?oc=5",
           "source_name": "SNY",
           "published_at": "2026-03-05",
+          "fetched_at": "2026-03-05T03:54:28.359516+00:00",
           "thumbnail_url": null
         },
         {
@@ -416,9 +440,11 @@
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOX183cFRWQWh5eUQxTU53R242T0pyald1R28yMFk1QkdXcU1nQlZoaTRFOGdINlRra0NBdk93U0pza3AtYm8zMmxtNHpiRGRtWDhJZ2w0c2hXSTduVld1cFB6bmhvTVY3SVVaZUxzSUgxNkE5RldoZEFzXzh5UmFGMEU0NnVUa0h4VG91dFJKMU8zU2t4UVhFVFVtQ0tqcWFKNC13aTYzdjZDRnY1dGRHZ0dybjZ3UQ?oc=5",
           "source_name": "Seattle Seahawks",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:28.359374+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 7.3,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -484,6 +510,7 @@
           "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOVlpIU3pGWFBVTmMyTkxuUmNwYmlvUklLRmRTVEJpcy11TENUbHNGZkx0QzlIV280QlBGdTUxODhybDJoR0pZLTVSVkFURmJjTW1LQ2V5cEZUQ2RETTRvTVhmV1pQeU1MR3RWdzNkanE0WXlna2NZbUF2TEhzZkxDajFOSEo1QWRMQ3d1QmxvLTRlUQ?oc=5",
           "source_name": "The New York Times",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:36.983779+00:00",
           "thumbnail_url": null
         },
         {
@@ -492,6 +519,7 @@
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOZHBwbGZwMWtFalpDSVFVa01nUGcteENLWjVmMks4M2ZsMkptVVd4M2gyVU1iRE5hbVhhdzU5NEFWSUx4bGJMRkVLVHFZenpLNTVfcHBOU0ctbklsY0dUT3R0bkZTbzBIYmMyeU9HQy1KMmE5amdOMDlSd0N6UGk2VXg3NTZMMW1JWTBmYkV2WjRWR3ZMSS1QNEhvaDhsSWY5amQ0?oc=5",
           "source_name": "Sports Illustrated",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:36.983801+00:00",
           "thumbnail_url": null
         },
         {
@@ -500,6 +528,7 @@
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNdC1xQ3hoeWxrWjdCYUMxd2kxaFhrWFdSdk8tbGhfV2VyZkUwaEhfbHp2aFhGbFA4SlR6dnVvTFRFQVgwVmlOaE9CQjM1QnJGdGJhUDk2WW1aRS14cWo5amtLWUs1ZWF2aEtZNElZbWhmTGlCVVZYOTZJalQtdnFpeTRIb3JtaWN1TUthZjhQVnVDZDhKc3hFaEk0VmZwNlFuMF81ZkRyUQ?oc=5",
           "source_name": "New York Jets",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:36.983756+00:00",
           "thumbnail_url": null
         },
         {
@@ -508,6 +537,7 @@
           "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQzRFTm5remtiOGVZVVpfM0JFLWF5bHJfVThyWTR5T0NtOW5meUFnNy0ycG1XanlnWkd5V0dHQTZwVzJpekZkMFFfTE02T1FOZV9hTS1ETTZsTy1ZcjhDQU9BOFRfdEIzTS1nQ1JOTW8tZTMxMmVMczNVN19Da0ZrZ2JIc1RwY3J2LV9aTjhEczhJWElGaG80Y1RPR2NRdXVDNXpZUnZBNUo5NzZsQkIxMUVLMWJlUVpaSDlETzBiQQ?oc=5",
           "source_name": "Bleacher Report",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:36.983829+00:00",
           "thumbnail_url": null
         },
         {
@@ -516,6 +546,7 @@
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQajllX25SeXk0dUV5bjFOc0o1LTBOenF0bWw4QmtQTDQ4U2VtMlRxVm5PbVJqc0ZRallaSFRYS3lhMW42NDRmcVpCd052anFPanVOX3NfLUpSRURGRTBqREZQaURZOWRLRnhuNjc5MjNkdzBJQWRydjlvT2dzejdnZWJoRHdqYUlKRlhEVGwxRG5uSTRueFcxcjFRTEg?oc=5",
           "source_name": "PFF",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:52:09.911430+00:00",
           "thumbnail_url": null
         },
         {
@@ -524,9 +555,11 @@
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPX01rd1JJNTNMWFFrV05zMWRIRGdELVhLbExxTWlQZWd1cV9GM3pFaWZUUTNZYWtFYmVwbVdQVF9XVFY1a1FqU0pqQ3JqWlh0dWszN2tScGp2TW1tX1g3Y0xmZHl4U2hZSGxvaXlYVExXRnJUaXhQdHBZTHdKR0lMZkJqMnZCRGVkejUxUENTQU1OYkxyc2llZUxZNy1NUllCWVZkMFAxRWlTZWNEanE5TGlnN21KQW1QckJKREFIQVA?oc=5",
           "source_name": "NFL.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:36.983712+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 7.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -587,6 +620,7 @@
           "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPS2lFQW9ZSlNBZm05OVEzWW14bGU2ZnVLMjRjcVN5ajhiYS1oaGVUS3JtaUEyQjYxSHdwSEplWEZtQXN2NlZ0X3JDUVZqajZOcm00X2RZcElZaFRJZjdjT210a3hhWFVldkdXd0p3Z1luUmU4SnRobWRTcG90TXhaNVJWd3h3NlVwT3hYd0M2Y1RDY3c0cmUwSdIBngFBVV95cUxQeDNyYWhnamE4Skw3V1BLWFdadk84MzNTTWhZWHhCSjItNlI1THJ1Wkh1ZmR0djRuWHA0TXlYTU1RSk9DQ1VObGYwRW04QlN3VnpVNlI2bzZuU3Fyb18ySWhWcWdEMjFyM1RjdVd0N1E5djlVOEtsbHdwdkstbDJZTTJleVlFQnlkblZ0RkNtNXdSUlQtak1XV3NUVGFQUQ?oc=5",
           "source_name": "FantasyPros",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:52:06.062068+00:00",
           "thumbnail_url": null
         },
         {
@@ -595,6 +629,7 @@
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxORURteDhDazJSTWlPNnBfYnZNcXN4SkZRcnhXSW5RMjdGMkdZajc3YW1HZUJQNWdXM1FCenNqa184NEpza0xQTmlKMklrYU8zNF9XZUZkTWoxZWxJeEJhY1g5bmp3ZjY3aW5RNlhVTEJrUExxa1dVS25qbGgzX2FTQUh1dGx0Q2RLVkNiREQwa2pmMHhhYW9qMGxwZnBTX1Q4STdLVjE1MjI2SWhJZlVfLWc3dDV4b1NKYTM1cmhlelQ?oc=5",
           "source_name": "Broncos Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:33.065215+00:00",
           "thumbnail_url": null
         },
         {
@@ -603,6 +638,7 @@
           "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNcm9GUzJYNy10cWZBTVAzWVFPTVl4VXlOaDJoVG1tZXlDYmR4ZTFfWHRFbHpkRkNkbkc1ZmxXS1c0RGlSdDJpVnZKdTh5TWdiWC1KeGpSdmZLalYxZEs5X0FuQlBUT0VwcWhfY2tYVVdsZE5kbjZGa21rUjhLbVVnbGstQjM2OVNDcTNyU0xvQ1NGLU5oU3fSAZsBQVVfeXFMUHdkVXMtNXlRUkVLRWZRalliYXpfSlhzb0dsbTgzdnlVTnRfZ0FDRFlLM2tJU2pRa042UktWQklhSHlpMGZtb3kxREIzLWFFTUh2LUJSZUNLSFA5dnhyUklOZXcwbnk2ZFY3Q2VqOWdaYWducjJFOXprdkVBR1V3T2Vqd0VjOWs0azJNSUVwdzZWRDQ0RFI5RkhxZzQ?oc=5",
           "source_name": "FantasyPros",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:33.065355+00:00",
           "thumbnail_url": null
         },
         {
@@ -611,6 +647,7 @@
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPcDZrNnVmeldQVHY0OFdfQjVla1hxajZGeDVpNlUzc3piTnMxRllkazNTc3JmQ3lUZTN3X0hfV3NaQWt4UlRvU1RLeTU1LXJ4bGduN2o1MnkydnVLLVdtLUFMQ3AxVnFIV3R3RW0zbE5KTFdMeWpxTmJBNHJkSFc1SFJ3cTlaQUl5R0ZGV01mZmtKd0JOckZDQk9EMk1Pa0U?oc=5",
           "source_name": "The New York Times",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:52:06.061958+00:00",
           "thumbnail_url": null
         },
         {
@@ -619,6 +656,7 @@
           "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBfWDZLcnZuQTIxZkMwbEFkUDk5aURrRU5ibHVxaE83QW5Fbzk4anVJczVweHk4Y3d5UUM0NDhIMno0X3RYOC1jYW1PeE5oaVBXeVBBWUJrbmhkamtMUGpXVkRkV3UyQW4tR0RhWVdFY2liVENJLVJNVkdBQQ?oc=5",
           "source_name": "Pewter Report",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:52:06.061995+00:00",
           "thumbnail_url": null
         },
         {
@@ -627,6 +665,7 @@
           "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1ma1NhYUhvdFlRUjdkeUZvdXNhenJaS0RKRXhwdjRHTzZoUFhLV09UQ2NDMnJLY1NYM2VPMkVfV3A3MTM5VFZ1dWpwbWFwUFhldE9ueWJvOGpXMmhSdnpRazFRY3ZkVUlVSktLeFVkcVRhdw?oc=5",
           "source_name": "NFL.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:33.065260+00:00",
           "thumbnail_url": null
         },
         {
@@ -635,6 +674,7 @@
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQemxEY1IxdUpjTTEzcTFQM1RKVV9TUGtjM3Jlbm5XclNoVWg1Q1pmLXhBWDVRajFJNFlPcnpfTmdQd0Z2Rlo2bWJndGt6MWVkN2xnRGthVGJFRDllVWppb1BZbmQtSC11LU5qMVBjaDVFWFF6dTFtQm5QeFcxTTFEcTJJTUthSDdaTXJTVkI2NDltVWFlOGlYd3VyRVhVNjBRdi0xTlh6OE5HU0JtQmc?oc=5",
           "source_name": "49ers.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:33.065329+00:00",
           "thumbnail_url": null
         },
         {
@@ -643,9 +683,11 @@
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOQmdMRWFvZk1zX2x5OTlrRjlMaW1UWWJhbXMxMHY2cndfNXcyOWN3WHNsYkw1TmVoUzU5bk01X3R5ZVBmSkF5Z3BrUnVENzB0T3Nqek1uSENjVDhVOUFiRG51em5fd3hVVjM3eTI4VEpsNVRTOThUYmx3S1d2d1NHZzdfekVqVmNEUm10aWZWb1E1a1NGNWRR?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-02-27",
+          "fetched_at": "2026-03-05T03:54:33.065307+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.5,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -702,6 +744,7 @@
           "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNWVJLTC1tM2c3dS04eWgxeTlGVFh2QW1hdWdsQlYxRGQ3VVJSM2wyNDVneElzTWg0dEYwNkExZXEyVXBFVGwtLTk4SlFCRWpMbVRhbWFLc2w1WEU3NmZCZm9IZTBCZmNuRjJkVS1iOGdBNXJvME0zUTk1Vm44a2UxaGxhT3gtT05iZUF0U3E3UEhVYnhyVkdxUzRXckFndUhkSHZBM2g4NVg0ZVdPcmNjd1hJSFlicmtvY09KVGgtcW1Ea2otcTVwY1JDVXZPaE00ckFqeklmOVByMFhOdHp2bENRQVprdw?oc=5",
           "source_name": "A to Z Sports",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:26.615717+00:00",
           "thumbnail_url": null
         },
         {
@@ -710,6 +753,7 @@
           "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPQVlUSUFNLU1RSjhYWDY0aHVVV2NzaWh3MFdSVXJnOG1nUXRxU1hDT0lob1MycVFBTFBlUmtlX1JMR3pESlFNYkdCQWRwMXo0Y0t6RngwTE1sWDRtaUstTU9LM0tITkVVLXR6Ymg4RmNJdjV3M19uRWZFNnpuQ20wZ21Ed2VpSklyRTg2ejdsSGdoSjhRUGF1c3FZRzY2LTlCYjh5ZG9HaVlYbER5VUo4UHZma2std3o1SnFZYnVMdExIMm50SWxBTGdneFBxNFJjT2Z1T3paS1NuQVpLRTR1b1pGY05wZy01MHZPNVFB?oc=5",
           "source_name": "The Phinsider",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:26.615639+00:00",
           "thumbnail_url": null
         },
         {
@@ -718,6 +762,7 @@
           "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNWmh6UlVraVkwVFJnVzhIVGU3WW1IVnNSQ24ya2hVclpiamZCcUlnOXhVMHpwYWIyeEJXN0ZTQlJPNzZneHgxVmJhSDZKblNMZFJZMS1jYXhBQm5NR2UwdFBaNDF2TEd6Uk1YZ0pZUHpqSDdWWWlmY0FGemZuaWtYdGllRG5MSFNpdWdlUDdodzNDVTM5bElleHNhXzBDNV9oTlRRbGdzQXRRVkFnbFZEdGk2aGViQ01nOE1JU3NJa3h4VkFh?oc=5",
           "source_name": "Cowboys Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:26.615684+00:00",
           "thumbnail_url": null
         },
         {
@@ -726,6 +771,7 @@
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdmUzM3hXTGw2ZXhsVy1YWFRaR01nbmFWZzdZY3FPRlhXSExrSWRuZWdvZjlONlpUSnh0Y0tVSzNQMVhCRHJYQllFRnE2ZnBjNFV6SXR2Wkh1ZkFjdTBfWjdHdTVvVGlJX2dMbmpVWW1LSUtpd055eWpqMEl1amJPckZGVjRFNC1VQ2NacDdJWnhPZ1ZyRzZ0UGtB?oc=5",
           "source_name": "247Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:26.615738+00:00",
           "thumbnail_url": null
         },
         {
@@ -734,9 +780,11 @@
           "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPUmFBQTRySjZlVFVNZEJoVUduRHhWdDloTkp3Sk1haG13ZTBiS0ZrQmtrcHJwdmpNbDVTS3N0Y2JWZWpwVDdoWFRGVEUxSnFIRHUxT0pQUm1lUVRkRXpaSGRxRmxiN1BfYlVSUUhJTXZJNnlVeUo1LVlYcjBzaGVZSTNjcU00T21acnRJanZSSmNDLTJfR1BvcU9acWtXOVNzSmViNnpPUW1ObGZ0UnMya3pVa0tYeFlTelc0cl9FVEFrOXNN?oc=5",
           "source_name": "Big Blue View",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:26.615766+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -792,6 +840,7 @@
           "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQVmduWFlnUVdGZFN2R0ZxVnFyRFVmY0VJbW0wcXNMd3JFWGlROE1VUXNCckpkdm40SXJQOUpRbG0zb2tOQXU4TFAxOEFDRFNSTTNWM0t0NmtHUFBQWnlRS0xsTFZNRmZvUl9naU5JV1JIYWEtak56YkVJYnlaWktsWW1ZLW5yRkczc1kzbFdnTkZmMzEzNjdoSllQY1l3U3A1a0pvcWZUaWFZaDM5ekFsVllhU1RmMnJRRHlLSndxTEZVOTVSMnlYUTZQUV9aUWRtV3ZaSzVmOTdYdw?oc=5",
           "source_name": "Dolphins Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:30.308099+00:00",
           "thumbnail_url": null
         },
         {
@@ -800,6 +849,7 @@
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQU2tPUmNFTzlkeDFVanh6TVlfbWFUNC1tb19SeVRSdDhKS2xncmVRVUo5b1NoOG9zUWo5ZC1UcTNiWGt4X0dKaXltMUk4VDFPTl9UNGpoUVdRUVplUVVzUlBvVm1wNklHZXNXVjdjZXN1T1JJTTAwQ0pZV0JJdS1HT0NTVUR4YnRmWVlmOWEyWENXbFctbFZ6UXVralNROFRoSk54MVNCYWgtSU9fVHc?oc=5",
           "source_name": "On3",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:30.308141+00:00",
           "thumbnail_url": null
         },
         {
@@ -808,6 +858,7 @@
           "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPV093NFdUbmlLc3k2eWFOQTRBUFdhTXlWUjJhbW1LMmpUcDZ0SWZhclBqSEFhRGxrU3JaM2hITHdyVmxkWFFIZkRZUkVrQTlOREVpV0x3T1pWeW1IdGlKQ3JLejY4NnpFb1lQOGpLbmk4Vm9IcmlUTWhxTzdMVGw3MFZnb2d4OXQ2UlVpNW54dnlrZnhfQjdZcTFGalEtd2V5NkliZFlrdV94MEFabzRPOGM3Umk4dVdySVE?oc=5",
           "source_name": "A to Z Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:30.308191+00:00",
           "thumbnail_url": null
         },
         {
@@ -816,6 +867,7 @@
           "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOang1TzdLdGNhSldxNFBtTnppRUhxRm1QNGppYVNkdnZ2WW56ZUQtR0dYLUZWblh0RVJMVkhWZkZlNk9CRGZaZUo5azhmQTRtdG5xandYSUxFajRKcERSZV9TY0haSlNNWW1sM1dvTFBiRDNxYnFMQmlkRVgtZXQ4LTlIRDFSb2dhX1ZzUDlzRW5qTDBUMTBZYXdvN2RSXzJMbzhlLUlUMFJxUUtOOEY4?oc=5",
           "source_name": "Big Blue View",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:30.308167+00:00",
           "thumbnail_url": null
         },
         {
@@ -824,9 +876,11 @@
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNLXJueFBoNHMwNGxoWklWaGo0ZXVndDdYdW1mTFdwa19lYUpMUHR2Rm93cGdGdzNUZTNSLVdXSXpwYm5xV2drSWw2UDYtYVRxY20tTm1vamRUaTlqbVVvUkhtSVZ5VnFPSklJdFNxOG56LTBfdFJJUEZCMnMzckZEa1lldUpHVzBNenZneF80Z3BEcUEtMUtKUFVkWHdUQi1RLWpYNzJ6Q2w2RXhqWWJiMzRjc3BoLUE3U2tXbzc2UFh6MllkSkxzaEVCVm83MUs3?oc=5",
           "source_name": "Big Blue View",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:30.308226+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -882,6 +936,7 @@
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOM0gta05OTnlXWC1sR0pFRlBJNG0wNHZ1RmhnY3l3TUxBSTY2eFhXMlZMcFozaDBLUTItVjlfWDFqX0tha05ib1pSdGdaR0hwdGhheS05V2dRZmFLd21xbE0tV1RyTFhPb2JnZzRBbUljWHkydXN1LU1YMHBUZXlFMjRSMHBNM0NZVjRtSmdlcEd3YS1UVW5zbFpoMnZxREpvTkRPNDhoMF9sRWk0UUFXWg?oc=5",
           "source_name": "On3",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:36.254212+00:00",
           "thumbnail_url": null
         },
         {
@@ -890,6 +945,7 @@
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNQi1tbnY0NVZZUFZXT01hVkItcmlldGliZkFLd1Y4Zy1lNy1FOFliYjgtTnpOU2tJU0hTTXp6ckNrNjhya2ttcG1BWkFFeXJCSHVLWG5sMHJpWks4NnJ5LWZraTlrZ09SYy1qNWdRRGRKZmkyNnBvZXZjWHI1c193Y2JpZV82TDdEcEFOV2Z2R3NwRUxHU2FvZlBkbUJJTjA?oc=5",
           "source_name": "FanSided",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:36.254249+00:00",
           "thumbnail_url": null
         },
         {
@@ -898,6 +954,7 @@
           "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5YYkl4YTJzVFFFeTdsTlFuZVJNMGpiMkw5bDQ3NVpPOEVlQUlUR2h5Z1J5M0twczFLVjlzVnJ6T25TeW5oYkFqV1QxTUVjaVRUQVBRTXdnMG1RVlNMMVNYdFNEWGdOZkVE?oc=5",
           "source_name": "Sun Sentinel",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:36.254290+00:00",
           "thumbnail_url": null
         },
         {
@@ -906,6 +963,7 @@
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNblhfY0taQ1c1M2hZdkwzODFqdTR4TzIydFFYaW9zN2YxT1VLbktuMHRpUHd6d3dKTzk5QU1QR1Q5MElFTXRLbVFBaC1COWRNQ1ZZOWphMlBIUnBFSWs0ZnRwUzRyMDFMczU5azFMZTJ4RVNScVRyV1J5SUFsVTVTUlhWZndKdzRBYUVWTmxUZ211Mk1YMTEzYnRpSDU5cm5NTFlaOE9VbXJheHZXcXlBNGVnYTlXR0ZIM2ZxS3RwOTFCYWdMZ2dMS0ZB?oc=5",
           "source_name": "Dolphins Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:36.254321+00:00",
           "thumbnail_url": null
         },
         {
@@ -914,9 +972,11 @@
           "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNT2tIU2JQcjl5dThrQUxwaXJnTEhRNEJOQVFIS2dnYUZVOTllLXpxeThJMlkyRGh2cWZERmI1bGd5SmtFUkVfekx3VWhvNXcwdjZkVER3ckNNbGpVN1BJbjZlbmxHblVMVTFKWGt4U09TcVZaTVNUenN3MDBDTkxhQXZFOFNwNGNRU083YzVzUXF6NWNSaUJfMmxtaHBsdEE4c1dxYU0xUHM3enl1ajYtbVhyLWdkeFhST1R3Q0pLejBnOWNwMU9VbU9TbGlQdkN4N0JzN3F6WDJiZlVYb2fSAfIBQVVfeXFMTXdIdTNXQXlvQUdRT2hUbXNrb3I2S0w0QUV3eE01OWV1T3pqWmFmMkJWNDI3WWtGdTBFYXhIcXFqRFlOaGhNLW9vaXpBTTJ5ZERqdHhILWgwTk12Z2Y3eDhsQmZaUGZ1QXQ0cXV5MHlEZVQ4bl96Qy1wdXJoT3NsU2RRcWVTYXFvT2Q3ckJDQ3o2MTFueVdlVXdHajR0LTZieUgzYXJFblMteDhfemMta3dodHdpNTFDOUFmWGhaZjc0YmtjRHQwN3FTZzFMaFd2WmdNRjJnVWJoTDBqdWI3RjY0TkpxYjNHdlJsUkJ0cGw2Znc?oc=5",
           "source_name": "Cleveland.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:36.254348+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -974,6 +1034,7 @@
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOUDlHM1RDNU5XbklPNTlVeUVYTndiY2J6TzYyVl9sX1VkX3dHSXlqQW10ckhZWENsbTVRaWxkTERHOTkyY1YtNkJTT3ZiaDJhRVFwWklZWjA0RlFtbGFvZ0YybFh6R3phQ2hLRlh5V3Q1T2JxQkNMUTNiX01NWU42TG1WZ00?oc=5",
           "source_name": "Steelers.com",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:30.811866+00:00",
           "thumbnail_url": null
         },
         {
@@ -982,6 +1043,7 @@
           "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPNjhibGlOLUliZEFMSHlqeXJJcEFTUWoyY0o3Z2ZpcFFJX2w1WkI3Y2ljU2N4cExwdkN1dm9Mc3lOb0NGZG5xZTk3SDJCcm16eVZmTzRjbngwNU5CNGdVR1hFWGFKSURod19lV1JxQ1pLZzBNWTVOSDZMRGtZRXlBazRVNXdrTjR2cjludndnWl9qbkljNllaYUU3Y0xDSVdKYnhYdXlJNEFsbmdKbDFLNHFKQnQ?oc=5",
           "source_name": "NFL.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:30.811796+00:00",
           "thumbnail_url": null
         },
         {
@@ -990,9 +1052,11 @@
           "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5rZElFM1ZNOUR5RDMzSjN0NlhUZE55akYybWxiNmNTR2YtZjBacWVqMWg2c2hwaXh6Rm9rSTFEaFFiRlpuNjZuWkR5V2lRZHV2Yms1blkwT21EVlRuTGFFOTljNW51UVBURHBSSzlFcjZEZw?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:30.811896+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1049,6 +1113,7 @@
           "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE52N3lRRFM2UzRLa0kwTjk0NUZGYVZ2OXhJU0RfQ2MtRDZsREFHNVNkZzBaN0N3cE1ZWGZMWG1DSnlONzZ5anVSc1hJMjJ2T0VKNm5DMnFKNi1faVVSOU9PcFRmTnRFaFIyQnNBMEJ0bw?oc=5",
           "source_name": "New England Patriots",
           "published_at": "2026-03-05",
+          "fetched_at": "2026-03-05T03:54:38.599262+00:00",
           "thumbnail_url": null
         },
         {
@@ -1057,6 +1122,7 @@
           "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9tY1VxZzJaT0hWczZSc3FwSERVbU4zZ1NjbzY1OGM4Z0xQQTFibUdPbW4yOEhLdWZCeXV2TC1MSGNwMUc1YjkwWFF4YWJJT2RfMldBWW03dktKWkN2d2wzeFFVNmRoYlUxWEpKbDFPS09tTTNnLWhwZ3l2Yw?oc=5",
           "source_name": "readoptional.com",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:38.599320+00:00",
           "thumbnail_url": null
         },
         {
@@ -1065,6 +1131,7 @@
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNYkU5UFpDdmNYZi1MUThFTFhMVTFTRTA0YWhKVUdzTk5QaGdMbzNfbU93WWNPdU1Vc2Z6Wi1OdkMwNmxkN2R6bC1PSnJ4bWlzLW1qZFJTSjk3UUdYNkhmVzRXQ0FXbmtFNGs0UEZHYVlmTlJiSXdpQUdoanAtTlRiRFVwVWd0U1VGYW0tdnRYOUJHNnI0eDVLRnpSZ0V4U19pV3JRVWhBcnRjSWdpX0h2QTZSUmRGaVpla1ZuTQ?oc=5",
           "source_name": "NFL Mocks",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:38.599384+00:00",
           "thumbnail_url": null
         },
         {
@@ -1073,6 +1140,7 @@
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOZ3VRaWMtNXA3SHRDcy0yUGlzRGtieGZQb2I4clpIdm16SjNZbGZKeWxQTW1pNUdKQUkxVmVRbjlMaEpPNzI1bHNhOUlvWl9Dd1dvdGR0OWlILWRDTkpYV1otazZpNVZhbEtqdzhnRXB3eDBqaEJEX05iVW52bVYwYi1Pc1NjSExydVg5NUZIOHdQbEc1VHI5SjJ3eHN4SVhWWTZvMmdneVlpQ3dQYU54VDNqbzNyUlJuRWVTNWVuNmE?oc=5",
           "source_name": "Patriots Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:38.599406+00:00",
           "thumbnail_url": null
         },
         {
@@ -1081,9 +1149,11 @@
           "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQVF9jOTlxd05NQnJxdHZSVVpmZWd3VXZXc0FxdHZXOFdISWRSNGFfbldPREJEOFpXLXNRWHZSYTlEWnc5Ym1HT0FrbkVGYjFwcVk0a1ZHY1BJM0lhMDJqYWFKTTRJR010QTZmbml6ZXhzSS05YjBFY1BlZ1dBZEFDZFlzb0hrQTZrV3c?oc=5",
           "source_name": "Panthers.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:38.599356+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.5,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -1142,6 +1212,7 @@
           "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQSkpuRVVqLVlRc2dBWjhJdmhuRnpRYzUyMV9DM3dnWGlpeWhaWjRWYjVwWERNam5JSG5mNmtLTnhOZkZFWm82OGNJQW9ZSVFoZmJWZEdBdl9yUlAyN3I4eVdweWdRb1NLdFlsRnhMY3BUMXRjc081ZmE0Y1o0NmRkaGYxNURMNTQ?oc=5",
           "source_name": "CBS Sports",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:27.738925+00:00",
           "thumbnail_url": null
         },
         {
@@ -1150,6 +1221,7 @@
           "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNWVgyNW5DMEdNUkJtSXpnMnZQU3lHbkNGem1fQWdZT2ZQRW11TmFDUldPQmJ2SE1WVjlZR0xIMnY2UTRMVlFFQ3RhdHVJYlU0U2dnaDM2WnF2V1RuU0ZEaElXSXB0MVF6Sk8yRHcxX25YaEs3Ry1GN29HVnFVZHBXWHBuVl9KUElFRElVZWVwQmkwbEZ1VUlwcnpBUFFFS3VkM2x6YkluT3ozZ19xUnlFQzZHX0pDRlhvT1hhTmREUEdUTXV6Y3JHT1JOcEx5Zw?oc=5",
           "source_name": "Bleacher Report",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:27.738971+00:00",
           "thumbnail_url": null
         },
         {
@@ -1158,6 +1230,7 @@
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPWXl5azJPR2JPaFpDUGl0MXBUWEdYbHJPZTNqQkZGcktWd0lXWUlwQzNvWjFlQnkwWGVnSTgtOFU1UFRldXRpS1pUOXBVNTh6YW1SZW5kUWktVTVhUWdZTWtyQUhibTdBSDBPX3UtWG5rWVhmVmhXdExMTTJTMnYwLVNRbFhsalFWQnVEcDRseE0tNEIzQXBTYW9MdmptT3B3OFdMdTRnTFRYYnNTamJ4bHhOMGJ1eVA3Uk9XVw?oc=5",
           "source_name": "Titans Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:27.739026+00:00",
           "thumbnail_url": null
         },
         {
@@ -1166,9 +1239,11 @@
           "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOcnVhZmVlQ2ZwTWw3QmtzbXNNVzd2NDZ6V0FmM3U4YmtkZmtrX0hQakZYZ2J0anNUTlhJc1BSaDYwc2Z2RU5CcGRub1NOcjFrV2pzR1FLVjRtMXMwakl4VFFiNk5yQkV3NF91Z016dVAtTDNuc21fS0tFWldheW1RVS11QzN6dC1LYmVJUUQwdk4wN2o3WjQ5WVNMejBUMV9yZ2lUZXFrbVhKRHJoTjNrUmFEMV9Kb1A3NGQ1cWhMbFh6a0ozM21BclJtWXNGdw?oc=5",
           "source_name": "Sports Illustrated",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:27.739056+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.3,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1226,6 +1301,7 @@
           "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOWV8wbTltMVMtYlhFY1VvY2pjalBma19WVmw3dkhlNjhRaFdNWkQyWVp2N2IzMUVDZ2VWVnJ6MW1qSWhRQ20yV1RpMmlTWXdSd0trb3drN3NTVGozcjNGZ01zaWpGTkctc2xFQUZlRzQwZFZyYjdYb2FkaURHSEZ0aGd4dk1GWmEtQ1pRSVRfb2d4a2dtUTUweHBlejRlQkJ0NWVVQ0RpTVRKQ2tzQllaTmRwUUw?oc=5",
           "source_name": "ESPN",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:31.430717+00:00",
           "thumbnail_url": null
         },
         {
@@ -1234,6 +1310,7 @@
           "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOc3JwTWlVaEJFODZaN0p1SjhlenJNYUhxdGlibkI3dEF1ODdhYktZTUY3eTlmWjZRcWxVUm4xSndwUkk4VktfaXd2TFkyNE9YMktMQzJYbVZMcHREeXVoR1V5ZzBSM1dXWWtuN2Q2d2VHN0xQeF93MFdvTERkX2FRS2RXY2F3QVpYcVU0ZWI0M1k?oc=5",
           "source_name": "The Viking Age",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:31.430786+00:00",
           "thumbnail_url": null
         },
         {
@@ -1242,6 +1319,7 @@
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOcDk2dHhmd0lyd2Q5dExTZDUxUWlqSnZFRV9fYW05MVFnMXNrR0gwRWZrSTVDNE5oSUFLMEZ6QkZKWkoteWp1b0REUHZIRk1VZUwtdXdhUEowc3BuOVZGdjlCbWo4c3NtVUlBeXBYMU1VYk9VallYYWdCV3hmTVdfUlN3aEhvRlVKb2xXODRITGk2eTJSaC1oV1pCaUJMN0J5cW5NNTZSUnZNTm9aMHB3eHROZjF1SVYzYUdfQlZQSUVFaEU4bVRsS3RINVNveUNV?oc=5",
           "source_name": "Chargers Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:31.430811+00:00",
           "thumbnail_url": null
         },
         {
@@ -1250,9 +1328,11 @@
           "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQSUJIcmhKblhpTWdMOUgwNE4ydW5VX01OckR4aGJBRWcwUzhsR01nMWk3Um1BcVpheThUeWkzd1N4d0o2NnQtZk9uSjRpUnVUNUpYV3c3NFd6VFc1QWRqYzRJejFQSUZBR3I3dTBUMmVnSTR0Slp0R3FDd2I2MkI5TUl4MU91LTlMbW52VEFpcVJOTVE?oc=5",
           "source_name": "Steelers Depot",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:31.430836+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 6.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1309,6 +1389,7 @@
           "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQa3NSZGI2dkgybElDOHh1NzBEdWp3aHhESGZXUHhSd0FpeHVmbUJ4MkJoUDFoR2xuMXFsZEJra3QtblhOTmp1MGxNcUpvOUtmbXdTVGl2Z2dJS211WWZsZXNjN182T0dBLTUwMGRIMy1sdWJ1WkpmWk5CendzS3JoQk96X2FuX2dHZ0o4YmNnOXg2Zw?oc=5",
           "source_name": "Bengals.com",
           "published_at": "2026-03-05",
+          "fetched_at": "2026-03-05T03:54:34.708429+00:00",
           "thumbnail_url": null
         },
         {
@@ -1317,6 +1398,7 @@
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNQlNERG5mZm5oZTZ4LWlrV1haYnVmTEhyZm52SnY4QnBoR2JQdG5mOXl6VHhIRkhLWDVTdU51bVN0SDluaWZHQ1BIRHBJc2NMNVJXLV9lb3UwZGpsRFVWYmJCblRFd1o1d1FXS0xfSDkyUmRKZ0tkMGdSb3VNQkZzMm82THFGOWVpYmpmRkRFMV9UOTgxVHVlTnUyVHhrY0JmZnZIUkYtWUlFN3A4Q3NXOQ?oc=5",
           "source_name": "The Palm Beach Post",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:34.708492+00:00",
           "thumbnail_url": null
         },
         {
@@ -1325,9 +1407,11 @@
           "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQR29pZ1FKT18tbGYySGVhZlI3S2hQRGg1NGhBM3pnNEpCbm5zSVN3SW1OUFgtZVRBMDM3a2VrMzM5Zm9FWnF1QnYzQ0VxLXk2cjFER1pYWFpfcHE1aDJMUHIzTlhOcnptT1ZYclZDdWtDbEJQR0hKbGcxQmRNbXdqOElUZ2FuaXkwTkVleG9BVjBjM2NRc3lBSjNPVnpMSDlXUFFVcjdqOURBWUN6MXI5NFNGZDExb25mNEtITGZYajRBQUFGYl9jOHpVTjhEaEF5c3JDLVpCYU8?oc=5",
           "source_name": "Rams",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:34.708467+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 3.3,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -1384,6 +1468,7 @@
           "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOcVhHQUNDckVaSjc4UjFJN1lXV1MzM1VuYm9haElwZ1BOa01WWFJlWlhOdlJEV1FRLTBPVU1PNFcySlU2ZVFET1VmNHZxS1dKbzRGODB3NjFxT01lR3RfVXJHcENEamVwUG5vbTZ0aU9vMjQ3R3BuMjI1Z2tqMi1KQlI5aXE5UE0?oc=5",
           "source_name": "Steeler Nation",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:37:44.819794+00:00",
           "thumbnail_url": null
         },
         {
@@ -1392,6 +1477,7 @@
           "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNd3BqR0s3c1N4VTVzUloxLTMxTXZKU21yR2ZNaHltenlfeE1IRHFOQlg5dklSVkxIOVAtSXpzYm1EREh6VlFkaUFHVG9tQ25GQm1vVGx5SnJ1MXp4eGk0M19EZHMwVHRoRDhYSHhtNVVLSEkxRWtsNlRwZW0wLTczVXVtbFE5UQ?oc=5",
           "source_name": "Yahoo Sports",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:34.108478+00:00",
           "thumbnail_url": null
         },
         {
@@ -1400,6 +1486,7 @@
           "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5mU0RPbnZwamRzRG9tenBTU1RDb3B0aHhid0JEZUp5cEg0QUgzU1E3d0x6R0FtUGpmOVJhcHRIbDVhUzJCNGJoS2x4dUg4UkVwMnlYemNuRWVoTk9GM0tWZ3JwMzBhSnVTdDZzVVFPN1d2bjZ4dWV6RQ?oc=5",
           "source_name": "PFSN",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:37:44.819734+00:00",
           "thumbnail_url": null
         },
         {
@@ -1408,6 +1495,7 @@
           "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOZGJBeXV1clZJZmQ2aTlBdjJXMko1QkphLWtDcW1HN21NZEtEVGRhUFdZZldQMFRtT0lwRm1yb3pnbzE1Q2lyWG9fOGNkc081YzVmVUVEMkd1aVBGeGFfQ3ZiMmFrUEp2YlpGbHB5RDlZQTRmU3lxUmVRUzFWOW5ZdXBMakVua1JtSEMyZVpCTXZSeEs1dloxNg?oc=5",
           "source_name": "PFF",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:34.108333+00:00",
           "thumbnail_url": null
         },
         {
@@ -1416,6 +1504,7 @@
           "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNdkF2cGRQTDBraXY1cGJSWWF2MDNfdjhzYnQ4cmEtaTJmWlpMc1haNUFtbU9RYjN6aHJ6OTk5V0EzeWhWVWY4TGxxNkdLT2xIWGlBUlRlUm1VUUF6MmpyRFl5cXNaRXhFYmk5VEZuR0o3eFhnRk9zZmtsVHZ4MlBhb3pvRU4yLVRDM2d4RldKS3VjSjdwSE54M2d6Z0ZIU0FXZjJWZVJBRTY5V2FvRU5ZU3hqSkxjbDRicVE?oc=5",
           "source_name": "Sports Illustrated",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:34.108416+00:00",
           "thumbnail_url": null
         },
         {
@@ -1424,6 +1513,7 @@
           "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOQ3U5WE9Td2RFRmVZTWFJTFJULTlBMDBNZFMxMk8zdEJibUpDMDZ4eXZtQ19pWWZHVnFGNjF2VHJRR0dFYklaQVNYa2FHalVqTW1rT3RhVlA1TnR5SWlWWFh3SUdDQ2RvUlNZSFljc3lMTVJsNzlNY0d3ZGkyNUJVVVlWb3AxU3BWaUFXcGZoeG1CZU5QcHpDOHZOMGRzSUZyRDdXcGZXWDkteWdmcG81QVNqb3lLc1hrNUc4dGV5Tk1VSVlWTzZnMGZSbw?oc=5",
           "source_name": "Steelers Wire",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:34.108390+00:00",
           "thumbnail_url": null
         },
         {
@@ -1432,9 +1522,11 @@
           "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNMGhadVJ6dmlIZ3FpaEtCOTlaVk95akNucEt4UTBXdlZES2p0TlhnVl9ydnljR0NZYlVpZmE4Zm9WTVJMYTV6d2pLbmJRNUg1aWh4d2p0S0E3c3g0TzczY2MzZU14czRYdXl3Q0p1OXpKZUZuUmJXUUN5QldlRjRoa1YzZ3RPVmFCRE9mNG9HdGNYSWZzWDBQcW9Gd2dxcE9CSTAyNEExaktjd3NQQ20tdHFwdk5ZTWdBYlFjWWFRUGZxbDlKT0E?oc=5",
           "source_name": "A to Z Sports",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:34.108451+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1498,6 +1590,7 @@
           "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxORGF2cDVGXzQxZVdxcExhS2J0ZjVOOTNVYVZKOEVxU0JYSzMtc0ZvUDZSY2NfNF84VHV2MVFiSUdXMkV0SU5qYVFmZHNsYmZkYk9ra25aNkVaU2w1WnA5ekxUZTlOVUZrMUsyWDI1NmFVc0UtcXJaWEhJOUNZbjVkb2lxWFVEaDItSDVVT1ljME9hYUNFTDViSmdxOWhkTWhBa3ZMdk1DS1Z5Wkp3dWNEbnlGeTlsREdtWXByTFRsM2VhQ0hMZFY0?oc=5",
           "source_name": "Ducks Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:37:44.308892+00:00",
           "thumbnail_url": null
         },
         {
@@ -1506,6 +1599,7 @@
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMkFBT1MxcUdON1NTRWlaZk5ReS1CUlRVcDlrMHRIaklKVmFqUWM3cldMTjJxYVNfRXJtdUhRT0JUZ1hWVEd6Y2ZINTlRbGYyS0JwaG01cjR6Y0NpZDlEd2M5M3RNY19mT09vWFNibUhrNFZUWkNwOWI0RjcxVEk2X1haSDJkYVdRYkVzR3BDbG5SNkdKLUNJb3JrY2U3YzJubk9PTk9kZ1ExWm44Q1I0SERZekRVQdIBvgFBVV95cUxOLTdPT254Q2h0QWw2YXZzZmQ3czBQUGhnaXR4QnpWVGticTVhZ2d6czMyVlQ3ekhUVG9Pel93QUxyQVhlU2k2NzgtREJrNzNqbEsxeFA2aXc0Tjk5UzJDZjRlLXJZZkNEeENIakxtTmpFMFU1aE9jSmRmbmFYSVVyZlptNi1LWGpmTDZDQkQtd0VVZ243ZFNzZ2VGOGJ3TzlOTGxobkw5OFdQd2Z1N3hzWl9lYWZhNmVXdThGbUxR?oc=5",
           "source_name": "NBC Sports Philadelphia",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:37:44.308914+00:00",
           "thumbnail_url": null
         },
         {
@@ -1514,6 +1608,7 @@
           "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPS0dRaXBZNWFTdFlGMU96RUQ5RjE3TWJjVzdmQWd1OV9LamZDUWVLNmdVX2lnS0dRS25aN093ZVdNUGtxTmtLeWljay02VkNJckhoNjJidWFvQ3JyV0FCaktGYkxrRkVuS1pRbkpMcnJ0LUdULU9aS3BFaEVWcmVSa2xXTnhZTzFkR19QckI2SWFKWTlQNlBCbHFCUlhLaHRpSVltZG52Y3MwdUdsOGF2Ym9WTkJjX25JNzBKUjNhY3JxRFFhTmlRR2FmYzNKd1U?oc=5",
           "source_name": "CBS Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:33.578215+00:00",
           "thumbnail_url": null
         },
         {
@@ -1522,6 +1617,7 @@
           "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNc2NUeTBZTHhvd3VDc0NwaU4tTjYtbk1aU1NDRnpISTlTdUYzUWhGQnhNWXZla1lwVXBMMWZvREV0OVduSGpWT0xHUjQ1MGRCeGdQR09vSm9uXzRPT1lHWlU2M3E3Zi10RUVlWVVMbHVtSkdKMFRmN1hRYUtYRVVHVGJtRQ?oc=5",
           "source_name": "Yahoo Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:33.578377+00:00",
           "thumbnail_url": null
         },
         {
@@ -1530,6 +1626,7 @@
           "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOYlBUdGxMSHZIS3FaVXJPdDdMNDdYN09iUGNJLWxnb0ZMUGpzZlNkcjliVXotTEdhamdTS0ZwejJ2T2ZMRGJBV3N3VXhWWU1RUnhXYld4alJReWJGQ00zTlJVS2tWMzFUREU2Q29rM3dqQmNpak5nSkNFM2VHX0FuMmlSc2g5RjVVeldQcTJtSGJPY1FuNm8tT3RkT3NHZw?oc=5",
           "source_name": "Matthew Berry's Fantasy Life",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:33.578306+00:00",
           "thumbnail_url": null
         },
         {
@@ -1538,9 +1635,11 @@
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQTkpWcnNmVW1MT1dyQ0pxV0dFN3dVQTZuLUxkVFNKRDFmOHYxSFRzQXduTkFuUTRBRU00NGphZENTLUxXbUVsQU1qUjNORVRneU41cDVGVm44SmM4RDBnNWJydnRWRXlRdDY4Q0V6QlNtQlhQbGFlTV9NclVEZ3NJb3p0SUVWamNaQVFNSVlkcl82TjNSR3BoWUlmRnNxLTRFcldDNGt5bGx6cHpweDk4ejgwN2d5Mk10MTdOTUZfTjhTWWVjbkFvR3VnTkxRNWg1?oc=5",
           "source_name": "Ducks Wire",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:33.578341+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1606,6 +1705,7 @@
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOR3NVRGJocmtoOVpHdDN0ZXJJTTNVSTJ2Yy1iOFJRY0lvbERidTRHU29lS3ExWVRhcjl3NHpKdTFTTjFYRjdtVHNzVG5PXzIzNjRLRWdVSTJxRTBRdEtBSW5BQlliQTdQYXJlTWF5SjRaMFFCeVExMnZ3TmZScU1xdGN3ZTFETnhjdWJITG95dlNXSHpjMF8wRWRSUnJzU3dfS3V1QmJ0R0V3SFFmSnhVMzhqYVc0elk?oc=5",
           "source_name": "Giants.com",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:37.475624+00:00",
           "thumbnail_url": null
         },
         {
@@ -1614,6 +1714,7 @@
           "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOUGtnWTlkSUlBSWV6ajNHQ1pKdmhLUDFxbFQ5NnZSOWR5ZWdPUF9NWTRlb0hMbExwOVhBYnhLV096UXRDd3hqUFh3MjVqZURYZTkwMXA4LVFDT3dDSDgzV0M0YlYwWU1ITGdnUFNRV09TamNHQU9iRmNUQUpILU50YzBRS0dRWWlIMlhCVFpfcTZGak5ELXR4SnZON2tiS1JRTzkwS3Zsb01qRkNHWWNwdG9BLWJwOC1WQ2s1bU9RTjIyWjV6eFZaUmwxTG5IR2l5QUdV?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:37.475647+00:00",
           "thumbnail_url": null
         },
         {
@@ -1622,6 +1723,7 @@
           "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaC00WWVHRGZxLV9CUUYydkpCOTljcFdZZ0dzdmkzYjlzTVdVdlVMTXFnNEFWWGstckUtZkhxeVJ3NDcxV3gtd3JYUjBJYmZVV1BPU04yblZ3eXZxaUNkZVViSC1aWExwd0NyWkx4YnAxblJFamN0MXA2Q3N4WTdlUHV4czE1QVRIb2UtRVZtdnhFUnB6T0Izc0J2Q3NIZ0Nlb3ZCRDNLTEp2bEp5SWx6eUxMSElyUEhTUGNYUTQ5V1phWVNNUWxZ?oc=5",
           "source_name": "Bleacher Report",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:37.475599+00:00",
           "thumbnail_url": null
         },
         {
@@ -1630,6 +1732,7 @@
           "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOSWU5cEdVMndtTlhmZUdZbmhGRFpDOTlsU0tZTm1OTW1XM1dtcjl6MVpNR2YtMnEyMElobWsxMjZyZmxnZDRzRTRWUnZidzdUUHVrZWt5X0psdThuTkhtTXYyUFYzVk91Z2I1N29oN1RkSHlkbnBqMVJybVFocjc1OFRES3F5TDRwWEJ2cW10RDlXSnE5LUxTb2JpUjlETHl2cnZ6RFg3eG1fRER5X19yaWJfZHY3MTZSWmJtWjNmaWFQYUE?oc=5",
           "source_name": "NFL.com",
           "published_at": "2026-03-01",
+          "fetched_at": "2026-03-05T03:54:37.475555+00:00",
           "thumbnail_url": null
         },
         {
@@ -1638,9 +1741,11 @@
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOOHJZSTgxbEwyRG82clg5dzhGRHdZSFVUbWRSMHdFWnV0ODNlXzZkSmxiYzVOWkdqQjQ1YnAybjlGeDFXQXZ4RWQ5bFpwZ1U2N0g2dUlIZDdIYkFPbXNnSU9BMHFLME9IazNjbWlhNFBoNnRzU0RTT0Z1T2xGa2doUG5uVUFHZmt0RkhZV0tvUTdVZGg2b2RBSDNkX1haQlpIZ2xJMk4yYVJOSlk?oc=5",
           "source_name": "CBS Sports",
           "published_at": "2026-03-01",
+          "fetched_at": "2026-03-05T03:54:37.475677+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1697,6 +1802,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1757,6 +1863,7 @@
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNTE5rb0puMjlLLTk3dWNiU08zQ2Q2Z09nclZzbldLcmlCRXB2c1RXY1I1bTVEZTBOdzVLTDFYQXIyTHRxaWVQajRVdGJLMjVuRHhvOEh3UUpOS21QS2dlZ1A2MHhmNlNzWVJaQl93TTNGMjNmbHFIN216Yi1kR2pJQmdjM3J2dGN3LThqZUdxUzl0YnVVMmJwUFB1SDNDT0hvaHFNdGt5UlBuZTFUYzhERXpKSlAtcnpESzlWblA2bkxMR0VITFFuNUx2TGtQdjJs?oc=5",
           "source_name": "Browns Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:35.221182+00:00",
           "thumbnail_url": null
         },
         {
@@ -1765,6 +1872,7 @@
           "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9VNjZpX1RrOGoxbUZNbDZ1cG5FeFZkOS03TUEwbU05MHZERUZGMmNxUFVWczdjcldjRnF3M2F1c0dtUmdubkwwMENPOG5MTkY2WjhiYjJyM09iMjQzVHpLNk9QVHZIdzhVaTdXOFZYaC1SUEE3WkFMd1BVbjFpUQ?oc=5",
           "source_name": "Yahoo Sports",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:35.221269+00:00",
           "thumbnail_url": null
         },
         {
@@ -1773,6 +1881,7 @@
           "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPS3IwTlU0eWdXUFZJMjFfNmtLVVEweWM5cnVfbUZSM2RYaVlNcHg5R3ljQjdkN1VxSEJGTEM3dTh2Yzc3OEdiVGdMRktST005WVNZNFB0S0hEWlNZbXJoTm5kZ1JxWEYyeFJzdVJWZWk5aVFVb2dKcEFSbmxTWDFoZUoweExqZFF5NE93aFlaT2UtclFWZGFFQU9KeTloZllWdDJyRXdQV21jazlYZ2lzM0FFUDJLSkhYX0VQLUZiSFlEZHp4VEFuZC1FdEpMTHU1Z3E2blV1TkVaV3fSAe8BQVVfeXFMUGZPSFJBVkRJQURjaTZ1UDBrWVZ0X0xPQ2pGM01DTkZYX2RtYS1yM1ZqQ1dnS1pNbVpVMTZNYnZ3SmFESlphY2VyTlQ0QnVodEU3Y2lqQXBsX09Pbmw4SzRueHE3NkQxMmt3YXV5NGJhN296TVJmcWZudGtIOEt1NGhhX016Vkk5RndsTm1LdTAxd1BlXzY3YlRGQ0tTZ1J3cHQ4d1U5SGdQeGtsYVFmVFh4dmZWWUEtaV8wZFNRRzB1Q1pWSlI1dk5iaFhvdVhZTzJzaWpuVlpqNUgtZUstWE1IM2JLR1MxTkhVcDV6cGs?oc=5",
           "source_name": "Cleveland.com",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:35.221143+00:00",
           "thumbnail_url": null
         },
         {
@@ -1781,6 +1890,7 @@
           "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQc3cwZnJwdWN6dWJQQUxPNlAyWTRxSG1UaTBVQl9SMS1FdDBMY0toOEpqd3I2ck90LVBQaEN2U3Jwc1BaMGQwTFEtNXJZVi1HYUp5Uzd3UWlfdlU5dkNCX1RoRmZZZVBzam50Z0FQdmFVdWZlcW4xd2gyNkYtaElOVEdjYThaVDdxOXlmbngtWjhzSGZpRDJickMyYjg4NC1mVFZFZVJaUnVWT3VyQ2hzUFJOMEtoT3NDU0tGd2lqZjRZd1BXY3l1NmVKZUhCQktrVlhLNU0waHF3U2FhTm50Yg?oc=5",
           "source_name": "247Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:35.221214+00:00",
           "thumbnail_url": null
         },
         {
@@ -1789,9 +1899,11 @@
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxORTVQZjVsRmZROEVRcWRpYlBWbXBhN1U3MHRzdEpPV3RPOW1WaGZYWDJiUHlRcEx4SVZXXzJUZzhNUXlZampuOTBGWTFMZkhNNVl5Q1J3SEcyS2dtdXd1VERzM2d4bldmUkFFREwwWlFRS3owSFc5MjBmNi1hWU14M2hQME5qekZOUjlUQVpDVTZKd1hVaE1FU3AwakNtcmRCVnFXQVJEVlVHMlJ3WEhLUHE0TFhhc1FJV0FUV3RZWVdUSDlwWmRJT1VPSnViY1g1?oc=5",
           "source_name": "DawgNation",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:35.221242+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1833,6 +1945,7 @@
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNOEQwYy1zLS1rVVFoTjQxeUczdWt6aFRhSDMzUzBqQ0VjcWJ1b0drdFp0YVUtZUVuU2owdzhRd2NfWkFVS25WMHdHRHdYQlFnNnpYRTZ2blhCcXZVakhialhtZXkwalprOGdud3E1b1hlRXJGYzM5cXE1NTBXV0dMWkhaNWEyM2czU2J4VTI1Y0Vydk0tVTNnbzlobXNaRXJtVXBlcmxvcWNnRTIwclJ4WHNQMlBVUDJRMDhZV3NGMk0?oc=5",
           "source_name": "Denver Broncos",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:25.809834+00:00",
           "thumbnail_url": null
         },
         {
@@ -1841,6 +1954,7 @@
           "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQNVlxUWZrYWhVRHIybTBuZ0I0RVlFRllLMDVnQU9Vb0lWZlhlSTU0UlBHbXlFMm9lbTNHTE9DTWRJaW5YNm11bVltR1hNamtaT0VGVkxpVTI5V1RrdDFOejBZdHdZanVnUlNnRVppSnY2dkFyRFk1REk0Yklpb2RGRGNjbEx4b2hTZEc1eEUwcnJaNTBfTnFDMEtrVnM1cHp1eE1ncXJKMHEwT0h2UlcyOWhZN1lfWjY3WE5LSG9tNC03MXVmY1EwcXZSTVhMZFVDNDQ2ZQ?oc=5",
           "source_name": "Bills Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:25.809907+00:00",
           "thumbnail_url": null
         },
         {
@@ -1849,6 +1963,7 @@
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNaEtOVU9OMGdOQTlYcU1ZZ2tBNGctd0N4VFNkNzZVc2FGSXlQamw2emxSRXFyQnB5c250Sk1wN0NicWUxSzVEbUdUMFE1SVJOa0FNSFhqRW9NdTh2Zzl4Q1l3MGNkS1VsR2VYVGNEamVZS0FTTC1WUW1ZeWR4QzhQa2JPVDZud19oVmN6NS1SUTlPWkdtUlFuR3dLQk83U2Q3dTJOWDRZd0JVQjF4U2h0UDZoQQ?oc=5",
           "source_name": "Sports Illustrated",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:25.809931+00:00",
           "thumbnail_url": null
         },
         {
@@ -1857,6 +1972,7 @@
           "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPQU80LTVnMGJXcDBVbWRZV1ZfRTVyWmdYWUR2b29uTDNPQkhCNVR0LW1HMU52VHJvZEh6a1ZfUFBreUJnM2Y2dDFBa3h3aTI4TVRTMXowR2lBWFVPY08wUzJ6VlRoNng0MWU0WDJYblczWXoxc2xmZkJtcDktSEMxLXdsb0pFNmM?oc=5",
           "source_name": "Yahoo Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:51:58.747829+00:00",
           "thumbnail_url": null
         },
         {
@@ -1865,6 +1981,7 @@
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNa1g2cV92RXpmdHhXS013Z0pXUVN3NXR0RThyajBZcEpkemdkTl9mYUJLY2ppM3hsUThPWjdCNllRZGRpNlJ5WGdqb0dvWVNQMm9NcUUxYkNQUUh4aFk3aUpnVzdBTDMxb0VKNnV2VzlwN3pyOGRsaEc2QmVUN3ZURHRlVmVfdGp0QXhoMFN2MFp0SlFINVdXWHp6bkl2RVBIRTd5OXlfQjNPV2dnbkxjdG1TaGMxTXVaWF9fQzlCdGQ4SGNuc014dlhB?oc=5",
           "source_name": "Panthers Wire",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:51:58.747801+00:00",
           "thumbnail_url": null
         },
         {
@@ -1873,9 +1990,11 @@
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQczV2Y2pRVllBc1E1STdNQmNOdXlNNW5GWFdUc0M5TXBkMVNYRXo2VlpnX0RYcU81VUtKVzR2bXhYaG9hVmRpeFhXMUVQeDktck03MU9oMGFMc1ItOHVqTzlzaGdCbzBSdTBmU1hVUWhNbkNHdS13dHRrd2c3dXJtRWxfVlBxQW84bk9YXy1RN2h2QWtEaV93ZjZQQlI5MmcxLXU2Um4wNm5hWWtvWV9LNzZsMA?oc=5",
           "source_name": "DawgNation",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:25.809880+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "ESPN Scouting Grade",
@@ -1928,6 +2047,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -1984,6 +2104,7 @@
           "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA5UVRwNkJ2R1JJcWhKQWJxLW1GZGMxaTYzNTJUQ0tDbGFRNkhlOUs1dXlBSlhsVmt1bS1UTmxWeWc1T2kweC1tWHNQZ0ZYMVhQVE1pNGxORTVLSk96cEFIUmVqSTdTZEdONjB2emFHN1F1SEV0VGphdENPYTBBZFk?oc=5",
           "source_name": "Steelers Now",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:31.942254+00:00",
           "thumbnail_url": null
         },
         {
@@ -1992,6 +2113,7 @@
           "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQUVRjOXBSTHBNVUJaNVk0cU9FYjRoc0N4Mk9pODQ4eTloOGYyTFZBLXlEQkQzanlVUzJKNGVnRFhXQjZ3bFRHVnMwakxDYjlRbFdmenFWb2hyY1ZMRHlEckJKX2tTRFNZWkRaQnFqMGNuMHNJd2l3cWFkVkhLQWowSS12VkdJR1lrSVlnUTl1TGhUWEp4cW5r?oc=5",
           "source_name": "CBS Sports",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:31.942309+00:00",
           "thumbnail_url": null
         },
         {
@@ -2000,6 +2122,7 @@
           "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAwRTZnSXlYWlpfNnVMMEx0c3hzMEp1c044aF81WFJ3bHRQbmxsRDAwX1FCQk9LLTRGTmNCRTEtQlY4dnM5ZjY4bktIQktZQ0l3dDI1ck5kek9raFdWcUl2aGVMdXpoV1p4cUFmN1VpREhKTmtjZ3Rlb2tqYw?oc=5",
           "source_name": "Steeler Nation",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:31.942392+00:00",
           "thumbnail_url": null
         },
         {
@@ -2008,9 +2131,11 @@
           "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPdC1yNWpPczRGY3FfOHpRMk9ZYUVfY0N3X1BXYUQ4X2RHeVY2WGZNTG1wQUQ4NmNaM2ctM1hTMHVEX0dDdXMwNVQzejFjcTV5dTZiNjV2UnN0SGJOdlAwTTBlT3lGb1dnLWhzLVdBMXFibkNBcEhJNS1kNFBaWV9tcVd0c1pyLUJJampWRzM4cktOZ2JUMk1icXlBNFllejQ?oc=5",
           "source_name": "New York Jets",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:31.942362+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.4,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2059,6 +2184,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.4,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2108,6 +2234,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2166,6 +2293,7 @@
           "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOMmxBNmFHS3dZaENTaUhHZ1V3SE80UkJpMnBCTUxCVjhvSGhzOVFHZVdYY0NmS1p6MG13cnVCaTEtanNqUGxTRFZabllaU2xXZVRXelNhZW05NnVrcmNiVG16RDdGUGRlUlJjVlozdjZtTkc2enNGa3lZbE9pOFljQUpSb1RidXo0Q25jbWVnSDI?oc=5",
           "source_name": "Steelers Now",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:28.969110+00:00",
           "thumbnail_url": null
         },
         {
@@ -2174,6 +2302,7 @@
           "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOMFNUZjg2dlNCYTRNeWY1Vnp0NnNwVlhDSmtsUGNmMmpFXzJxVnU4QjJEdHZhbUotZHpFTDBQemo2VU5NOXdmSUlsdXB1cWxGS3hDVEVfSi10T0t6QkdqR0pFb1RpSy1ydG9rQnpHWUlEc1JwMmVCYk8tTEJjTEVPSnVaS1RyQUs0UFhIMElScllpVHBZczkzZXZLX1h0aXVIOHhLc0pQMUdiZFhNclktaWhSb2Q4QkQ2MDgwbnNIUUpfUF8ydzgyVUVIWjVsZGNGMTFIeVlNMmVjUkFDa25IVy15Q3FnUQ?oc=5",
           "source_name": "Seahawks Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:28.969169+00:00",
           "thumbnail_url": null
         },
         {
@@ -2182,6 +2311,7 @@
           "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNMTg5cW1zeEJlOHZtY1B1YTlhLVVYQXhaWkdwa0NqRk43MndPX0loN0xkSTBfOERFS2pyOF8yOG14akdBWXU4Y01adjZyOUhPa2RQUUd0M0lYX1g3ZktSbjEyYVhncTlXalFRdUFyeGVWTXJzQkFpOTBBYzNlTjMwSUtfSVBaSURHOEpOanZvV25ndw?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:28.969081+00:00",
           "thumbnail_url": null
         },
         {
@@ -2190,6 +2320,7 @@
           "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdXg5RC1ULTFBOHd0SHVlcEpCRDFuX3MxTWpaS3l5NFFCcm41Q3JvMHVua2thU1h6S1hHZGppZHV4b0l5Z1hNZU5ITk8zU1h4cHFEREtCLTJjaUd4bFNTUjFMcjNnR1BRNlhWSnJQTjVHOWVjSHBvSldPV0d3cTBtSVIwdFhIYnk0NjJ5TnJJNXU0LU9kVlpsOWFibw?oc=5",
           "source_name": "Steel Curtain Network",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:28.969139+00:00",
           "thumbnail_url": null
         },
         {
@@ -2198,9 +2329,11 @@
           "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxObVpEZDBNczc0UzFvakhiQTc0elFQTUstWk9ia3EtamNkYlRCeTc2Skl5Q0ZNSDlFcXRjQ1RHeFpZMldJbExEVkk1bDk3SFZJSDdScjltLTJNbVl2eDlQQjBvaUtLODl2ejdSZUhLN1dJbTBScEQ0ZER0bU44aE9MeGlJRVB3UTAyX29VQmQ2TlNTZWg5ci0wZnV1WDR5Ti1EOXVpaA?oc=5",
           "source_name": "Cleveland Browns",
           "published_at": "2026-02-28",
+          "fetched_at": "2026-03-05T03:54:28.969038+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2253,6 +2386,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2306,6 +2440,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2359,6 +2494,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2412,6 +2548,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2463,6 +2600,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2518,6 +2656,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 5.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2572,6 +2711,7 @@
           "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNQ1Jwbzc5c0tIdmJENUFjenpueXd2bEg1ZVJrQmd5M3VzdDR5dEtFSnhhclVlQ3M1WkhLQjFUcGxHZWpMRnQ1ZkJCbnAwaEw1LTlVSC1FZ0tobUtDS2R0LXVXU3JTWDJ6MUZ1dDdra01kdWtSWkxWaXVQUnBTRU1sRmFScTd5Tm1GeXh3bHpYWWZvakNDc0Zlc0JaWm5pdGRJcUtV?oc=5",
           "source_name": "NFL Rumors - ProFootballRumors.com",
           "published_at": "2026-03-05",
+          "fetched_at": "2026-03-05T03:54:37.978950+00:00",
           "thumbnail_url": null
         },
         {
@@ -2580,6 +2720,7 @@
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNS3J0NlVfUERSR3pFYmRuZ1dyZGlYQWpUcWtYMm1GRkxsNnM2ZnM4eWhKRFRuYk1ZNVF6V3pMMnh5V005N2RRUVVNWXlBd1FtRU01QXkwc2JGTndOWTJoVjNoRy16Tm9fWEdWSFlCRkJNTEZTT3ZoRHpaV2Ztd0VIN2tfdmRpWFJpenJSMzllQk5pT2dCOWdBS2dwZjEtR1E5X1o0YjlmdDdQZ2RGYzZiUWdtV2gtWXJaOVhMUnpOT1JZNlhlWUEwaC1iVUZ5TG1f?oc=5",
           "source_name": "USA Today",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:37.978828+00:00",
           "thumbnail_url": null
         },
         {
@@ -2588,6 +2729,7 @@
           "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQNGJKU1dqQnlSRkUzeWFiMm5OS1JYY29hajNXeU11dnN2S3p0T0FwSXNnZ0Z6c1Bjb3ZTdl9McGQ2enlQQmFjamMxV0ZfWVNKMzZiODBDNlQyN2p0bnNwYjVURVBoMERLZVVHYVdGblVnLVFfUW81T2s0UlZ3cE4xTWpMeUxRci05akFrZTY3d0hMUUhNZVVDYWYzUWRZM3NranZZUE1KbTBXeEFCWUhMREtrV00xSnRzZUt0ZnJWZVV1ejkyaFc2bDBOTUZqOHZXc2V0ekRDZTg2Z19rZmdoWXh3?oc=5",
           "source_name": "The Arizona Republic",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:37.978873+00:00",
           "thumbnail_url": null
         },
         {
@@ -2596,6 +2738,7 @@
           "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5QYy1yLXduT2V5WmFuRDhwbk5Wanl2WFFNY3AxVDMtNk1IWWtzbEhDZUZXNmllZDdSTC1WY2xjb0VGTTYyUmhfdzR6dnJiWFMxSkI1ZEZTZ0F5UGlZQzJuWTU5M0YyNkttZF9fN3NlR1M5UjhfTWdEb2Q2MA?oc=5",
           "source_name": "Pittsburgh Post-Gazette",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:37.978898+00:00",
           "thumbnail_url": null
         },
         {
@@ -2604,6 +2747,7 @@
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQLWlfYXpadzlrTElnNVZjb21URFdVU0tnbFdRZVJvZWtCOTJrdWZDa3YtbnZ5dlBVVDZRZl9FN1VnQ3pIS3A2UmF5cDlHVURReG1ZZWV4UXppU3paZE5uNTZQdGlYenhwX0pKWENIM284Y0RDZVgxeWV3RmV5QW1GUWxWZ0JnWGxNZ3I5TzZCMEpKeGdFLXBOZHU5VjZESHFrS2M3bnBLME04a1V0dWc?oc=5",
           "source_name": "Sports Illustrated",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:37:48.482233+00:00",
           "thumbnail_url": null
         },
         {
@@ -2612,9 +2756,11 @@
           "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNS0laR0EyMVZBdWFEamhPZGZPNXZFUjN6Q3hSY1BobXdleEpudVpoLWpVM01Ob0lhQVI0OHg2Zk5ObUxWaEpuZHlBNmtPNEgzS3FhaUJyRl8zN3lBODdvaUVkaTB1U1AtSkRxMFRMazRwMVp6cmM1c3Z0eFFRdFJyYmVrSWZvNElkcEtQV21IVzhyeEUxN01EVTZyOVB2Uk4zb1AwVENnV0szT1RhaVhyY3VGWGwzczBBb0czal9NTF90Y3VjVDcteF8xY0szU3BneUhtbUtKRUlrdmZ1bnc?oc=5",
           "source_name": "Jets Wire",
           "published_at": "2026-03-03",
+          "fetched_at": "2026-03-05T03:54:37.978921+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2676,6 +2822,7 @@
           "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQLVhRM094cFFkS3hEaEdmZmxvSGVncktGM2N0SmlWelpPTlhYeXJCbEc3TEExUGFkaTV2VHpDOWktQlI5UXRuN1VyQ1N5OWFfck1naDRoT0Z3eFhXZnUzNk9ZV1Z0U1RqdE1FVjNmZUFRcjU4YXBFNkJsUGZjTTVFbnhrOFBvM3FSc2Y1M1RB?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:27.226955+00:00",
           "thumbnail_url": null
         },
         {
@@ -2684,6 +2831,7 @@
           "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNOVh3WUpOYVJxN1JZd1RFdm1UX0k4NEk4Z05LNm1RNWQ0RUFsQWNUMG5LQ0pDSWpBbjVVZGxpcUNMZUY3eEFXdElkd3Ixc2hYY01mYk96MW0yREhPcG9FRlVETmN3NWgzazJyNW43OHYySzRrNlk3cjdXTEZFdW9VcmFaTzBMSGJzMUpYTVR0aDRkempOTEVmWk9LOGI?oc=5",
           "source_name": "Deseret News",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:27.226998+00:00",
           "thumbnail_url": null
         },
         {
@@ -2692,6 +2840,7 @@
           "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOLUYzeHFHSHpadEhrZGVnSTFld1JzUlZlWDdJT3JXQW1xM0dnZUhDbnlSYWFnYzBGckdnY0ppTk8wS0dPOXJEdXpkcGplZTVmc0VNQnduQnR4Q1VxRjBKeGFTSzg4SHlGTjFPZ09MSlNKTWVXa0g5bmsxY2pzWVVOLWFhTUN3NU9VUzc2bzA3eU80Vm9vZG4tVGZVRWpKbVJPaXJlN2RVM2JvNGp1THk3STNCQ09ESGJkSzMydURjV0w4WU44LXdxSGNMRQ?oc=5",
           "source_name": "Pride Of Detroit",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:27.227060+00:00",
           "thumbnail_url": null
         },
         {
@@ -2700,6 +2849,7 @@
           "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQS1BZRi1kTzlndGFQU0FZOG9ITjdRbFpZam1kWXNfNDRqQkJEYUE0VjBsQ25WOWpWZE9pR0p2S1NvdWNJdUZieUtuTEU3alJRbVc0ak1UU0oycWdQcl9ZV2pUUUhqaXNKa29nc0J1SmI1OVNHcUF2ZDc1SHIzOGQ0RGthUkdkMkVaMzc2Y3JlY3BqSTZvY2R5MG9ZN2NWMVlJ?oc=5",
           "source_name": "NFL.com",
           "published_at": "2026-03-01",
+          "fetched_at": "2026-03-05T03:54:27.227031+00:00",
           "thumbnail_url": null
         },
         {
@@ -2708,9 +2858,11 @@
           "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNY21nZmtFenZJNTY1WGRXUFBRZnVWc3RIMzZ6UW1VMGU4MVNJcHFZVExtbkJfVlMtOFhKMnpuTzBlOVh3SXNNbVNEZnZzdTR5TmRRSjhZRXZuR1BvenByTVVDSDUzVnFlQUxVZXNxTEgtY3B2MVl0T0VlQ1VobGhJWDR2UGxpR1Q3ZTJIU3lsQ0JBd2RRWTMyTEg5WFNlbE9Mazk3UXd1bTZNdDg?oc=5",
           "source_name": "Browns Wire",
           "published_at": "2026-03-01",
+          "fetched_at": "2026-03-05T03:54:27.227085+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2744,6 +2896,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2796,6 +2949,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2828,6 +2982,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2882,6 +3037,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2935,6 +3091,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -2988,6 +3145,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3043,6 +3201,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3082,6 +3241,7 @@
           "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOQ1JuekdvekNPbWpkUTFGMTZiZEd5UWJPclNyc25CbWdsazE3Z2tsa2o3NVA1ckdBQURoR3llZzBSQzBtUldoRWE4VklpYUdqOERRZnhUZWdFYlk2YVFTbXo0dS1fUTJSWThuU3dNbUlFQmNCNWtrUzBZWS03dHNRallnQm1WcUFLYkFJb1ViYmhsd3FFWE5PS0xjSEpEOTB2azVyRk16a0w1Zy1aN2JJTG0yQ0NWcEhLbGw3bFZGb21qZDMxY1lWSm5jTXBwX0ZsTVd1SS05cw?oc=5",
           "source_name": "Big Blue View",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:35.771596+00:00",
           "thumbnail_url": null
         },
         {
@@ -3090,6 +3250,7 @@
           "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPMHVoLS1lQk5WeXktRGFDLVZzajZHbDVoZ3Y4SU91REF6Q05hWTNxckpvVGg3YjQwUHplQ1p4bXhoZlRDY0hKLW9xdUUwNVR1UTcwMFpDMGRiTTRIaEdHVFRTRV9qUHN3ZDMwVmdzbTRjNTBON3pOZUxFaUVfRkwzZEc5LUh6Vmh1REwwM0Etb3hoeWZuVlA1cUxTRUFJcEh2MGRUUDQ2M2xtZHhQaHdhaUhqUEFVU2xYZXphQ1hJTVQ?oc=5",
           "source_name": "Chargers Wire",
           "published_at": "2026-03-04",
+          "fetched_at": "2026-03-05T03:54:35.771670+00:00",
           "thumbnail_url": null
         },
         {
@@ -3098,6 +3259,7 @@
           "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPS0Nma2p3OHRVUVBqbVUwV09JUlBOdG1fUTZ0T0pkMkxUWnNPT2pUTmZzZ25jYjZxLVl3R1l4NVc1YTVEZlN4Sm96Rmp5WE5xekVxMEdFRlp5SHVVY3NHbHF2S2tFRmpyUXhISXhGZUR3TEVCcGZXX1IzQzlYVUh2RUxHQ1FxU1Y1WDItTlY2czc5S0dJd2c?oc=5",
           "source_name": "New Orleans Saints | NewOrleansSaints.com",
           "published_at": "2026-03-02",
+          "fetched_at": "2026-03-05T03:54:35.771639+00:00",
           "thumbnail_url": null
         },
         {
@@ -3106,6 +3268,7 @@
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUHFZN1dwUFFCem1qM0YzYkdSSlllcjkxSmxGS2dXc1U2cnVJUEc5eVZWbENfTUlONC1sRzhFVnFkaEZ6MHJNdGVKV0phSjVFQWNkRWtHYmFwTk8wdGhRaVVHLVZmRXhwNkRwOVdXUzRsWHh2VVdiV3BsVENYR3loTHBzdlFYUkZWQ2lidFFyNUtPVTFaMXQ5U1BmcFlkSlhJUGFLRkN4S1p3QQ?oc=5",
           "source_name": "Baltimore Ravens",
           "published_at": "2026-03-01",
+          "fetched_at": "2026-03-05T03:54:35.771697+00:00",
           "thumbnail_url": null
         },
         {
@@ -3114,9 +3277,11 @@
           "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNYVo5RGxEZV9uTWUwTHZ0WmN3S1VJYUlOeUFDSnlPT2dGM3hvUjY1bTduY1hIYXJIVGhIblRuVnFjUzJOa3c2c0hxOER5QXVEaFZYRXlwX1ZYM3dCVmdwX2pOSEhPVGZFLVphMTJiMHZnbVUzV2ZDUzluOVdBR3Y1QkVBdk43X0tENmc?oc=5",
           "source_name": "Los Angeles Chargers website",
           "published_at": "2026-03-01",
+          "fetched_at": "2026-03-05T03:54:35.771725+00:00",
           "thumbnail_url": null
         }
       ],
+      "tweets": [],
       "grade": 5.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3172,6 +3337,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3227,6 +3393,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3276,6 +3443,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3331,6 +3499,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3388,6 +3557,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3441,6 +3611,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3500,6 +3671,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.4,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3553,6 +3725,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.4,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3585,6 +3758,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.4,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3641,6 +3815,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.3,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3688,6 +3863,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3735,6 +3911,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3790,6 +3967,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3845,6 +4023,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.2,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3894,6 +4073,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3943,6 +4123,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -3998,6 +4179,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4030,6 +4212,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4076,6 +4259,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.1,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4127,6 +4311,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4182,6 +4367,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4239,6 +4425,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4296,6 +4483,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4351,6 +4539,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4406,6 +4595,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4459,6 +4649,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4516,6 +4707,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 4.0,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4565,6 +4757,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4618,6 +4811,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4665,6 +4859,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4720,6 +4915,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4767,6 +4963,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.9,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4820,6 +5017,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4867,6 +5065,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4920,6 +5119,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -4967,6 +5167,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5026,6 +5227,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5079,6 +5281,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5132,6 +5335,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5179,6 +5383,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.8,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5234,6 +5439,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5281,6 +5487,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5330,6 +5537,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5381,6 +5589,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5428,6 +5637,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5481,6 +5691,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.7,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5534,6 +5745,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5583,6 +5795,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5615,6 +5828,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5667,6 +5881,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5714,6 +5929,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.6,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5773,6 +5989,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5820,6 +6037,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5873,6 +6091,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5930,6 +6149,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -5977,6 +6197,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -6028,6 +6249,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
@@ -6081,6 +6303,7 @@
         }
       ],
       "media_links": [],
+      "tweets": [],
       "grade": 3.5,
       "grade_breakdown": {
         "grade_source": "Model-Derived (Mock + Combine)",
