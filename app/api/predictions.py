@@ -47,6 +47,7 @@ class RunResponse(BaseModel):
     duration_ms: int
     sources_scraped: list[str]
     errors: list[str]
+    trades_applied: int = 0
 
 
 class StatusResponse(BaseModel):
@@ -103,11 +104,33 @@ async def run_predictions(
     start_ts = time.perf_counter()
     sources_scraped: list[str] = []
     errors: list[str] = []
+    trades_applied = 0
 
     # Invalidate position_value cache so any config file changes are picked up
     # without requiring a server restart.
     from app.analytics.position_value import invalidate_cache as _invalidate_pv
     _invalidate_pv()
+
+    # --- Phase 0: sync live draft order + apply confirmed manual trades ---
+    try:
+        # Step 0a: live sync from Tankathon (auto-detects trades and rescissions)
+        from app.pipeline.draft_order_sync import sync_draft_order
+        live_changes = await sync_draft_order()
+        if live_changes:
+            logger.info("Draft order sync applied %d pick ownership change(s)", live_changes)
+            trades_applied += live_changes
+    except Exception as exc:
+        logger.warning("Draft order sync failed (non-fatal): %s", exc)
+
+    try:
+        # Step 0b: apply any remaining manual overrides from known_trades.json
+        from app.pipeline.trade_detector import detect_and_apply_trades
+        manual_changes = detect_and_apply_trades()
+        if manual_changes:
+            logger.info("Trade detector applied %d manual pick ownership change(s)", manual_changes)
+            trades_applied += manual_changes
+    except Exception as exc:
+        logger.warning("Trade detection failed (non-fatal): %s", exc)
 
     # --- Phase 1: optional scraping ---
     if scrape:
@@ -178,6 +201,7 @@ async def run_predictions(
         duration_ms=duration_ms,
         sources_scraped=sources_scraped,
         errors=errors,
+        trades_applied=trades_applied,
     )
 
 

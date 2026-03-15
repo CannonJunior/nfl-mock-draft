@@ -167,6 +167,28 @@ def build_player_pool() -> list[PlayerCandidate]:
 # ---------------------------------------------------------------------------
 
 
+def _count_combine_drills(combine: dict) -> int:
+    """
+    Count the number of standard athletic drills with valid recorded data.
+
+    The three standard drills are: 40-yard dash, vertical jump, broad jump.
+    Used to scale the combine's weight in the scoring formula proportionally
+    to participation — players who skipped events are not penalised for them.
+
+    Args:
+        combine (dict): Combine measurements dict for a player.
+
+    Returns:
+        int: Number of standard drills with a positive recorded value (0-3).
+    """
+    count = 0
+    for key in ("forty_yard_dash", "vertical_jump_inches", "broad_jump_inches"):
+        val = combine.get(key)
+        if val and val > 0:
+            count += 1
+    return count
+
+
 def _compute_base_score(
     espn_grade: Optional[float],
     espn_rank: Optional[int],
@@ -178,11 +200,10 @@ def _compute_base_score(
     """
     Compute the 0-100 base score for a prospect.
 
-    Formula (when all signals present):
-        base_score = espn_norm(0.35) + mock_signal(0.35) + combine_score(0.15) + buzz(0.15)
-
-    Falls back to the original 0.40/0.40/0.20 formula when buzz is absent,
-    and to ESPN-only or mock-only weights when grades/mocks are missing.
+    Scoring uses a two-step approach:
+    1. Primary score from scouting signals (ESPN grade, mock consensus, buzz).
+    2. Combine applied as a signed delta from neutral (50) to avoid depressing
+       scores for players who posted average or partial combine results.
 
     Args:
         espn_grade (Optional[float]): ESPN 0-10 grade.
@@ -195,40 +216,100 @@ def _compute_base_score(
     Returns:
         float: Base score in range 0-100.
     """
+    # Sanity-check ESPN grade vs rank to reject scraping artifacts.
+    # Reason: grade extraction from ESPN articles can accidentally match stat
+    # numbers (e.g. "6.5 sacks" → grade 6.5; "9.5 sacks" → grade 9.5).
+    # We validate using a rank-based expected range:
+    #   expected_min = 9.5 - rank * 0.12  (drops ~1.2 pts per 10 ranks)
+    #   expected_max = 10.0 - rank * 0.08 (steeper ceiling; rank-17 max ~8.6,
+    #                                       rank-1 max 9.9, rank-5 max 9.6)
+    # Grades outside this window are treated as scraping artifacts and discarded.
+    # Examples correctly rejected:
+    #   rank 3,  grade 6.5 → min 9.14, too low  ("6.5 sacks")
+    #   rank 17, grade 9.5 → max 8.64, too high  ("9.5 sacks" / stat artifact)
+    #   rank 24, grade 9.5 → max 8.08, too high
+    if espn_grade is not None and espn_rank is not None:
+        expected_min = max(1.0, 9.5 - espn_rank * 0.12)
+        expected_max = min(9.9, 10.0 - espn_rank * 0.08)
+        if espn_grade < expected_min or espn_grade > expected_max:
+            logger.debug(
+                "[player_pool] Discarding implausible ESPN grade %.1f for rank %d "
+                "(expected %.1f–%.1f; likely a scraped stat number)",
+                espn_grade,
+                espn_rank,
+                expected_min,
+                expected_max,
+            )
+            espn_grade = None
+
     mock_signal = _mock_consensus_signal(mock_picks)
-    combine_score = _combine_score(combine, position)
+    combine_score = _combine_score(combine, position)  # None when no drill data
+
+    # Reason: scale the combine's weight by the fraction of standard drills
+    # completed (40yd, vertical, broad jump = 3 drills). A player who only ran
+    # the 40 gets 1/3 of the normal combine weight; unused weight flows back to
+    # the primary signals (ESPN / mock). This prevents skipping events from
+    # creating a negative bias.
+    drill_count = _count_combine_drills(combine)
+    combine_conf = drill_count / 3.0  # 0.0, 0.33, 0.67, or 1.0
+    has_combine = combine_score is not None and combine_conf > 0.0
+    # Reason: Pyright cannot narrow Optional[float] through the `has_combine`
+    # boolean, so we create a typed alias used only inside `has_combine` guards.
+    cs: float = combine_score if combine_score is not None else 0.0
+
     # Reason: normalise buzz (0-100) — use 50.0 neutral if None so we can
     # smoothly blend it when present without destabilising no-buzz cases.
     has_buzz = buzz is not None
     buzz_norm = buzz if buzz is not None else 50.0
 
+    # ---------------------------------------------------------------------------
+    # Step 1: Compute the primary score from scouting signals (no combine).
+    # Combine is applied as an additive delta in Step 2 so that average combine
+    # performance (score ≈ 50) contributes exactly zero.
+    # ---------------------------------------------------------------------------
     if espn_grade is not None:
         espn_norm = (espn_grade / 10.0) * 100.0
         if mock_picks and has_buzz:
-            return (espn_norm * 0.35) + (mock_signal * 0.35) + (combine_score * 0.15) + (buzz_norm * 0.15)
+            primary = (espn_norm * 0.425) + (mock_signal * 0.425) + (buzz_norm * 0.15)
         elif mock_picks:
-            return (espn_norm * 0.40) + (mock_signal * 0.40) + (combine_score * 0.20)
+            primary = (espn_norm * 0.50) + (mock_signal * 0.50)
+        elif has_buzz:
+            primary = (espn_norm * 0.80) + (buzz_norm * 0.20)
         else:
-            # No mock data — reweight to ESPN + combine (± buzz)
-            if has_buzz:
-                return (espn_norm * 0.65) + (combine_score * 0.15) + (buzz_norm * 0.20)
-            return (espn_norm * 0.80) + (combine_score * 0.20)
-
-    # No ESPN grade — derive from mock consensus or rank
-    if mock_picks:
+            primary = espn_norm
+    elif mock_picks:
         derived_grade = _derive_grade_from_picks(mock_picks)
         if has_buzz:
-            return (derived_grade * 0.65) + (combine_score * 0.15) + (buzz_norm * 0.20)
-        return (derived_grade * 0.80) + (combine_score * 0.20)
-
-    if espn_rank is not None:
+            primary = (derived_grade * 0.80) + (buzz_norm * 0.20)
+        else:
+            primary = derived_grade
+    elif espn_rank is not None:
         derived_grade = _derive_grade_from_rank(espn_rank)
         if has_buzz:
-            return (derived_grade * 0.65) + (combine_score * 0.15) + (buzz_norm * 0.20)
-        return (derived_grade * 0.80) + (combine_score * 0.20)
+            primary = (derived_grade * 0.80) + (buzz_norm * 0.20)
+        else:
+            primary = derived_grade
+    else:
+        # Absolute fallback — unknown prospect with no scouting signals
+        if has_combine:
+            return max(1.0, cs * 0.5)
+        return 1.0
 
-    # Absolute fallback — unknown prospect, low score
-    return max(1.0, combine_score * 0.5)
+    # ---------------------------------------------------------------------------
+    # Step 2: Apply combine as a signed adjustment from neutral (50).
+    # Reason: mixing combine_score as an absolute value in a weighted average
+    # depresses a high-rated player's score whenever combine_score < primary,
+    # even if the player posted an average result. Using (cs - 50) as the delta
+    # ensures average combine = zero adjustment. Weight scales by drills/3
+    # so partial combine participation has proportionally less influence.
+    # ---------------------------------------------------------------------------
+    if has_combine:
+        # Base combine weight: 0.15 when primary signals present, else 0.20
+        base_wc = 0.15 if (mock_picks or espn_grade is not None) else 0.20
+        wc = base_wc * combine_conf
+        primary = primary + (cs - 50.0) * wc
+
+    return primary
 
 
 def _mock_consensus_signal(mock_picks: list[int]) -> float:
@@ -261,22 +342,26 @@ def _mock_consensus_signal(mock_picks: list[int]) -> float:
     return avg
 
 
-def _combine_score(combine: dict, position: str) -> float:
+def _combine_score(combine: dict, position: str) -> Optional[float]:
     """
     Compute a position-relative athletic composite from combine measurements.
 
     Uses position-specific reference norms so a fast RB doesn't get the
     same boost as a fast OT (different expectations by position).
 
+    Returns None when the player has no recorded performance drills (did not
+    participate or data unavailable), so callers can exclude combine from the
+    scoring formula entirely rather than substituting an arbitrary neutral value.
+
     Args:
-        combine (dict): Combine measurements (40yd, vertical, etc.).
+        combine (dict): Combine measurements (40yd, vertical, broad jump, etc.).
         position (str): Normalised position code.
 
     Returns:
-        float: Combine score in range 0-100.
+        Optional[float]: Combine score 0-100, or None if no drill data present.
     """
     if not combine:
-        return 50.0  # Neutral when no combine data
+        return None  # No combine record at all — exclude from scoring
 
     # Reference medians by position tier for 40-yard dash (lower = better)
     _40_medians: dict[str, float] = {
@@ -307,7 +392,11 @@ def _combine_score(combine: dict, position: str) -> float:
         raw = 50.0 + (broad - 120.0) * (10.0 / 6.0)
         scores.append(max(0.0, min(100.0, raw)))
 
-    return sum(scores) / len(scores) if scores else 50.0
+    # Reason: return None (not 50) when we have a combine record (height/weight)
+    # but no athletic performance drills — the player either skipped drills or
+    # the data isn't available yet; injecting 50 would unfairly suppress or
+    # inflate their score relative to players who actually ran drills.
+    return sum(scores) / len(scores) if scores else None
 
 
 def _derive_grade_from_picks(mock_picks: list[int]) -> float:

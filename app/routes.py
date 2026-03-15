@@ -67,6 +67,35 @@ async def index(request: Request) -> HTMLResponse:
             "%b %d, %Y %H:%M UTC"
         )
 
+    # Build per-pick "prior filled needs" map for the Team Needs section.
+    # For each pick, records which positions the same team filled with EARLIER
+    # picks: {pick_number → {position → player_name}}.
+    # Reason: Jinja2 can't do mutable dict updates in loops, so we pre-compute
+    # this in Python where it's straightforward.
+    team_draft_log: dict[str, list[dict]] = {}
+    for ep in sorted(all_picks, key=lambda x: x.pick.pick_number):
+        if ep.player:
+            team_draft_log.setdefault(ep.pick.current_team, []).append(
+                {
+                    "pick_number": ep.pick.pick_number,
+                    "position": ep.player.position,
+                    "player_name": ep.player.name,
+                }
+            )
+
+    pick_team_histories: dict[int, dict[str, str]] = {}
+    for ep in all_picks:
+        team = ep.pick.current_team
+        pick_num = ep.pick.pick_number
+        # Only include picks by the same team made BEFORE this pick number
+        prior: dict[str, str] = {}
+        for entry in team_draft_log.get(team, []):
+            if entry["pick_number"] < pick_num:
+                # Keep the earliest pick at each position (first fill wins)
+                if entry["position"] not in prior:
+                    prior[entry["position"]] = entry["player_name"]
+        pick_team_histories[pick_num] = prior
+
     return templates.TemplateResponse(
         request,
         "index.html",
@@ -75,6 +104,7 @@ async def index(request: Request) -> HTMLResponse:
             "total_picks": len(all_picks),
             "assigned_picks": assigned,
             "last_updated": last_updated,
+            "pick_team_histories": pick_team_histories,
         },
     )
 

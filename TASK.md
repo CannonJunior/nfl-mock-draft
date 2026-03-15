@@ -97,6 +97,16 @@
 - [DONE] localStorage tracks lastRefresh + seenPicks for persistent badge state across reloads
 - [DONE] 17 new tests in test_twitter_nitter.py; 208/208 total passing
 
+## Discovered During Work (2026-03-15 grade normalization + scoring fixes)
+- [DONE] Grade normalization: `_compute_display_grade()` rescales base_score [15,100] → display grade [6.5,9.9]
+- [DONE] ESPN grade sanity check tightened: `expected_max = min(9.9, 10.0 - rank * 0.08)` (steeper ceiling rejects rank-17 grade 9.5 artifacts)
+- [DONE] `_combine_score()` now returns `Optional[float]` (None when no drills); `_compute_base_score()` uses additive delta instead of neutral 50
+- [DONE] `_count_combine_drills()` helper added; combine confidence scales with drill count (1/3, 2/3, 1.0)
+- [DONE] models_core.py: `Pick.team_needs_snapshot: Optional[dict]` added
+- [DONE] routes.py: `pick_team_histories` pre-computed for Team Needs section in UI
+- [DONE] team_context.py: `_load_team_needs_from_config()` fallback + `_TEAM_NEEDS_CONFIG_PATH`
+- [DONE] Restored all files reverted by git stash disaster; 255/255 tests passing
+
 ## Upcoming Tasks
 - [x] Add web data ingestion pipeline (T-001 — completed 2026-03-04)
 - [x] Add player analytics pipeline to populate data/players.json (completed 2026-03-04)

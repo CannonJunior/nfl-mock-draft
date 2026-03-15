@@ -99,12 +99,18 @@ class TestMockConsensusSignal:
 
 
 class TestCombineScore:
-    def test_empty_combine_returns_neutral(self):
-        assert _combine_score({}, "QB") == pytest.approx(50.0)
+    def test_empty_combine_returns_none(self):
+        """No combine record → None (excluded from scoring, not a neutral 50)."""
+        assert _combine_score({}, "QB") is None
+
+    def test_measurements_only_returns_none(self):
+        """Height/weight only (no drills) → None, not a neutral 50."""
+        assert _combine_score({"height_inches": 76, "weight_lbs": 230}, "QB") is None
 
     def test_fast_40_boosts_score(self):
         # 4.30 is very fast; median for WR ~4.45
         score = _combine_score({"forty_yard_dash": 4.30}, "WR")
+        assert score is not None
         assert score > 50.0
 
     def test_slow_40_lowers_score(self):
@@ -170,15 +176,111 @@ class TestComputeBaseScore:
         assert 80.0 < score <= 100.0
 
     def test_no_mock_reweights_espn(self):
+        # Use rank 15 with grade 7.8 — within the plausible range for rank 15
+        # (expected_min = 9.5 - 15*0.12 = 7.7)
         score_no_mock = _compute_base_score(
-            espn_grade=7.0, espn_rank=20, mock_picks=[], combine={}, position="WR"
+            espn_grade=7.8, espn_rank=15, mock_picks=[], combine={}, position="WR"
         )
         score_with_mock = _compute_base_score(
-            espn_grade=7.0, espn_rank=20, mock_picks=[20], combine={}, position="WR"
+            espn_grade=7.8, espn_rank=15, mock_picks=[15], combine={}, position="WR"
         )
         # Both should be in reasonable range; no-mock weighting is just ESPN+combine
         assert score_no_mock > 0
         assert score_with_mock > 0
+
+    def test_implausible_high_grade_rank17_discarded(self):
+        """Grade 9.5 for rank-17 player is a scraping artifact (e.g. '9.5 sacks')."""
+        score_with_artifact = _compute_base_score(
+            espn_grade=9.5, espn_rank=17, mock_picks=[28, 32, 25], combine={}, position="DT"
+        )
+        score_no_grade = _compute_base_score(
+            espn_grade=None, espn_rank=17, mock_picks=[28, 32, 25], combine={}, position="DT"
+        )
+        assert score_with_artifact == pytest.approx(score_no_grade, abs=0.01)
+
+    def test_implausible_high_grade_discarded(self):
+        """Grade 9.5 for rank-24 player is a scraping artifact; should be ignored."""
+        score_with_artifact = _compute_base_score(
+            espn_grade=9.5, espn_rank=24, mock_picks=[25, 15, 20], combine={}, position="EDGE"
+        )
+        score_no_grade = _compute_base_score(
+            espn_grade=None, espn_rank=24, mock_picks=[25, 15, 20], combine={}, position="EDGE"
+        )
+        assert score_with_artifact == pytest.approx(score_no_grade, abs=0.01)
+        assert score_with_artifact < 85.0
+
+    def test_implausible_low_grade_discarded(self):
+        """Grade 3.3 for rank-16 player is a scraping artifact; should be ignored."""
+        score_with_artifact = _compute_base_score(
+            espn_grade=3.3, espn_rank=16, mock_picks=[16], combine={}, position="CB"
+        )
+        score_no_grade = _compute_base_score(
+            espn_grade=None, espn_rank=16, mock_picks=[16], combine={}, position="CB"
+        )
+        assert score_with_artifact == pytest.approx(score_no_grade, abs=0.01)
+
+    def test_implausible_low_grade_for_high_rank_discarded(self):
+        """Grade 6.5 for rank-3 player is a scraping artifact (e.g. '6.5 sacks')."""
+        score_with_artifact = _compute_base_score(
+            espn_grade=6.5, espn_rank=3, mock_picks=[2, 3, 4], combine={}, position="LB"
+        )
+        score_no_grade = _compute_base_score(
+            espn_grade=None, espn_rank=3, mock_picks=[2, 3, 4], combine={}, position="LB"
+        )
+        assert score_with_artifact == pytest.approx(score_no_grade, abs=0.01)
+
+    def test_legitimate_high_grade_kept(self):
+        """Grade 9.5 for rank-1 QB is legitimate and must not be discarded."""
+        score = _compute_base_score(
+            espn_grade=9.5, espn_rank=1, mock_picks=[1, 1, 2], combine={}, position="QB"
+        )
+        assert score > 90.0
+
+    def test_legitimate_mid_grade_kept(self):
+        """Grade 7.5 for rank-20 player is within the plausible ESPN range."""
+        score_with_grade = _compute_base_score(
+            espn_grade=7.5, espn_rank=20, mock_picks=[20], combine={}, position="WR"
+        )
+        score_no_grade = _compute_base_score(
+            espn_grade=None, espn_rank=20, mock_picks=[20], combine={}, position="WR"
+        )
+        assert score_with_grade != pytest.approx(score_no_grade, abs=0.01)
+
+    def test_single_combine_drill_no_negative_bias(self):
+        """Player who did only one combine drill must score >= player who did none.
+
+        With confidence scaling (1/3 of normal weight for 1 drill), an average
+        drill no longer depresses the score.
+        """
+        base_kwargs = dict(espn_grade=None, espn_rank=5, mock_picks=[5], position="WR")
+        score_no_combine = _compute_base_score(**base_kwargs, combine={})
+        # 40-yard dash of 4.45 is exactly the WR median → combine_score ≈ 50 (neutral)
+        score_one_drill = _compute_base_score(
+            **base_kwargs, combine={"forty_yard_dash": 4.45}
+        )
+        assert score_one_drill >= score_no_combine - 0.5
+
+    def test_partial_combine_scales_with_drill_count(self):
+        """More drills = more combine influence; elite score gives a larger boost."""
+        base_kwargs = dict(espn_grade=None, espn_rank=10, mock_picks=[10], position="WR")
+        score_no_combine = _compute_base_score(**base_kwargs, combine={})
+        score_one_drill = _compute_base_score(
+            **base_kwargs, combine={"forty_yard_dash": 4.28}
+        )
+        score_two_drills = _compute_base_score(
+            **base_kwargs, combine={"forty_yard_dash": 4.28, "vertical_jump_inches": 40.0}
+        )
+        score_three_drills = _compute_base_score(
+            **base_kwargs,
+            combine={
+                "forty_yard_dash": 4.28,
+                "vertical_jump_inches": 40.0,
+                "broad_jump_inches": 130.0,
+            },
+        )
+        assert score_one_drill >= score_no_combine
+        assert score_two_drills >= score_one_drill - 0.1
+        assert score_three_drills >= score_two_drills - 0.1
 
     def test_no_espn_uses_mock(self):
         score = _compute_base_score(

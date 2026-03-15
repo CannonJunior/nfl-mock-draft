@@ -96,13 +96,17 @@ class TestCandidateToPlayerDict:
         assert d["grade"] == pytest.approx(8.9)
 
     def test_none_espn_grade_derives_from_base_score(self):
-        """Grade must never be None — fallback derives from base_score."""
+        """Grade must never be None — fallback rescales base_score to scout-grade band.
+
+        base_score=70 maps to 6.5 + (70-15)/85 * 3.4 ≈ 8.7 so model grades
+        sit in the same 6.5-9.9 range as professional scouting grades.
+        """
         player = _make_player("No Grade", "S")
         player.espn_grade = None
         player.base_score = 70.0
         d = _candidate_to_player_dict(player)
         assert d["grade"] is not None
-        assert d["grade"] == pytest.approx(7.0)
+        assert d["grade"] == pytest.approx(8.7, abs=0.1)
 
     def test_empty_combine_produces_empty_bio(self):
         player = _make_player("No Combine", "TE")
@@ -145,7 +149,7 @@ class TestRunSimulation:
         from app.analytics.player_pool import _synthetic_fallback_pool
 
         pool = _synthetic_fallback_pool()
-        results = run_simulation(player_pool=pool)
+        results, _snapshots = run_simulation(player_pool=pool)
 
         assert len(results) == 10
         assigned_ids = [p.player_id for p in results.values()]
@@ -161,7 +165,7 @@ class TestRunSimulation:
         from app.analytics.player_pool import _synthetic_fallback_pool
 
         pool = _synthetic_fallback_pool()
-        results = run_simulation(player_pool=pool)
+        results, _snapshots = run_simulation(player_pool=pool)
 
         ids = [c.player_id for c in results.values()]
         assert len(ids) == len(set(ids))
@@ -172,7 +176,7 @@ class TestRunSimulation:
         picks_file.write_text(json.dumps(empty_picks), encoding="utf-8")
         monkeypatch.setattr("app.analytics.simulator._PICKS_PATH", picks_file)
 
-        results = run_simulation(player_pool=[_make_player("P1")])
+        results, _snapshots = run_simulation(player_pool=[_make_player("P1")])
         assert results == {}
 
     def test_empty_pool_returns_empty(self, tmp_path, monkeypatch):
@@ -181,7 +185,7 @@ class TestRunSimulation:
         picks_file.write_text(json.dumps(picks_data), encoding="utf-8")
         monkeypatch.setattr("app.analytics.simulator._PICKS_PATH", picks_file)
 
-        results = run_simulation(player_pool=[])
+        results, _snapshots = run_simulation(player_pool=[])
         assert results == {}
 
 

@@ -20,6 +20,9 @@ _DB_PATH = Path(__file__).parent.parent.parent / "data" / "draft.db"
 _TEAM_MAP_PATH = (
     Path(__file__).parent.parent.parent / "data" / "config" / "team_name_map.json"
 )
+_TEAM_NEEDS_CONFIG_PATH = (
+    Path(__file__).parent.parent.parent / "data" / "config" / "team_needs_2026.json"
+)
 
 # Default need level applied when no data exists for a team-position pair
 _DEFAULT_NEED_LEVEL = 2
@@ -77,10 +80,16 @@ def build_team_need_states(team_abbrevs: list[str]) -> dict[str, TeamNeedState]:
     db_needs = _load_team_needs_from_db()
     team_map = _load_team_name_map()
 
+    config_needs = _load_team_needs_from_config()
+
     states: dict[str, TeamNeedState] = {}
     for abbrev in team_abbrevs:
         # Resolve DB key for this abbreviation (DB may use full names)
         needs = _resolve_needs_for_team(abbrev, db_needs, team_map)
+        # Reason: fall back to the curated config file when the DB table is
+        # empty (scraper hasn't run yet). DB data always takes precedence.
+        if not needs:
+            needs = config_needs.get(abbrev.lower(), {})
         states[abbrev] = TeamNeedState(team=abbrev, needs=needs)
 
     logger.info(
@@ -200,6 +209,31 @@ def _load_team_name_map() -> dict[str, str]:
         raw = json.load(f)
 
     return {k.lower(): v.lower() for k, v in raw.items()}
+
+
+def _load_team_needs_from_config() -> dict[str, dict[str, int]]:
+    """
+    Load curated team needs from data/config/team_needs_2026.json.
+
+    Used as a fallback when the DB team_needs table is empty (scraper not yet
+    run). DB data always takes precedence via build_team_need_states().
+
+    Returns:
+        dict[str, dict[str, int]]: Lower-cased team abbreviation →
+            {position: need_level}. Empty dict if file is missing or invalid.
+    """
+    import json
+
+    if not _TEAM_NEEDS_CONFIG_PATH.exists():
+        return {}
+
+    try:
+        with open(_TEAM_NEEDS_CONFIG_PATH, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+        return {k.lower(): v for k, v in raw.get("teams", {}).items()}
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.warning("Could not load team_needs_2026.json: %s", exc)
+        return {}
 
 
 def _resolve_needs_for_team(

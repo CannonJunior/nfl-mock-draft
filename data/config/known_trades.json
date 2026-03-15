@@ -1,0 +1,117 @@
+{
+  "_comment": "Known NFL trades affecting 2026 draft pick ownership. Update this file when trades are confirmed. The pipeline reads this on every run and applies changes idempotently — re-running will not corrupt the traded_from chain.",
+  "_schema": {
+    "pick_number": "int — overall pick number 1-100",
+    "new_current_team": "str — abbreviation of the team now holding the pick (lowercase)",
+    "traded_from_append": "str — team abbreviation to append to the traded_from chain (the previous owner)",
+    "trade_notes": "str — human-readable description shown in the UI tooltip",
+    "confirmed_date": "str — ISO date when the trade was confirmed (YYYY-MM-DD)"
+  },
+  "trades": [
+    {
+      "pick_number": 13,
+      "new_current_team": "lar",
+      "traded_from_append": "atl",
+      "trade_notes": "LAR acquired ATL's 2026 1st in trade (ATL sent 2026 1st + other picks to LAR)",
+      "confirmed_date": "2024-10-01"
+    },
+    {
+      "pick_number": 16,
+      "new_current_team": "nyj",
+      "traded_from_append": "ind",
+      "trade_notes": "NYJ traded Sauce Gardner to IND; IND sent 2026 1st-round pick (pick #16) to NYJ",
+      "confirmed_date": "2025-10-01"
+    },
+    {
+      "pick_number": 20,
+      "new_current_team": "dal",
+      "traded_from_append": "gb",
+      "trade_notes": "GB traded Micah Parsons to DAL; DAL received GB's 2026 1st (pick #20) + 2027 1st + Kenny Clark",
+      "confirmed_date": "2025-08-28"
+    },
+    {
+      "pick_number": 24,
+      "new_current_team": "cle",
+      "traded_from_append": "jax",
+      "trade_notes": "JAX traded 2026 1st to CLE at 2025 NFL Draft to move up for Travis Hunter",
+      "confirmed_date": "2025-04-24"
+    },
+    {
+      "pick_number": 29,
+      "new_current_team": "kc",
+      "traded_from_append": "lar",
+      "trade_notes": "KC traded Trent McDuffie to LAR; LAR sent pick #29 + 3 other picks to KC",
+      "confirmed_date": "2026-03-06"
+    },
+    {
+      "pick_number": 38,
+      "new_current_team": "hou",
+      "traded_from_append": "wsh",
+      "trade_notes": "HOU traded Laremy Tunsil to WSH; WSH sent 2026 2nd + 2026 4th + other picks to HOU",
+      "confirmed_date": "2025-03-10"
+    },
+    {
+      "pick_number": 44,
+      "new_current_team": "nyj",
+      "traded_from_append": "dal",
+      "trade_notes": "NYJ traded Quinnen Williams to DAL; DAL sent 2026 2nd + 2027 1st + Mazi Smith to NYJ",
+      "confirmed_date": "2025-11-04"
+    },
+    {
+      "pick_number": 60,
+      "new_current_team": "chi",
+      "traded_from_append": "buf",
+      "trade_notes": "CHI traded DJ Moore + 2026 5th to BUF; BUF sent 2026 2nd (pick #60) to CHI",
+      "confirmed_date": "2026-03-05"
+    },
+    {
+      "pick_number": 68,
+      "new_current_team": "phi",
+      "traded_from_append": "nyj",
+      "trade_notes": "NYJ traded Haason Reddick to PHI; PHI received NYJ's 2026 3rd-round pick",
+      "confirmed_date": "2025-10-01"
+    },
+    {
+      "pick_number": 69,
+      "new_current_team": "hou",
+      "traded_from_append": "nyg",
+      "trade_notes": "NYG sent 2026 3rd + 2025 picks to HOU in exchange for HOU's 2025 1st-round pick",
+      "confirmed_date": "2025-04-24"
+    },
+    {
+      "pick_number": 76,
+      "new_current_team": "pit",
+      "traded_from_append": "dal",
+      "trade_notes": "DAL traded George Pickens + 2027 6th to PIT; PIT sent DAL's 2026 3rd + 2027 5th",
+      "confirmed_date": "2025-11-04"
+    },
+    {
+      "pick_number": 81,
+      "new_current_team": "jax",
+      "traded_from_append": "det",
+      "trade_notes": "DET traded two 2026 3rd-round picks to JAX for WR Isaac TeSlaa at 2025 NFL Draft",
+      "confirmed_date": "2025-04-25"
+    },
+    {
+      "pick_number": 87,
+      "new_current_team": "mia",
+      "traded_from_append": "phi",
+      "trade_notes": "MIA traded Jaelan Phillips to PHI; PHI sent 2026 3rd (pick #87) to MIA",
+      "confirmed_date": "2025-11-03"
+    },
+    {
+      "pick_number": 90,
+      "new_current_team": "mia",
+      "traded_from_append": "hou",
+      "trade_notes": "HOU sent 2026 3rd to MIA in 2025 draft-day trade (for 2025 picks)",
+      "confirmed_date": "2025-04-26"
+    },
+    {
+      "pick_number": 100,
+      "new_current_team": "jax",
+      "traded_from_append": "det",
+      "trade_notes": "DET's 2026 comp 3rd (Aaron Glenn/Jets HC comp) traded to JAX in Isaac TeSlaa deal",
+      "confirmed_date": "2025-04-25"
+    }
+  ]
+}

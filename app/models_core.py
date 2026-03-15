@@ -177,6 +177,7 @@ class Pick(BaseModel):
     trade_notes: Optional[str] = None
     is_compensatory: bool = False
     player_id: Optional[str] = None
+    team_needs_snapshot: Optional[dict] = None
 
 
 class EnrichedPick(BaseModel):

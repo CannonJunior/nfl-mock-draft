@@ -42,12 +42,13 @@ except FileNotFoundError:
 
 def run_simulation(
     player_pool: Optional[list[PlayerCandidate]] = None,
-) -> dict[int, PlayerCandidate]:
+) -> tuple[dict[int, PlayerCandidate], dict[int, dict]]:
     """
-    Simulate all 100 draft picks sequentially and return pick-to-player mapping.
+    Simulate all 100 draft picks sequentially and return pick-to-player mapping
+    along with a per-pick team need snapshot captured before each selection.
 
     For each pick:
-    1. Retrieve the team making the pick.
+    1. Snapshot the team's current need state (pre-pick).
     2. Score all available players for that team.
     3. Select the highest-scoring available player.
     4. Mark the player as unavailable.
@@ -58,21 +59,23 @@ def run_simulation(
             If None, will call build_player_pool() to construct from DB.
 
     Returns:
-        dict[int, PlayerCandidate]: Mapping of pick_number → selected player.
+        tuple:
+            - dict[int, PlayerCandidate]: pick_number → selected player.
+            - dict[int, dict]: pick_number → team need snapshot (pre-pick).
     """
     picks_data = _load_picks_json()
     picks = picks_data.get("picks", [])
 
     if not picks:
         logger.error("No picks found in picks.json — aborting simulation")
-        return {}
+        return {}, {}
 
     if player_pool is None:
         player_pool = build_player_pool()
 
     if not player_pool:
         logger.error("Player pool is empty — aborting simulation")
-        return {}
+        return {}, {}
 
     # Extract unique teams from picks to build need states
     team_abbrevs = list({p["current_team"] for p in picks})
@@ -82,6 +85,7 @@ def run_simulation(
     pool = list(player_pool)
 
     results: dict[int, PlayerCandidate] = {}
+    need_snapshots: dict[int, dict] = {}
 
     for pick_row in picks:
         pick_number = pick_row["pick_number"]
@@ -98,6 +102,13 @@ def run_simulation(
             logger.warning("Pick %d: Unknown team '%s', creating empty state", pick_number, team)
             team_state = TeamNeedState(team=team)
             team_states[team] = team_state
+
+        # Capture pre-pick need snapshot so the UI can show what the team needed
+        need_snapshots[pick_number] = {
+            "team": team,
+            "needs_ranked": _build_needs_ranked(team_state),
+            "picks_made": list(team_state.picks_made),
+        }
 
         ranked = rank_players_for_team(available, team_state)
         if not ranked:
@@ -119,18 +130,49 @@ def run_simulation(
         )
 
     logger.info("Simulation complete: %d/%d picks assigned", len(results), len(picks))
-    return results
+    return results, need_snapshots
 
 
-def write_results(results: dict[int, PlayerCandidate]) -> tuple[int, int]:
+def _build_needs_ranked(state: TeamNeedState) -> list[dict]:
+    """
+    Return the team's positional needs sorted by need level descending.
+
+    Excludes positions with need level 0 (fully satisfied or irrelevant).
+
+    Args:
+        state (TeamNeedState): Current team need state.
+
+    Returns:
+        list[dict]: Ordered list of {"position": str, "need_level": int} dicts,
+            highest need first.
+    """
+    sorted_needs = sorted(
+        state.needs.items(),
+        key=lambda kv: kv[1],
+        reverse=True,
+    )
+    return [
+        {"position": pos, "need_level": level}
+        for pos, level in sorted_needs
+        if level > 0
+    ]
+
+
+def write_results(
+    results: dict[int, PlayerCandidate],
+    need_snapshots: Optional[dict[int, dict]] = None,
+) -> tuple[int, int]:
     """
     Write simulation results to data/players.json and data/picks.json.
 
     Players are serialised as Player-compatible JSON objects.
-    Picks are updated in-place with the assigned player_id.
+    Picks are updated in-place with the assigned player_id and, when provided,
+    a ``team_needs_snapshot`` dict recording what the team needed pre-pick.
 
     Args:
         results (dict[int, PlayerCandidate]): pick_number → PlayerCandidate.
+        need_snapshots (Optional[dict[int, dict]]): pick_number → need snapshot
+            dict as produced by run_simulation(). Written to picks.json when given.
 
     Returns:
         tuple[int, int]: (picks_assigned, players_created) counts.
@@ -154,7 +196,7 @@ def write_results(results: dict[int, PlayerCandidate]) -> tuple[int, int]:
     )
     logger.info("Wrote %d player records to %s", len(players_list), _PLAYERS_PATH)
 
-    # Update picks.json with player_ids
+    # Update picks.json with player_ids and team need snapshots
     picks_data = _load_picks_json()
     player_id_map: dict[int, str] = {
         pick_num: candidate.player_id for pick_num, candidate in results.items()
@@ -166,6 +208,8 @@ def write_results(results: dict[int, PlayerCandidate]) -> tuple[int, int]:
         if pick_num in player_id_map:
             pick_row["player_id"] = player_id_map[pick_num]
             updated_count += 1
+        if need_snapshots and pick_num in need_snapshots:
+            pick_row["team_needs_snapshot"] = need_snapshots[pick_num]
 
     _PICKS_PATH.write_text(
         json.dumps(picks_data, indent=2, ensure_ascii=False),
@@ -189,10 +233,10 @@ def simulate_and_write(
     Returns:
         tuple[int, int]: (picks_assigned, players_created).
     """
-    results = run_simulation(player_pool=player_pool)
+    results, need_snapshots = run_simulation(player_pool=player_pool)
     if not results:
         return 0, 0
-    return write_results(results)
+    return write_results(results, need_snapshots=need_snapshots)
 
 
 # ---------------------------------------------------------------------------
@@ -261,28 +305,45 @@ def _load_media_articles_map() -> dict[str, list[dict]]:
     return result
 
 
+# Normalisation constants for model-derived display grades.
+# Top-100 picks have base_scores roughly in [15, 100]. We map that range onto
+# the [6.5, 9.9] band that professional scouts use for draftable prospects,
+# so model grades look consistent with ESPN/consensus scouting grades.
+_GRADE_SCORE_MIN = 15.0   # base_score that anchors the lowest displayed grade
+_GRADE_SCORE_MAX = 100.0  # base_score that anchors the highest displayed grade
+_GRADE_DISPLAY_MIN = 6.5  # displayed grade floor (comparable to a late-3rd pick)
+_GRADE_DISPLAY_MAX = 9.9  # displayed grade ceiling (comparable to #1 overall)
+
+
 def _compute_display_grade(candidate: PlayerCandidate) -> float:
     """
     Compute the displayed 0-10 scouting grade for a player. Never returns None.
 
     Priority:
     1. ESPN scouting grade (professional, calibrated 0-10 scale).
-    2. Base-score derived: ``base_score / 10``, clamped to [3.5, 9.9].
-       Any player assigned to picks 1-100 has a base_score >= ~30, so the
-       floor of 3.5 prevents absurdly low display values for late picks.
+    2. Model-derived: linearly rescales base_score from [_GRADE_SCORE_MIN,
+       _GRADE_SCORE_MAX] onto [_GRADE_DISPLAY_MIN, _GRADE_DISPLAY_MAX].
+
+    Reason: base_score for top-100 picks spans ~15-100. A raw ``/10`` mapping
+    puts mid-round picks at 5.0 or below, far outside the 6.5-9.9 band that
+    professional scouts assign to all draftable prospects. The rescaled formula
+    ensures model grades are directly comparable to real scouting grades.
 
     Args:
         candidate (PlayerCandidate): Scored prospect.
 
     Returns:
-        float: Grade in 0-10 range, always set.
+        float: Grade in [_GRADE_DISPLAY_MIN, _GRADE_DISPLAY_MAX], always set.
     """
     if candidate.espn_grade is not None:
         return round(candidate.espn_grade, 1)
-    # Reason: base_score is 0-100; convert to 0-10 scale with a 3.5 floor so
-    # even players with minimal signal show a meaningful (if modest) grade.
-    derived = candidate.base_score / 10.0
-    return round(max(3.5, min(9.9, derived)), 1)
+    # Reason: linearly map the draftable base_score range onto the scout grade
+    # range so model grades sit in the same band as ESPN/consensus grades.
+    ratio = (candidate.base_score - _GRADE_SCORE_MIN) / (
+        _GRADE_SCORE_MAX - _GRADE_SCORE_MIN
+    )
+    derived = _GRADE_DISPLAY_MIN + ratio * (_GRADE_DISPLAY_MAX - _GRADE_DISPLAY_MIN)
+    return round(max(_GRADE_DISPLAY_MIN, min(_GRADE_DISPLAY_MAX, derived)), 1)
 
 
 def _build_grade_breakdown(candidate: PlayerCandidate) -> dict:

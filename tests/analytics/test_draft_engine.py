@@ -190,6 +190,54 @@ class TestRankPlayersForTeam:
         top_player = ranked[0][1]
         assert top_player.position == "CB"
 
+    def test_critical_need_beats_significantly_better_off_need_player(self):
+        """Level-5 need position beats a player ~20% stronger at a no-need position.
+
+        The 35% boost for critical need (level 5) plus the -12% penalty for
+        no-need (level 0) should overcome a raw base-score gap of ~20 points,
+        reflecting realistic NFL draft behaviour where teams fill critical holes.
+        """
+        # CB at level-5 need: 70 * (1 + 0.35) = 94.5
+        # QB at level-0 (already drafted): 84 * (1 - 0.12) = 73.9
+        cb = _make_player(name="Need CB", position="CB", base_score=70.0)
+        qb = _make_player(name="No-Need QB", position="QB", base_score=84.0)
+        state = _make_state(needs={"CB": 5, "QB": 0})
+        ranked = rank_players_for_team([qb, cb], state)
+        assert ranked[0][1].position == "CB"
+
+    def test_bpa_wins_when_talent_gap_is_extreme(self):
+        """Best player available at a no-need position beats a modest need player.
+
+        When the raw base-score gap is large, the BPA model should prevail so
+        elite prospects are not wasted on teams that barely need them.
+        Uses a deep CB pool to neutralise supply pressure, isolating the
+        need boost signal.
+
+        Math (no supply pressure since 10 CBs available):
+          Elite WR level-0: 95 * (1 - 0.12) = 83.6
+          Mediocre CB level-5: 60 * (1 + 0.35) = 81.0  → WR wins
+        """
+        wr = _make_player(name="Elite WR", position="WR", base_score=95.0)
+        cb = _make_player(name="Need CB", position="CB", base_score=60.0)
+        # Add 9 more CBs to suppress drain-rate supply pressure
+        deep_cbs = [
+            _make_player(name=f"CB Depth {i}", position="CB", base_score=55.0)
+            for i in range(9)
+        ]
+        state = _make_state(needs={"CB": 5, "WR": 0})
+        ranked = rank_players_for_team([wr, cb] + deep_cbs, state)
+        assert ranked[0][1].position == "WR"
+
+    def test_moderate_need_beats_slightly_better_off_need_player(self):
+        """Level-3 need gives enough boost to prefer a player 8% worse in base score."""
+        # Needed EDGE at level-3: 75 * (1 + 0.10) = 82.5
+        # Off-need WR at level-2 (default): 80 * (1 + 0.00) = 80.0
+        edge = _make_player(name="Need EDGE", position="EDGE", base_score=75.0)
+        wr = _make_player(name="WR", position="WR", base_score=80.0)
+        state = _make_state(needs={"EDGE": 3})  # WR gets default level 2 → 0%
+        ranked = rank_players_for_team([wr, edge], state)
+        assert ranked[0][1].position == "EDGE"
+
     def test_returns_tuples_of_float_and_candidate(self):
         players = [_make_player()]
         state = _make_state()
