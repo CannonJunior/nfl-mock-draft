@@ -30,7 +30,7 @@
   "Seattle Seahawks":      "sea",
   "Tampa Bay Buccaneers":  "tb",
   "Tennessee Titans":      "ten",
-  "Washington Commanders": "was",
+  "Washington Commanders": "wsh",
   "Arizona":               "ari",
   "Atlanta":               "atl",
   "Baltimore":             "bal",
@@ -62,7 +62,7 @@
   "Seattle":               "sea",
   "Tampa Bay":             "tb",
   "Tennessee":             "ten",
-  "Washington":            "was",
+  "Washington":            "wsh",
   "Raiders":               "lv",
   "Jets":                  "nyj",
   "Cardinals":             "ari",
@@ -94,5 +94,5 @@
   "Seahawks":              "sea",
   "Buccaneers":            "tb",
   "Titans":                "ten",
-  "Commanders":            "was"
+  "Commanders":            "wsh"
 }

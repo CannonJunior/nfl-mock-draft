@@ -49,14 +49,26 @@ async def index(request: Request) -> HTMLResponse:
     """
     all_picks = data_loader.get_all_enriched_picks()
 
-    # Group picks by round for the template
+    # Single pass: group by round, count assigned, and build team draft log.
+    # Reason: previously three separate loops (sort+iterate for team_draft_log,
+    # iterate for round grouping, sum() for assigned). Now done in one traversal.
     rounds: dict[int, list[EnrichedPick]] = {1: [], 2: [], 3: []}
+    assigned = 0
+    # team_draft_log maps team → list of {pick_number, position, player_name}
+    # ordered by pick_number (all_picks is already sorted ascending).
+    team_draft_log: dict[str, list[dict]] = {}
     for ep in all_picks:
         if ep.pick.round in rounds:
             rounds[ep.pick.round].append(ep)
-
-    # Determine how many picks have a player assigned
-    assigned = sum(1 for ep in all_picks if ep.player is not None)
+        if ep.player is not None:
+            assigned += 1
+            team_draft_log.setdefault(ep.pick.current_team, []).append(
+                {
+                    "pick_number": ep.pick.pick_number,
+                    "position": ep.player.position,
+                    "player_name": ep.player.name,
+                }
+            )
 
     # Last prediction run time from picks.json modification timestamp
     picks_path = _DATA_DIR / "picks.json"
@@ -71,30 +83,19 @@ async def index(request: Request) -> HTMLResponse:
     # For each pick, records which positions the same team filled with EARLIER
     # picks: {pick_number → {position → player_name}}.
     # Reason: Jinja2 can't do mutable dict updates in loops, so we pre-compute
-    # this in Python where it's straightforward.
-    team_draft_log: dict[str, list[dict]] = {}
-    for ep in sorted(all_picks, key=lambda x: x.pick.pick_number):
-        if ep.player:
-            team_draft_log.setdefault(ep.pick.current_team, []).append(
-                {
-                    "pick_number": ep.pick.pick_number,
-                    "position": ep.player.position,
-                    "player_name": ep.player.name,
-                }
-            )
-
+    # this in Python. team_draft_log entries are already in pick_number order
+    # since all_picks is sorted, so we can use a running per-team accumulator.
     pick_team_histories: dict[int, dict[str, str]] = {}
+    team_filled: dict[str, dict[str, str]] = {}  # team → {position → first player name}
     for ep in all_picks:
         team = ep.pick.current_team
         pick_num = ep.pick.pick_number
-        # Only include picks by the same team made BEFORE this pick number
-        prior: dict[str, str] = {}
-        for entry in team_draft_log.get(team, []):
-            if entry["pick_number"] < pick_num:
-                # Keep the earliest pick at each position (first fill wins)
-                if entry["position"] not in prior:
-                    prior[entry["position"]] = entry["player_name"]
-        pick_team_histories[pick_num] = prior
+        # Snapshot what the team has filled BEFORE this pick
+        pick_team_histories[pick_num] = dict(team_filled.get(team, {}))
+        # Then record this pick's player (if any) for subsequent picks
+        if ep.player is not None:
+            pos = ep.player.position
+            team_filled.setdefault(team, {}).setdefault(pos, ep.player.name)
 
     return templates.TemplateResponse(
         request,

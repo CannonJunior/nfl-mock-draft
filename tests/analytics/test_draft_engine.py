@@ -193,12 +193,12 @@ class TestRankPlayersForTeam:
     def test_critical_need_beats_significantly_better_off_need_player(self):
         """Level-5 need position beats a player ~20% stronger at a no-need position.
 
-        The 35% boost for critical need (level 5) plus the -12% penalty for
-        no-need (level 0) should overcome a raw base-score gap of ~20 points,
-        reflecting realistic NFL draft behaviour where teams fill critical holes.
+        With quality scaling the CB (base 70) gets a scaled boost:
+          quality_scale = (70-20)/80 = 0.625
+          CB effective boost: 0.35 * 0.625 = 0.219 → score 70 * 1.219 = 85.3
+          QB at level-0 (no scaling on negatives): 84 * (1 - 0.12) = 73.9
+        CB (85.3) beats QB (73.9).
         """
-        # CB at level-5 need: 70 * (1 + 0.35) = 94.5
-        # QB at level-0 (already drafted): 84 * (1 - 0.12) = 73.9
         cb = _make_player(name="Need CB", position="CB", base_score=70.0)
         qb = _make_player(name="No-Need QB", position="QB", base_score=84.0)
         state = _make_state(needs={"CB": 5, "QB": 0})
@@ -213,9 +213,10 @@ class TestRankPlayersForTeam:
         Uses a deep CB pool to neutralise supply pressure, isolating the
         need boost signal.
 
-        Math (no supply pressure since 10 CBs available):
-          Elite WR level-0: 95 * (1 - 0.12) = 83.6
-          Mediocre CB level-5: 60 * (1 + 0.35) = 81.0  → WR wins
+        Math (no supply pressure since 10 CBs available, with quality scaling):
+          Elite WR level-0: 95 * (1 - 0.12) = 83.6   (negative, unscaled)
+          Mediocre CB level-5: quality_scale=(60-20)/80=0.5; boost=0.35*0.5=0.175
+            → 60 * 1.175 = 70.5  → WR wins
         """
         wr = _make_player(name="Elite WR", position="WR", base_score=95.0)
         cb = _make_player(name="Need CB", position="CB", base_score=60.0)
@@ -230,8 +231,9 @@ class TestRankPlayersForTeam:
 
     def test_moderate_need_beats_slightly_better_off_need_player(self):
         """Level-3 need gives enough boost to prefer a player 8% worse in base score."""
-        # Needed EDGE at level-3: 75 * (1 + 0.10) = 82.5
-        # Off-need WR at level-2 (default): 80 * (1 + 0.00) = 80.0
+        # With quality scaling: EDGE (base 75): scale=(75-20)/80=0.688; boost=0.10*0.688=0.069
+        #   → 75 * 1.069 = 80.2
+        # Off-need WR (base 80, level-2 default=0%): 80 * 1.0 = 80.0  → EDGE wins
         edge = _make_player(name="Need EDGE", position="EDGE", base_score=75.0)
         wr = _make_player(name="WR", position="WR", base_score=80.0)
         state = _make_state(needs={"EDGE": 3})  # WR gets default level 2 → 0%

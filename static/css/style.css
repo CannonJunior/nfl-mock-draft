@@ -125,6 +125,7 @@ img {
 /* ---------- Round Tabs ---------- */
 .round-tabs {
   display: flex;
+  align-items: flex-end;
   gap: 0.5rem;
   padding: 1.25rem 0 0;
   border-bottom: 1px solid var(--border);
@@ -173,6 +174,52 @@ img {
 .round-tab.active .pick-count {
   background: var(--gold);
   color: #000;
+}
+
+/* Vertical divider between round tabs and position filters */
+.tab-bar-sep {
+  width: 1px;
+  background: var(--border);
+  margin: 0.3rem 0.25rem 0.3rem 0.5rem;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* Position filter buttons — same colour language as .player-position-badge */
+.position-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.3rem;
+  align-items: flex-end;
+  padding-bottom: 5px;
+  flex-shrink: 0;
+}
+
+.pos-filter-btn {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.pos-filter-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.pos-filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 /* ---------- Round Panel ---------- */
@@ -960,6 +1007,118 @@ img {
 
 .tweet-card.is-new {
   border-left: 3px solid var(--accent);
+}
+
+/* ============================================================
+   Team Needs Section (in expanded pick panel)
+   ============================================================ */
+
+.team-needs-section {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.team-needs-section .detail-section-title {
+  margin-bottom: 10px;
+}
+
+.team-needs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.team-need-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  flex: 1 1 200px;
+  min-width: 180px;
+  max-width: 280px;
+}
+
+.team-need-item.need-filled {
+  opacity: 0.58;
+  border-color: #3fb950;
+  background: rgba(63, 185, 80, 0.07);
+}
+
+.need-rank {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 22px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.need-position {
+  font-weight: 700;
+  color: var(--text-primary);
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.need-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.need-filled-label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #3fb950;
+  background: rgba(63, 185, 80, 0.14);
+  border: 1px solid #3fb950;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.need-filled-player {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.need-pips {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.need-pip {
+  width: 5px;
+  height: 10px;
+  border-radius: 1px;
+  background: var(--border);
+}
+
+/* Need level colours: 1-2=muted, 3=accent, 4=gold, 5=red */
+.need-level-1 .need-pip.active,
+.need-level-2 .need-pip.active { background: var(--text-muted); }
+.need-level-3 .need-pip.active { background: var(--accent); }
+.need-level-4 .need-pip.active { background: var(--gold); }
+.need-level-5 .need-pip.active { background: var(--red); }
+
+.need-level-label {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 
 /* ============================================================

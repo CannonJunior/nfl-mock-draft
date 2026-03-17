@@ -16,23 +16,140 @@
 // Round Tabs
 // ============================================================
 
+// Cached NodeLists — queried once on DOMContentLoaded, reused on every round switch.
+// Reason: querySelectorAll on the full document is called per round-tab click
+// without caching, re-scanning all DOM nodes each time.
+let _roundTabs = null;
+let _roundPanels = null;
+
+// Currently active positions for filtering. Empty set = show all positions.
+const _activePositions = new Set();
+
 /**
  * Activate a specific round tab and show its panel.
- * @param {number} round - Round number (1, 2, or 3)
+ * Pass round=0 to show all rounds simultaneously.
+ * @param {number} round - Round number (1, 2, or 3), or 0 for all rounds.
  */
 function activateRound(round) {
-  // Update tab styling
-  document.querySelectorAll(".round-tab").forEach((tab) => {
+  const showAll = round === 0;
+
+  // Update numbered tab styling
+  (_roundTabs || document.querySelectorAll(".round-tab")).forEach((tab) => {
     tab.classList.toggle("active", parseInt(tab.dataset.round) === round);
   });
 
-  // Show/hide panels
-  document.querySelectorAll(".round-panel").forEach((panel) => {
-    panel.classList.toggle("active", parseInt(panel.dataset.round) === round);
+  // Update "All" button styling
+  const allTab = document.getElementById("all-rounds-tab");
+  if (allTab) allTab.classList.toggle("active", showAll);
+
+  // Show/hide panels — all visible when round=0
+  (_roundPanels || document.querySelectorAll(".round-panel")).forEach((panel) => {
+    panel.classList.toggle(
+      "active",
+      showAll || parseInt(panel.dataset.round) === round
+    );
   });
 
-  // Persist selection in session storage so refresh stays on same round
+  // Persist selection; "0" restores All Rounds on reload
   sessionStorage.setItem("activeRound", round);
+
+  // Re-apply position filter so rows in newly visible panels are correctly shown/hidden
+  applyPositionFilter();
+}
+
+// ============================================================
+// Position Filters
+// ============================================================
+
+// Canonical NFL position order for the filter bar (matches player_pool normalisation).
+const _POSITION_ORDER = [
+  "QB", "RB", "FB", "WR", "TE",
+  "OT", "OG", "C", "IOL",
+  "EDGE", "DE", "DT",
+  "LB", "CB", "S",
+];
+
+/**
+ * Build position filter buttons from the positions actually present in the pick data.
+ * Inserts buttons into #position-filters in canonical position order.
+ */
+function buildPositionFilters() {
+  const container = document.getElementById("position-filters");
+  if (!container) return;
+
+  // Collect unique non-empty positions from rendered pick rows
+  const present = new Set();
+  document.querySelectorAll(".pick-row[data-position]").forEach((row) => {
+    const pos = row.dataset.position;
+    if (pos) present.add(pos);
+  });
+
+  if (present.size === 0) return; // No predictions yet — hide the filter bar entirely
+
+  // Render buttons in canonical order; append any unknown positions at the end
+  const ordered = _POSITION_ORDER.filter((p) => present.has(p));
+  _POSITION_ORDER.forEach((p) => present.delete(p));
+  present.forEach((p) => ordered.push(p)); // any remaining unknown positions
+
+  ordered.forEach((pos) => {
+    const btn = document.createElement("button");
+    btn.className = "pos-filter-btn";
+    btn.dataset.position = pos;
+    btn.textContent = pos;
+    btn.title = `Filter picks: ${pos}`;
+    btn.addEventListener("click", (e) => {
+      togglePositionFilter(pos);
+      e.stopPropagation();
+    });
+    container.appendChild(btn);
+  });
+}
+
+/**
+ * Toggle a position filter on or off. Multiple positions can be active at once;
+ * if none are active the filter shows all picks.
+ * @param {string} pos - Position code to toggle (e.g. "QB", "EDGE").
+ */
+function togglePositionFilter(pos) {
+  if (_activePositions.has(pos)) {
+    _activePositions.delete(pos);
+  } else {
+    _activePositions.add(pos);
+  }
+
+  // Sync button active states
+  document.querySelectorAll(".pos-filter-btn").forEach((btn) => {
+    btn.classList.toggle("active", _activePositions.has(btn.dataset.position));
+  });
+
+  applyPositionFilter();
+}
+
+/**
+ * Show or hide pick rows (and their expanded detail rows) based on the active
+ * position filters. If no filters are active all rows are shown.
+ *
+ * Reason: detail rows use a CSS class (.visible) for display, but inline
+ * style.display overrides class-based rules. We always reset the inline style
+ * to "" for visible rows so CSS retains control, and only set it to "none"
+ * for filtered-out rows to hide them regardless of the .visible class.
+ */
+function applyPositionFilter() {
+  const filterActive = _activePositions.size > 0;
+
+  document.querySelectorAll(".pick-row").forEach((row) => {
+    const pos = row.dataset.position || "";
+    const visible = !filterActive || _activePositions.has(pos);
+
+    row.style.display = visible ? "" : "none";
+
+    // Always reset detail row inline style so .visible CSS class controls display.
+    const pickNum = row.dataset.pickNumber;
+    const detailRow = document.getElementById(`detail-${pickNum}`);
+    if (detailRow) {
+      detailRow.style.display = visible ? "" : "none";
+    }
+  });
 }
 
 // ============================================================
@@ -298,18 +415,34 @@ async function runPredictions() {
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Restore last active round or default to round 1
+  // Cache NodeLists once so activateRound doesn't re-query the DOM each call
+  _roundTabs = document.querySelectorAll(".round-tab[data-round]");
+  _roundPanels = document.querySelectorAll(".round-panel");
+
+  // Restore last active round (0 = All Rounds) or default to round 1
   const savedRound = parseInt(sessionStorage.getItem("activeRound") || "1");
   activateRound(savedRound);
 
-  // Wire round tab clicks
-  document.querySelectorAll(".round-tab").forEach((tab) => {
+  // Wire numbered round tab clicks using cached list
+  _roundTabs.forEach((tab) => {
     tab.addEventListener("click", () => activateRound(parseInt(tab.dataset.round)));
   });
 
-  // Wire pick row clicks
-  document.querySelectorAll(".pick-row").forEach((row) => {
-    row.addEventListener("click", () => togglePickDetail(row));
+  // Wire "All Rounds" button
+  const allTab = document.getElementById("all-rounds-tab");
+  if (allTab) allTab.addEventListener("click", () => activateRound(0));
+
+  // Build and wire position filter buttons from pick data
+  buildPositionFilters();
+
+  // Wire pick row clicks via event delegation — one listener instead of one per row.
+  // Reason: 100 individual addEventListener calls on .pick-row replaced with a
+  // single delegated handler, reducing memory overhead and init time.
+  document.addEventListener("click", (e) => {
+    const row = e.target.closest(".pick-row");
+    if (row && !e.target.closest(".stats-tab, .injury-toggle, a")) {
+      togglePickDetail(row);
+    }
   });
 
   // Wire stats tab clicks (event delegation on each detail panel)

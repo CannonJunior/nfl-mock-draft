@@ -39,6 +39,17 @@ try:
 except FileNotFoundError:
     pass
 
+# Pre-compute which college logo PNGs actually exist on disk.
+# Reason: checking local_path.exists() for every player during write_results
+# hits the filesystem once per player (100+ disk stat calls). Building this
+# set once at import time reduces that to a single directory scan.
+_STATIC_DIR = Path(__file__).parent.parent.parent / "static" / "img" / "colleges"
+_existing_logo_ids: set[int] = set()
+if _STATIC_DIR.exists():
+    for _logo_file in _STATIC_DIR.iterdir():
+        if _logo_file.suffix == ".png" and _logo_file.stem.isdigit():
+            _existing_logo_ids.add(int(_logo_file.stem))
+
 
 def run_simulation(
     player_pool: Optional[list[PlayerCandidate]] = None,
@@ -81,8 +92,11 @@ def run_simulation(
     team_abbrevs = list({p["current_team"] for p in picks})
     team_states: dict[str, TeamNeedState] = build_team_need_states(team_abbrevs)
 
-    # Working copy of the pool (available flag is mutated per pick)
+    # Reason: instead of rebuilding [p for p in pool if p.available] each pick
+    # (O(n) per pick → O(n²) total), maintain an ordered list and remove
+    # selected players in O(n) total by rebuilding only after selection.
     pool = list(player_pool)
+    available: list[PlayerCandidate] = [p for p in pool if p.available]
 
     results: dict[int, PlayerCandidate] = {}
     need_snapshots: dict[int, dict] = {}
@@ -91,7 +105,6 @@ def run_simulation(
         pick_number = pick_row["pick_number"]
         team = pick_row["current_team"]
 
-        available = [p for p in pool if p.available]
         if not available:
             logger.warning("Pick %d: No available players remaining!", pick_number)
             break
@@ -117,6 +130,7 @@ def run_simulation(
 
         _, selected = ranked[0]
         selected.available = False
+        available.remove(selected)  # O(n) removal keeps list current without rebuild
         results[pick_number] = selected
         update_team_need(team_state, selected.position)
 
@@ -315,12 +329,38 @@ _GRADE_DISPLAY_MIN = 6.5  # displayed grade floor (comparable to a late-3rd pick
 _GRADE_DISPLAY_MAX = 9.9  # displayed grade ceiling (comparable to #1 overall)
 
 
+def _espn_grade_is_plausible(grade: float, rank: Optional[int]) -> bool:
+    """
+    Return True when an ESPN grade is plausible given the player's big-board rank.
+
+    Mirrors the identical check in player_pool._compute_base_score so every
+    code path that decides whether to trust an ESPN grade uses the same rule.
+    Grades outside the rank-calibrated window are likely scraping artifacts
+    (e.g. "3.3 sacks" or "9.5 tackles" parsed as a 0-10 scouting grade).
+
+    Args:
+        grade (float): ESPN scouting grade (0-10 scale).
+        rank (Optional[int]): ESPN big-board rank.
+
+    Returns:
+        bool: True if the grade is plausible; False if it looks like an artifact.
+    """
+    if rank is None:
+        return True  # No rank to validate against — trust the grade
+    expected_min = max(1.0, 9.5 - rank * 0.12)
+    expected_max = min(9.9, 10.0 - rank * 0.08)
+    return expected_min <= grade <= expected_max
+
+
 def _compute_display_grade(candidate: PlayerCandidate) -> float:
     """
     Compute the displayed 0-10 scouting grade for a player. Never returns None.
 
     Priority:
-    1. ESPN scouting grade (professional, calibrated 0-10 scale).
+    1. ESPN scouting grade — but only when it passes a rank-based plausibility
+       check (same as player_pool._compute_base_score). Grades that lie outside
+       the expected window (e.g. "3.3 sacks" scraped as a grade) are treated as
+       artifacts and fall through to the model-derived path.
     2. Model-derived: linearly rescales base_score from [_GRADE_SCORE_MIN,
        _GRADE_SCORE_MAX] onto [_GRADE_DISPLAY_MIN, _GRADE_DISPLAY_MAX].
 
@@ -335,7 +375,9 @@ def _compute_display_grade(candidate: PlayerCandidate) -> float:
     Returns:
         float: Grade in [_GRADE_DISPLAY_MIN, _GRADE_DISPLAY_MAX], always set.
     """
-    if candidate.espn_grade is not None:
+    if candidate.espn_grade is not None and _espn_grade_is_plausible(
+        candidate.espn_grade, candidate.espn_rank
+    ):
         return round(candidate.espn_grade, 1)
     # Reason: linearly map the draftable base_score range onto the scout grade
     # range so model grades sit in the same band as ESPN/consensus grades.
@@ -386,18 +428,22 @@ def _build_grade_breakdown(candidate: PlayerCandidate) -> dict:
     forty = combine.get("forty_yard_dash")
     if forty and forty > 0:
         median = _40_medians.get(candidate.position, 4.75)
-        combine_scores.append(max(0.0, min(100.0, 50.0 + (median - forty) * 100.0)))
+        combine_scores.append(max(0.0, min(100.0, 50.0 + (median - forty) * 200.0)))
     vert = combine.get("vertical_jump_inches")
     if vert and vert > 0:
-        combine_scores.append(max(0.0, min(100.0, 50.0 + (vert - 33.0) * (10.0 / 3.0))))
+        combine_scores.append(max(0.0, min(100.0, 50.0 + (vert - 33.0) * 5.0)))
     broad = combine.get("broad_jump_inches")
     if broad and broad > 0:
-        combine_scores.append(max(0.0, min(100.0, 50.0 + (broad - 120.0) * (10.0 / 6.0))))
+        combine_scores.append(max(0.0, min(100.0, 50.0 + (broad - 120.0) * 3.0)))
     combine_score = sum(combine_scores) / len(combine_scores) if combine_scores else 50.0
     drills_measured = len(combine_scores)
 
     # --- Determine grade source and weights used ---
-    has_espn = candidate.espn_grade is not None
+    # Reason: use the same plausibility gate as _compute_display_grade so
+    # artifact grades (e.g. "3.3 sacks") are excluded from the breakdown too.
+    has_espn = candidate.espn_grade is not None and _espn_grade_is_plausible(
+        candidate.espn_grade, candidate.espn_rank
+    )
     has_mock = bool(mock_picks)
     has_buzz = candidate.buzz_score is not None
     has_combine = bool(combine)
@@ -457,8 +503,8 @@ def _resolve_college_logo_url(college: str) -> Optional[str]:
     logo_id = _college_logo_map.get(college.lower().strip())
     if logo_id is None:
         return None
-    local_path = Path(__file__).parent.parent.parent / "static" / "img" / "colleges" / f"{logo_id}.png"
-    if not local_path.exists():
+    # Reason: use pre-built set instead of per-call Path.exists() disk stat
+    if logo_id not in _existing_logo_ids:
         return None
     return f"{_COLLEGE_LOGOS_URL_BASE}/{logo_id}.png"
 
@@ -568,7 +614,9 @@ def _candidate_to_player_dict(
     # Always append so the Statistics tab always has at least one view.
     grade_bd = _build_grade_breakdown(candidate)
     proj: dict[str, str | int | float] = {}
-    if candidate.espn_grade is not None:
+    if candidate.espn_grade is not None and _espn_grade_is_plausible(
+        candidate.espn_grade, candidate.espn_rank
+    ):
         proj["ESPN Grade"] = f"{candidate.espn_grade:.1f}/10"
     if candidate.espn_rank:
         proj["Big Board Rank"] = f"#{candidate.espn_rank}"

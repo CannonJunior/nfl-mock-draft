@@ -48,10 +48,17 @@
             {% if assigned_picks > 0 %}Refresh Predictions{% else %}Run Predictions{% endif %}
           </span>
         </button>
+        {# Progress bar — hidden until predictions run #}
+        <div class="predictions-progress-wrap" id="predictions-progress-wrap" aria-hidden="true">
+          <div class="predictions-progress-track">
+            <div class="predictions-progress-fill" id="predictions-progress-fill"></div>
+          </div>
+          <div class="predictions-progress-label" id="predictions-progress-label"></div>
+        </div>
       </div>
     </div>
 
-    <!-- Round Tabs -->
+    <!-- Round Tabs + All Rounds + Position Filters -->
     <div class="round-tabs">
       {% for round_num, picks in rounds.items() %}
       <button class="round-tab" data-round="{{ round_num }}">
@@ -59,6 +66,12 @@
         <span class="pick-count">{{ picks | length }}</span>
       </button>
       {% endfor %}
+      <button class="round-tab" id="all-rounds-tab">
+        All
+        <span class="pick-count">{{ total_picks }}</span>
+      </button>
+      <div class="tab-bar-sep" aria-hidden="true"></div>
+      <div class="position-filters" id="position-filters" aria-label="Filter by position"></div>
     </div>
   </div>
 </header>
@@ -98,6 +111,7 @@
               class="pick-row"
               id="pick-{{ pick.pick_number }}"
               data-pick-number="{{ pick.pick_number }}"
+              data-position="{{ player.position if player else '' }}"
               aria-expanded="false"
             >
 
@@ -495,6 +509,38 @@
                     </div>
 
                   </div>{# end detail-grid #}
+
+                  {# --- Team Needs section (full width, below the 3-col grid) --- #}
+                  {% if pick.team_needs_snapshot and pick.team_needs_snapshot.needs_ranked %}
+                  <div class="team-needs-section">
+                    <div class="detail-section-title">
+                      {{ team.nickname }} — Team Needs (Pre-Pick)
+                    </div>
+                    <div class="team-needs-grid">
+                      {% set prior_picks_for_team = pick_team_histories.get(pick.pick_number, {}) %}
+                      {% for need in pick.team_needs_snapshot.needs_ranked %}
+                      {% set filled_player = prior_picks_for_team.get(need.position) %}
+                      <div class="team-need-item need-level-{{ need.need_level }}{% if filled_player %} need-filled{% endif %}">
+                        <span class="need-rank">#{{ loop.index }}</span>
+                        <span class="need-position">{{ need.position }}</span>
+                        <div class="need-status">
+                          {% if filled_player %}
+                            <span class="need-filled-label">FILLED</span>
+                            <span class="need-filled-player">{{ filled_player }}</span>
+                          {% else %}
+                            <span class="need-pips">
+                              {% for i in range(5) %}
+                              <span class="need-pip{% if i < need.need_level %} active{% endif %}"></span>
+                              {% endfor %}
+                            </span>
+                            <span class="need-level-label">{{ need.need_level }}/5</span>
+                          {% endif %}
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% endif %}
 
                   {# --- Tweets / Social Buzz section (full width below the 3-col grid) --- #}
                   {% if player and player.tweets %}

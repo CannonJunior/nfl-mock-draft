@@ -18,6 +18,13 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
+# Pre-computed log constants used in grade-derivation formulas.
+# Reason: math.log(N) is called many times with fixed denominators; computing
+# once at module level avoids repeated transcendental function calls.
+_LOG_100 = math.log(100)
+_LOG_200 = math.log(200)
+_LOG_300 = math.log(300)
+
 _DB_PATH = Path(__file__).parent.parent.parent / "data" / "draft.db"
 
 # All active mock draft sources that contribute to consensus signal
@@ -167,27 +174,6 @@ def build_player_pool() -> list[PlayerCandidate]:
 # ---------------------------------------------------------------------------
 
 
-def _count_combine_drills(combine: dict) -> int:
-    """
-    Count the number of standard athletic drills with valid recorded data.
-
-    The three standard drills are: 40-yard dash, vertical jump, broad jump.
-    Used to scale the combine's weight in the scoring formula proportionally
-    to participation — players who skipped events are not penalised for them.
-
-    Args:
-        combine (dict): Combine measurements dict for a player.
-
-    Returns:
-        int: Number of standard drills with a positive recorded value (0-3).
-    """
-    count = 0
-    for key in ("forty_yard_dash", "vertical_jump_inches", "broad_jump_inches"):
-        val = combine.get(key)
-        if val and val > 0:
-            count += 1
-    return count
-
 
 def _compute_base_score(
     espn_grade: Optional[float],
@@ -245,14 +231,13 @@ def _compute_base_score(
     mock_signal = _mock_consensus_signal(mock_picks)
     combine_score = _combine_score(combine, position)  # None when no drill data
 
-    # Reason: scale the combine's weight by the fraction of standard drills
-    # completed (40yd, vertical, broad jump = 3 drills). A player who only ran
-    # the 40 gets 1/3 of the normal combine weight; unused weight flows back to
-    # the primary signals (ESPN / mock). This prevents skipping events from
-    # creating a negative bias.
-    drill_count = _count_combine_drills(combine)
-    combine_conf = drill_count / 3.0  # 0.0, 0.33, 0.67, or 1.0
-    has_combine = combine_score is not None and combine_conf > 0.0
+    # Reason: _combine_score() already averages only the drills the player
+    # completed, so its output correctly reflects their demonstrated athleticism
+    # regardless of participation count. No further drill-count scaling is
+    # applied — throttling the weight for partial participants would suppress
+    # elite single-event performances (e.g. a 4.36 40-yd dash by an RB who
+    # skipped the vertical and broad jump).
+    has_combine = combine_score is not None
     # Reason: Pyright cannot narrow Optional[float] through the `has_combine`
     # boolean, so we create a typed alias used only inside `has_combine` guards.
     cs: float = combine_score if combine_score is not None else 0.0
@@ -300,13 +285,14 @@ def _compute_base_score(
     # Reason: mixing combine_score as an absolute value in a weighted average
     # depresses a high-rated player's score whenever combine_score < primary,
     # even if the player posted an average result. Using (cs - 50) as the delta
-    # ensures average combine = zero adjustment. Weight scales by drills/3
-    # so partial combine participation has proportionally less influence.
+    # ensures average combine = zero adjustment.
     # ---------------------------------------------------------------------------
     if has_combine:
-        # Base combine weight: 0.15 when primary signals present, else 0.20
-        base_wc = 0.15 if (mock_picks or espn_grade is not None) else 0.20
-        wc = base_wc * combine_conf
+        # Combine weight: 0.15 when primary signals present, else 0.20.
+        # Full weight is used regardless of how many drills were completed —
+        # _combine_score() already accounts for partial participation by
+        # averaging only the events with recorded data.
+        wc = 0.15 if (mock_picks or espn_grade is not None) else 0.20
         primary = primary + (cs - 50.0) * wc
 
     return primary
@@ -376,20 +362,26 @@ def _combine_score(combine: dict, position: str) -> Optional[float]:
     forty = combine.get("forty_yard_dash")
     if forty and forty > 0:
         median = _40_medians.get(position, 4.75)
-        # Reason: scale so median = 50; each 0.10s deviation = ±10 pts
-        raw = 50.0 + (median - forty) * 100.0
+        # Reason: scale so median = 50; 200 pts/second so a realistic elite
+        # time (≈0.20s below median) reaches ~90 rather than only 70.
+        # Old scale of 100 pts/s mapped a 4.36 RB (0.12s below median) to 62,
+        # which understated truly elite speed. With 200 pts/s: 4.36 → 74,
+        # 4.28 → 90, 4.24 → 98. Scores above 100 are clamped.
+        raw = 50.0 + (median - forty) * 200.0
         scores.append(max(0.0, min(100.0, raw)))
 
     vertical = combine.get("vertical_jump_inches")
     if vertical and vertical > 0:
-        # Median vertical ~33 inches; each 3-inch deviation = ±10 pts
-        raw = 50.0 + (vertical - 33.0) * (10.0 / 3.0)
+        # Median vertical ~33 inches; each 2-inch deviation = ±10 pts
+        # (5 pts/inch). A 40" vertical (elite, ~98th pct) now scores 85.
+        raw = 50.0 + (vertical - 33.0) * 5.0
         scores.append(max(0.0, min(100.0, raw)))
 
     broad = combine.get("broad_jump_inches")
     if broad and broad > 0:
-        # Median broad ~120 inches; each 6-inch deviation = ±10 pts
-        raw = 50.0 + (broad - 120.0) * (10.0 / 6.0)
+        # Median broad ~120 inches; each 3.33-inch deviation = ±10 pts
+        # (3 pts/inch). A 130" broad (elite) now scores 80.
+        raw = 50.0 + (broad - 120.0) * 3.0
         scores.append(max(0.0, min(100.0, raw)))
 
     # Reason: return None (not 50) when we have a combine record (height/weight)
@@ -413,7 +405,7 @@ def _derive_grade_from_picks(mock_picks: list[int]) -> float:
     """
     avg_pick = sum(mock_picks) / len(mock_picks)
     # Reason: log curve maps pick 1→95, pick 32→70, pick 100→30 roughly
-    grade = 100.0 - (math.log(max(1, avg_pick)) / math.log(100)) * 70.0
+    grade = 100.0 - (math.log(max(1, avg_pick)) / _LOG_100) * 70.0
     return max(0.0, min(100.0, grade))
 
 
@@ -427,7 +419,7 @@ def _derive_grade_from_rank(rank: int) -> float:
     Returns:
         float: Derived score in 0-100 range.
     """
-    grade = 100.0 - (math.log(max(1, rank)) / math.log(200)) * 70.0
+    grade = 100.0 - (math.log(max(1, rank)) / _LOG_200) * 70.0
     return max(0.0, min(100.0, grade))
 
 
@@ -568,8 +560,7 @@ def _load_buzz_map() -> dict[str, float]:
 
         # Derive grade from rank if no direct grade
         if grade_score is None and rank:
-            import math
-            grade_score = max(0.0, 100.0 - (math.log(max(1, rank)) / math.log(300)) * 80.0)
+            grade_score = max(0.0, 100.0 - (math.log(max(1, rank)) / _LOG_300) * 80.0)
 
         # Normalise Reddit mention count: cap at 20 mentions = 100 score
         reddit_score = min(100.0, (mentions / 20.0) * 100.0) if mentions > 0 else 0.0

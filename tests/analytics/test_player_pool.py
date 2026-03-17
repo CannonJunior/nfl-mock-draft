@@ -173,7 +173,9 @@ class TestComputeBaseScore:
             combine={"forty_yard_dash": 4.6},
             position="QB",
         )
-        assert 80.0 < score <= 100.0
+        # base_score is a raw composite and is not clamped to 100; a #1 pick
+        # with an elite combine can exceed 100 in this unclamped space.
+        assert score > 80.0
 
     def test_no_mock_reweights_espn(self):
         # Use rank 15 with grade 7.8 — within the plausible range for rank 15
@@ -247,10 +249,10 @@ class TestComputeBaseScore:
         assert score_with_grade != pytest.approx(score_no_grade, abs=0.01)
 
     def test_single_combine_drill_no_negative_bias(self):
-        """Player who did only one combine drill must score >= player who did none.
+        """Player who did only one drill at the median must score >= player who did none.
 
-        With confidence scaling (1/3 of normal weight for 1 drill), an average
-        drill no longer depresses the score.
+        A median-time 40-yard dash (combine_score = 50) contributes zero
+        adjustment. Partial participation no longer throttles weight.
         """
         base_kwargs = dict(espn_grade=None, espn_rank=5, mock_picks=[5], position="WR")
         score_no_combine = _compute_base_score(**base_kwargs, combine={})
@@ -260,27 +262,49 @@ class TestComputeBaseScore:
         )
         assert score_one_drill >= score_no_combine - 0.5
 
-    def test_partial_combine_scales_with_drill_count(self):
-        """More drills = more combine influence; elite score gives a larger boost."""
-        base_kwargs = dict(espn_grade=None, espn_rank=10, mock_picks=[10], position="WR")
+    def test_single_elite_drill_gets_full_weight(self):
+        """An elite single-event score must contribute at full combine weight.
+
+        Previously a 1-drill participant received only 1/3 of the combine
+        weight (drill_count / 3.0). Now _combine_score() averages only
+        completed events and the result is applied at full weight, so an
+        elite 40-yard dash from an RB who skipped other events gets the same
+        combine contribution as an athlete who ran all three drills at the
+        same level.
+        """
+        base_kwargs = dict(espn_grade=None, espn_rank=15, mock_picks=[15], position="RB")
         score_no_combine = _compute_base_score(**base_kwargs, combine={})
+        # 4.36s is well under the RB median of 4.48 → combine_score = 62
+        score_elite_40 = _compute_base_score(
+            **base_kwargs, combine={"forty_yard_dash": 4.36}
+        )
+        # Elite 40 must boost the score, not just approximate no-combine
+        assert score_elite_40 > score_no_combine + 1.0
+
+    def test_combine_score_independent_of_drill_count(self):
+        """Same average athletic output should give the same base_score regardless of drills.
+
+        If an athlete scored 67/100 on just the 40-yard dash and another
+        scored 67/100 averaged across all three drills, their base_score
+        adjustments must be equal (within float tolerance).
+        """
+        base_kwargs = dict(espn_grade=None, espn_rank=10, mock_picks=[10], position="WR")
+        # 4.28s WR 40 → score = 50 + (4.45-4.28)*200 = 84
         score_one_drill = _compute_base_score(
             **base_kwargs, combine={"forty_yard_dash": 4.28}
         )
-        score_two_drills = _compute_base_score(
-            **base_kwargs, combine={"forty_yard_dash": 4.28, "vertical_jump_inches": 40.0}
-        )
+        # Three drills all scoring 84 → same average → same adjustment.
+        # vertical → 84: (84-50)/5 + 33 = 39.8"
+        # broad   → 84: (84-50)/3 + 120 = 131.33"
         score_three_drills = _compute_base_score(
             **base_kwargs,
             combine={
                 "forty_yard_dash": 4.28,
-                "vertical_jump_inches": 40.0,
-                "broad_jump_inches": 130.0,
+                "vertical_jump_inches": 39.8,
+                "broad_jump_inches": 131.33,
             },
         )
-        assert score_one_drill >= score_no_combine
-        assert score_two_drills >= score_one_drill - 0.1
-        assert score_three_drills >= score_two_drills - 0.1
+        assert score_three_drills == pytest.approx(score_one_drill, abs=0.5)
 
     def test_no_espn_uses_mock(self):
         score = _compute_base_score(

@@ -23,11 +23,20 @@ from app.analytics.team_context import get_need_boost_for_team
 
 logger = logging.getLogger(__name__)
 
+# Quality scaling constants for need boost attenuation.
+# Reason: a marginal QB (base 50) should not receive the same 35% critical-need
+# boost as an elite QB (base 90). The boost reflects team desire but player
+# quality limits how early they can realistically be selected.
+_QUALITY_FLOOR = 20.0    # base_score below which need boost approaches 0
+_QUALITY_CEILING = 100.0  # base_score at which need boost is fully applied
+
 
 def compute_team_value(
     player: "PlayerCandidate",
     team_state: "TeamNeedState",
     available_players: list["PlayerCandidate"],
+    *,
+    _pos_index: "dict[str, list[PlayerCandidate]] | None" = None,
 ) -> float:
     """
     Compute the team-specific value of a player for a given team at this pick.
@@ -41,6 +50,8 @@ def compute_team_value(
         player (PlayerCandidate): The candidate being evaluated.
         team_state (TeamNeedState): Current need state for the selecting team.
         available_players (list[PlayerCandidate]): All still-available players.
+        _pos_index (dict | None): Internal pre-built position index passed from
+            rank_players_for_team to avoid redundant O(n) filtering.
 
     Returns:
         float: Composite team value score (higher = better fit for this team).
@@ -50,6 +61,18 @@ def compute_team_value(
 
     # Step 2: team need boost (additive factor on top of 1.0)
     need_boost = get_need_boost_for_team(team_state, player.position)
+
+    # Quality gate: scale positive need boosts by player tier.
+    # Reason: a mediocre player at a needed position (e.g. a backup-calibre QB
+    # with base_score 50 for a QB-needy team) should not receive the same 35%
+    # boost as an elite prospect. Only positive boosts are scaled — negative
+    # boosts (level 0/-12%, level 1/-5%) stay at full strength so teams without
+    # a need are still properly penalised for drafting that position.
+    if need_boost > 0:
+        quality_range = _QUALITY_CEILING - _QUALITY_FLOOR
+        quality_scale = max(0.0, min(1.0, (player.base_score - _QUALITY_FLOOR) / quality_range))
+        need_boost = need_boost * quality_scale
+
     need_multiplier = 1.0 + need_boost
 
     # Step 3: supply pressure factor
@@ -57,6 +80,7 @@ def compute_team_value(
         player=player,
         team_state=team_state,
         available_players=available_players,
+        pos_index=_pos_index,
     )
 
     return pos_adjusted * need_multiplier * supply_factor
@@ -66,6 +90,7 @@ def _supply_pressure_factor(
     player: "PlayerCandidate",
     team_state: "TeamNeedState",
     available_players: list["PlayerCandidate"],
+    pos_index: "dict[str, list[PlayerCandidate]] | None" = None,
 ) -> float:
     """
     Compute a supply pressure multiplier for a player's position.
@@ -79,6 +104,9 @@ def _supply_pressure_factor(
         player (PlayerCandidate): The candidate being scored.
         team_state (TeamNeedState): Current team need state.
         available_players (list[PlayerCandidate]): Remaining available players.
+        pos_index (dict | None): Optional pre-built position index (sorted
+            descending by base_score) from rank_players_for_team. When
+            provided, avoids O(n) re-filtering for each player scored.
 
     Returns:
         float: Multiplier in range [1.0, max_boost]. 1.0 means no pressure.
@@ -95,12 +123,16 @@ def _supply_pressure_factor(
     if need_level < 3:
         return 1.0
 
-    # Collect available players at this position, sorted by base_score descending
-    pos_players = sorted(
-        [p for p in available_players if p.position == position],
-        key=lambda p: p.base_score,
-        reverse=True,
-    )
+    # Collect available players at this position, sorted by base_score descending.
+    # Reason: use pre-built index when available to avoid O(n) filter per player.
+    if pos_index is not None:
+        pos_players = pos_index.get(position, [])
+    else:
+        pos_players = sorted(
+            [p for p in available_players if p.position == position],
+            key=lambda p: p.base_score,
+            reverse=True,
+        )
 
     if not pos_players:
         return 1.0
@@ -111,7 +143,7 @@ def _supply_pressure_factor(
         talent_cliff = pos_players[0].base_score - pos_players[1].base_score
 
     # Drain rate: how many of the original top-10 at this position are gone
-    drain_rate = _compute_drain_rate(position, available_players)
+    drain_rate = _compute_drain_rate(position, available_players, pos_index)
 
     cliff_pressure = talent_cliff > cliff_threshold
     drain_pressure = drain_rate > drain_threshold
@@ -135,6 +167,7 @@ def _supply_pressure_factor(
 def _compute_drain_rate(
     position: str,
     available_players: list["PlayerCandidate"],
+    pos_index: "dict[str, list[PlayerCandidate]] | None" = None,
 ) -> float:
     """
     Estimate how much of the top talent at a position has already been picked.
@@ -144,21 +177,24 @@ def _compute_drain_rate(
     Args:
         position (str): Position code to evaluate.
         available_players (list[PlayerCandidate]): Remaining available players.
+        pos_index (dict | None): Optional pre-built position index to avoid
+            re-filtering available_players.
 
     Returns:
         float: Drain rate in [0.0, 1.0]; 1.0 = all top-10 gone.
     """
-    pos_players = [p for p in available_players if p.position == position]
     _TOP_N = 10  # Reason: top-10 at any position is meaningful premium tier
+
+    if pos_index is not None:
+        pos_players = pos_index.get(position, [])
+    else:
+        pos_players = [p for p in available_players if p.position == position]
 
     if not pos_players:
         # All players at this position have been drafted
         return 1.0
 
-    # Approximate "top 10" by taking the 10th-highest score threshold
-    scores = sorted([p.base_score for p in pos_players], reverse=True)
-    # Count how many of the expected top 10 are still available
-    still_available = min(_TOP_N, len(scores))
+    still_available = min(_TOP_N, len(pos_players))
     return 1.0 - (still_available / _TOP_N)
 
 
@@ -169,6 +205,9 @@ def rank_players_for_team(
     """
     Score all available players for a team and return sorted (score, player) pairs.
 
+    Pre-builds a position index once so that supply pressure checks inside
+    compute_team_value avoid O(n) re-filtering for every player scored.
+
     Args:
         available_players (list[PlayerCandidate]): All still-available players.
         team_state (TeamNeedState): Current team need state.
@@ -176,8 +215,17 @@ def rank_players_for_team(
     Returns:
         list[tuple[float, PlayerCandidate]]: Sorted descending by team value.
     """
+    # Reason: build position index once here; each call to compute_team_value
+    # for N players would otherwise filter all N players by position, giving
+    # O(N²) total. With the index we reduce to O(N) filtering + O(N log N) sort.
+    pos_index: dict[str, list["PlayerCandidate"]] = {}
+    for p in available_players:
+        pos_index.setdefault(p.position, []).append(p)
+    for lst in pos_index.values():
+        lst.sort(key=lambda p: p.base_score, reverse=True)
+
     scored = [
-        (compute_team_value(p, team_state, available_players), p)
+        (compute_team_value(p, team_state, available_players, _pos_index=pos_index), p)
         for p in available_players
     ]
     return sorted(scored, key=lambda x: x[0], reverse=True)

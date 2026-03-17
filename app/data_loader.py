@@ -136,6 +136,23 @@ def get_all_enriched_picks() -> list[EnrichedPick]:
     return enrich_picks(picks, teams, players)
 
 
+@lru_cache(maxsize=1)
+def _get_enriched_picks_index() -> tuple[dict[int, list[EnrichedPick]], dict[int, EnrichedPick]]:
+    """
+    Build index structures for O(1) pick lookups, cached alongside the pick list.
+
+    Returns:
+        tuple: (by_round, by_number) dicts computed once from get_all_enriched_picks.
+    """
+    all_picks = get_all_enriched_picks()
+    by_round: dict[int, list[EnrichedPick]] = {}
+    by_number: dict[int, EnrichedPick] = {}
+    for ep in all_picks:
+        by_round.setdefault(ep.pick.round, []).append(ep)
+        by_number[ep.pick.pick_number] = ep
+    return by_round, by_number
+
+
 def get_enriched_picks_by_round(round_number: int) -> list[EnrichedPick]:
     """
     Return enriched picks filtered to a specific round.
@@ -146,8 +163,8 @@ def get_enriched_picks_by_round(round_number: int) -> list[EnrichedPick]:
     Returns:
         list[EnrichedPick]: Enriched picks for the given round.
     """
-    all_picks = get_all_enriched_picks()
-    return [ep for ep in all_picks if ep.pick.round == round_number]
+    by_round, _ = _get_enriched_picks_index()
+    return by_round.get(round_number, [])
 
 
 def get_enriched_pick_by_number(pick_number: int) -> Optional[EnrichedPick]:
@@ -160,11 +177,8 @@ def get_enriched_pick_by_number(pick_number: int) -> Optional[EnrichedPick]:
     Returns:
         Optional[EnrichedPick]: The enriched pick, or None if not found.
     """
-    all_picks = get_all_enriched_picks()
-    for ep in all_picks:
-        if ep.pick.pick_number == pick_number:
-            return ep
-    return None
+    _, by_number = _get_enriched_picks_index()
+    return by_number.get(pick_number)
 
 
 def clear_cache() -> None:
@@ -176,3 +190,4 @@ def clear_cache() -> None:
     load_teams.cache_clear()
     load_picks.cache_clear()
     load_players.cache_clear()
+    _get_enriched_picks_index.cache_clear()
